@@ -1,0 +1,459 @@
+{
+  "experiment_id": "HDC-Esp-001",
+  "description": "Memoria asociativa para caracteres del español",
+  "timestamp": "2026-10-17T20:25:37.181091",
+  "dimensions_tested": [
+    1024,
+    2048,
+    4096,
+    8192,
+    10000
+  ],
+  "results": {
+    "1024": {
+      "dimension": 1024,
+      "seed": 42,
+      "timestamp": "2026-10-17T20:25:35.830995",
+      "creation_time_ms": 0.9112358093261719,
+      "inventory_size": 44,
+      "random_distribution": {
+        "dimension": 1024,
+        "n_samples": 500,
+        "similarity_mean": 0.000209765625,
+        "similarity_std": 0.031423484832483715,
+        "expected_mean": 0.0,
+        "expected_std": 0.03125,
+        "mean_deviation": 0.000209765625,
+        "std_deviation": 0.00017348483248371543,
+        "all_bipolar": true,
+        "mean_within_3sigma": true,
+        "std_within_tolerance": true
+      },
+      "collision_analysis": {
+        "capacity": 44,
+        "dimension": 1024,
+        "max_pairwise_similarity": 0.09765625,
+        "mean_pairwise_similarity": -0.00018375066067653276,
+        "pairs_above_0.1": 0,
+        "total_pairs": 946,
+        "expected_max_similarity": 0.08597089844096434,
+        "collision_rate": 0.0
+      },
+      "exact_recovery": {
+        "total": 44,
+        "correct": 44,
+        "error_rate": 0.0,
+        "mean_similarity": 1.0,
+        "min_similarity": 1.0,
+        "query_time_ms": 3.5202503204345703,
+        "query_time_per_item_us": 80.00568910078569
+      },
+      "noisy_recovery": {
+        "0.01": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.98046875,
+          "correct": 44
+        },
+        "0.05": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.900390625,
+          "correct": 44
+        },
+        "0.1": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.80078125,
+          "correct": 44
+        },
+        "0.15": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.701171875,
+          "correct": 44
+        },
+        "0.2": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.6015625,
+          "correct": 44
+        },
+        "0.3": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.400390625,
+          "correct": 44
+        },
+        "0.4": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.201171875,
+          "correct": 44
+        }
+      },
+      "sequence_encoding": {
+        "n_sequences": 10,
+        "encode_time_ms": 0.20551681518554688,
+        "max_pairwise_similarity": 0.064453125,
+        "mean_pairwise_similarity": 0.0049609375,
+        "min_self_similarity": 1.0
+      },
+      "memory_usage": {
+        "per_item_bytes": 1024,
+        "total_items": 44,
+        "total_bytes": 45056,
+        "total_kb": 44.0
+      }
+    },
+    "2048": {
+      "dimension": 2048,
+      "seed": 42,
+      "timestamp": "2026-10-17T20:25:35.910903",
+      "creation_time_ms": 0.7102489471435547,
+      "inventory_size": 44,
+      "random_distribution": {
+        "dimension": 2048,
+        "n_samples": 500,
+        "similarity_mean": -7.539062499999987e-05,
+        "similarity_std": 0.02225193264229286,
+        "expected_mean": 0.0,
+        "expected_std": 0.022097086912079608,
+        "mean_deviation": 7.539062499999987e-05,
+        "std_deviation": 0.00015484573021325165,
+        "all_bipolar": true,
+        "mean_within_3sigma": true,
+        "std_within_tolerance": true
+      },
+      "collision_analysis": {
+        "capacity": 44,
+        "dimension": 2048,
+        "max_pairwise_similarity": 0.07519531249999999,
+        "mean_pairwise_similarity": 0.0016558205602536999,
+        "pairs_above_0.1": 0,
+        "total_pairs": 946,
+        "expected_max_similarity": 0.06079060527230586,
+        "collision_rate": 0.0
+      },
+      "exact_recovery": {
+        "total": 44,
+        "correct": 44,
+        "error_rate": 0.0,
+        "mean_similarity": 0.9999999999999999,
+        "min_similarity": 0.9999999999999998,
+        "query_time_ms": 7.513523101806641,
+        "query_time_per_item_us": 170.76188867742366
+      },
+      "noisy_recovery": {
+        "0.01": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.9804687499999999,
+          "correct": 44
+        },
+        "0.05": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.9003906249999999,
+          "correct": 44
+        },
+        "0.1": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.8007812499999999,
+          "correct": 44
+        },
+        "0.15": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.7001953124999999,
+          "correct": 44
+        },
+        "0.2": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.6005859374999999,
+          "correct": 44
+        },
+        "0.3": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.40039062499999994,
+          "correct": 44
+        },
+        "0.4": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.20019531249999997,
+          "correct": 44
+        }
+      },
+      "sequence_encoding": {
+        "n_sequences": 10,
+        "encode_time_ms": 0.1976490020751953,
+        "max_pairwise_similarity": 0.07226562499999999,
+        "mean_pairwise_similarity": 0.004863281249999999,
+        "min_self_similarity": 1.0
+      },
+      "memory_usage": {
+        "per_item_bytes": 2048,
+        "total_items": 44,
+        "total_bytes": 90112,
+        "total_kb": 88.0
+      }
+    },
+    "4096": {
+      "dimension": 4096,
+      "seed": 42,
+      "timestamp": "2026-10-17T20:25:36.041475",
+      "creation_time_ms": 0.9942054748535156,
+      "inventory_size": 44,
+      "random_distribution": {
+        "dimension": 4096,
+        "n_samples": 500,
+        "similarity_mean": -0.00023369140625,
+        "similarity_std": 0.015759893958211823,
+        "expected_mean": 0.0,
+        "expected_std": 0.015625,
+        "mean_deviation": 0.00023369140625,
+        "std_deviation": 0.0001348939582118229,
+        "all_bipolar": true,
+        "mean_within_3sigma": true,
+        "std_within_tolerance": true
+      },
+      "collision_analysis": {
+        "capacity": 44,
+        "dimension": 4096,
+        "max_pairwise_similarity": 0.05322265625,
+        "mean_pairwise_similarity": 0.00029936905391120505,
+        "pairs_above_0.1": 0,
+        "total_pairs": 946,
+        "expected_max_similarity": 0.04298544922048217,
+        "collision_rate": 0.0
+      },
+      "exact_recovery": {
+        "total": 44,
+        "correct": 44,
+        "error_rate": 0.0,
+        "mean_similarity": 1.0,
+        "min_similarity": 1.0,
+        "query_time_ms": 13.957738876342773,
+        "query_time_per_item_us": 317.2213380986994
+      },
+      "noisy_recovery": {
+        "0.01": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.98046875,
+          "correct": 44
+        },
+        "0.05": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.900390625,
+          "correct": 44
+        },
+        "0.1": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.80029296875,
+          "correct": 44
+        },
+        "0.15": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.7001953125,
+          "correct": 44
+        },
+        "0.2": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.60009765625,
+          "correct": 44
+        },
+        "0.3": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.400390625,
+          "correct": 44
+        },
+        "0.4": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.2001953125,
+          "correct": 44
+        }
+      },
+      "sequence_encoding": {
+        "n_sequences": 10,
+        "encode_time_ms": 0.33736228942871094,
+        "max_pairwise_similarity": 0.04150390625,
+        "mean_pairwise_similarity": -0.00376953125,
+        "min_self_similarity": 1.0
+      },
+      "memory_usage": {
+        "per_item_bytes": 4096,
+        "total_items": 44,
+        "total_bytes": 180224,
+        "total_kb": 176.0
+      }
+    },
+    "8192": {
+      "dimension": 8192,
+      "seed": 42,
+      "timestamp": "2026-10-17T20:25:36.282099",
+      "creation_time_ms": 1.6503334045410156,
+      "inventory_size": 44,
+      "random_distribution": {
+        "dimension": 8192,
+        "n_samples": 500,
+        "similarity_mean": -7.3291015625e-05,
+        "similarity_std": 0.011022090448253608,
+        "expected_mean": 0.0,
+        "expected_std": 0.011048543456039804,
+        "mean_deviation": 7.3291015625e-05,
+        "std_deviation": 2.6453007786196234e-05,
+        "all_bipolar": true,
+        "mean_within_3sigma": true,
+        "std_within_tolerance": true
+      },
+      "collision_analysis": {
+        "capacity": 44,
+        "dimension": 8192,
+        "max_pairwise_similarity": 0.03808593749999999,
+        "mean_pairwise_similarity": 0.00018581527484143757,
+        "pairs_above_0.1": 0,
+        "total_pairs": 946,
+        "expected_max_similarity": 0.03039530263615293,
+        "collision_rate": 0.0
+      },
+      "exact_recovery": {
+        "total": 44,
+        "correct": 44,
+        "error_rate": 0.0,
+        "mean_similarity": 0.9999999999999999,
+        "min_similarity": 0.9999999999999998,
+        "query_time_ms": 30.502796173095703,
+        "query_time_per_item_us": 693.2453675703568
+      },
+      "noisy_recovery": {
+        "0.01": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.9802246093749999,
+          "correct": 44
+        },
+        "0.05": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.9001464843749999,
+          "correct": 44
+        },
+        "0.1": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.8000488281249999,
+          "correct": 44
+        },
+        "0.15": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.7001953124999999,
+          "correct": 44
+        },
+        "0.2": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.6000976562499999,
+          "correct": 44
+        },
+        "0.3": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.40014648437499994,
+          "correct": 44
+        },
+        "0.4": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.20019531249999997,
+          "correct": 44
+        }
+      },
+      "sequence_encoding": {
+        "n_sequences": 10,
+        "encode_time_ms": 0.5261898040771484,
+        "max_pairwise_similarity": 0.021972656249999997,
+        "mean_pairwise_similarity": 0.0009667968749999999,
+        "min_self_similarity": 1.0
+      },
+      "memory_usage": {
+        "per_item_bytes": 8192,
+        "total_items": 44,
+        "total_bytes": 360448,
+        "total_kb": 352.0
+      }
+    },
+    "10000": {
+      "dimension": 10000,
+      "seed": 42,
+      "timestamp": "2026-10-17T20:25:36.682450",
+      "creation_time_ms": 2.0759105682373047,
+      "inventory_size": 44,
+      "random_distribution": {
+        "dimension": 10000,
+        "n_samples": 500,
+        "similarity_mean": 7.600000000000007e-06,
+        "similarity_std": 0.009913423941303026,
+        "expected_mean": 0.0,
+        "expected_std": 0.01,
+        "mean_deviation": 7.600000000000007e-06,
+        "std_deviation": 8.657605869697403e-05,
+        "all_bipolar": true,
+        "mean_within_3sigma": true,
+        "std_within_tolerance": true
+      },
+      "collision_analysis": {
+        "capacity": 44,
+        "dimension": 10000,
+        "max_pairwise_similarity": 0.0334,
+        "mean_pairwise_similarity": -2.3467230443974423e-05,
+        "pairs_above_0.1": 0,
+        "total_pairs": 946,
+        "expected_max_similarity": 0.027510687501108588,
+        "collision_rate": 0.0
+      },
+      "exact_recovery": {
+        "total": 44,
+        "correct": 44,
+        "error_rate": 0.0,
+        "mean_similarity": 1.0,
+        "min_similarity": 1.0,
+        "query_time_ms": 38.02061080932617,
+        "query_time_per_item_us": 864.1047911210494
+      },
+      "noisy_recovery": {
+        "0.01": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.9799999999999998,
+          "correct": 44
+        },
+        "0.05": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.8999999999999999,
+          "correct": 44
+        },
+        "0.1": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.7999999999999997,
+          "correct": 44
+        },
+        "0.15": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.7,
+          "correct": 44
+        },
+        "0.2": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.6000000000000001,
+          "correct": 44
+        },
+        "0.3": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.39999999999999986,
+          "correct": 44
+        },
+        "0.4": {
+          "error_rate": 0.0,
+          "mean_similarity": 0.19999999999999993,
+          "correct": 44
+        }
+      },
+      "sequence_encoding": {
+        "n_sequences": 10,
+        "encode_time_ms": 0.6041526794433594,
+        "max_pairwise_similarity": 0.0208,
+        "mean_pairwise_similarity": -0.0010199999999999999,
+        "min_self_similarity": 1.0
+      },
+      "memory_usage": {
+        "per_item_bytes": 10000,
+        "total_items": 44,
+        "total_bytes": 440000,
+        "total_kb": 429.6875
+      }
+    }
+  }
+}
