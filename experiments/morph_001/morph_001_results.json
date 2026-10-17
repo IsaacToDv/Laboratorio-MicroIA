@@ -1,0 +1,337 @@
+{
+  "experiment_id": "MORPH-001",
+  "description": "Clasificación morfológica con HDC",
+  "corpus": "UD Spanish-AnCora",
+  "timestamp": "2026-10-17T21:06:05.222943",
+  "dimension": 10000,
+  "max_train_samples": 50000,
+  "results": {
+    "POS": {
+      "feature": "POS",
+      "dimension": 10000,
+      "baseline_majority": {
+        "accuracy": 0.17863936443996867,
+        "total": 53622,
+        "majority_class": "NOUN",
+        "distribution": {
+          "DET": 68318,
+          "NOUN": 81785,
+          "ADP": 71074,
+          "CCONJ": 12064,
+          "PROPN": 33427,
+          "VERB": 38988,
+          "NUM": 7277,
+          "PUNCT": 52988,
+          "ADV": 15016,
+          "AUX": 11064,
+          "PRON": 20495,
+          "ADJ": 29772,
+          "SCONJ": 10259,
+          "SYM": 358,
+          "INTJ": 151,
+          "X": 3
+        }
+      },
+      "baseline_suffix_2": {
+        "accuracy": 0.7064078176867703,
+        "total": 53622,
+        "suffix_len": 2,
+        "n_suffixes": 823
+      },
+      "baseline_suffix_3": {
+        "accuracy": 0.8118123158405133,
+        "total": 53622,
+        "suffix_len": 3,
+        "n_suffixes": 3969
+      },
+      "baseline_suffix_4": {
+        "accuracy": 0.8680951848122039,
+        "total": 53622,
+        "suffix_len": 4,
+        "n_suffixes": 9767
+      },
+      "baseline_lookup": {
+        "accuracy": 0.8978031405020327,
+        "total": 53622,
+        "oov": 2583,
+        "oov_rate": 0.04817052702249077,
+        "coverage": 0.9518294729775092,
+        "n_words": 34556
+      },
+      "train_time_s": 43.52354168891907,
+      "hdc": {
+        "accuracy": 0.56310842564619,
+        "macro_f1": 0.5050882476886956,
+        "total": 53622,
+        "correct": 30195,
+        "eval_time_s": 73.06374502182007,
+        "per_class": {
+          "ADJ": {
+            "accuracy": 0.46608004541583875,
+            "total": 3523,
+            "correct": 1642
+          },
+          "ADP": {
+            "accuracy": 0.45907345175228037,
+            "total": 8332,
+            "correct": 3825
+          },
+          "DET": {
+            "accuracy": 0.8044692737430168,
+            "total": 8055,
+            "correct": 6480
+          },
+          "PUNCT": {
+            "accuracy": 0.9777391853489107,
+            "total": 6334,
+            "correct": 6193
+          },
+          "NOUN": {
+            "accuracy": 0.3999373629815221,
+            "total": 9579,
+            "correct": 3831
+          },
+          "PROPN": {
+            "accuracy": 0.5142281541173508,
+            "total": 3971,
+            "correct": 2042
+          },
+          "VERB": {
+            "accuracy": 0.4262295081967213,
+            "total": 4636,
+            "correct": 1976
+          },
+          "NUM": {
+            "accuracy": 0.6202661207778914,
+            "total": 977,
+            "correct": 606
+          },
+          "CCONJ": {
+            "accuracy": 0.7860169491525424,
+            "total": 1416,
+            "correct": 1113
+          },
+          "PRON": {
+            "accuracy": 0.08258011503697617,
+            "total": 2434,
+            "correct": 201
+          },
+          "ADV": {
+            "accuracy": 0.40672268907563025,
+            "total": 1785,
+            "correct": 726
+          },
+          "AUX": {
+            "accuracy": 0.5731800766283525,
+            "total": 1305,
+            "correct": 748
+          },
+          "SCONJ": {
+            "accuracy": 0.6417546709991877,
+            "total": 1231,
+            "correct": 790
+          },
+          "SYM": {
+            "accuracy": 0.6785714285714286,
+            "total": 28,
+            "correct": 19
+          },
+          "INTJ": {
+            "accuracy": 0.1875,
+            "total": 16,
+            "correct": 3
+          }
+        }
+      }
+    },
+    "Gender": {
+      "feature": "Gender",
+      "dimension": 10000,
+      "baseline_majority": {
+        "accuracy": 0.5861662308362816,
+        "total": 19503,
+        "majority_class": "Masc",
+        "distribution": {
+          "Fem": 69421,
+          "Masc": 95767
+        }
+      },
+      "baseline_suffix_2": {
+        "accuracy": 0.957903912218633,
+        "total": 19503,
+        "suffix_len": 2,
+        "n_suffixes": 246
+      },
+      "baseline_suffix_3": {
+        "accuracy": 0.9785161257242475,
+        "total": 19503,
+        "suffix_len": 3,
+        "n_suffixes": 964
+      },
+      "baseline_suffix_4": {
+        "accuracy": 0.9823616879454443,
+        "total": 19503,
+        "suffix_len": 4,
+        "n_suffixes": 2899
+      },
+      "baseline_lookup": {
+        "accuracy": 0.9506229810798339,
+        "total": 19503,
+        "oov": 931,
+        "oov_rate": 0.047736245705788855,
+        "coverage": 0.9522637542942112,
+        "n_words": 15148
+      },
+      "train_time_s": 18.86410427093506,
+      "hdc": {
+        "accuracy": 0.6702558580731169,
+        "macro_f1": 0.6622972832261093,
+        "total": 19503,
+        "correct": 13072,
+        "eval_time_s": 19.82891583442688,
+        "per_class": {
+          "Masc": {
+            "accuracy": 0.7026766969909027,
+            "total": 11432,
+            "correct": 8033
+          },
+          "Fem": {
+            "accuracy": 0.6243340354355098,
+            "total": 8071,
+            "correct": 5039
+          }
+        }
+      }
+    },
+    "Number": {
+      "feature": "Number",
+      "dimension": 10000,
+      "baseline_majority": {
+        "accuracy": 0.7343327879456641,
+        "total": 26281,
+        "majority_class": "Sing",
+        "distribution": {
+          "Plur": 58650,
+          "Sing": 164030
+        }
+      },
+      "baseline_suffix_2": {
+        "accuracy": 0.9798333396750504,
+        "total": 26281,
+        "suffix_len": 2,
+        "n_suffixes": 297
+      },
+      "baseline_suffix_3": {
+        "accuracy": 0.9920474867775199,
+        "total": 26281,
+        "suffix_len": 3,
+        "n_suffixes": 1349
+      },
+      "baseline_suffix_4": {
+        "accuracy": 0.9929226437350177,
+        "total": 26281,
+        "suffix_len": 4,
+        "n_suffixes": 4413
+      },
+      "baseline_lookup": {
+        "accuracy": 0.9450934134926373,
+        "total": 26281,
+        "oov": 1440,
+        "oov_rate": 0.05479243559986302,
+        "coverage": 0.945207564400137,
+        "n_words": 23181
+      },
+      "train_time_s": 25.167877435684204,
+      "hdc": {
+        "accuracy": 0.5565237243636086,
+        "macro_f1": 0.5545936910821099,
+        "total": 26281,
+        "correct": 14626,
+        "eval_time_s": 28.49912929534912,
+        "per_class": {
+          "Sing": {
+            "accuracy": 0.42375252603761854,
+            "total": 19299,
+            "correct": 8178
+          },
+          "Plur": {
+            "accuracy": 0.923517616728731,
+            "total": 6982,
+            "correct": 6448
+          }
+        }
+      }
+    },
+    "Tense": {
+      "feature": "Tense",
+      "dimension": 10000,
+      "baseline_majority": {
+        "accuracy": 0.45207877461706786,
+        "total": 4570,
+        "majority_class": "Pres",
+        "distribution": {
+          "Past": 14136,
+          "Imp": 3333,
+          "Pres": 18527,
+          "Fut": 2261
+        }
+      },
+      "baseline_suffix_2": {
+        "accuracy": 0.9227571115973742,
+        "total": 4570,
+        "suffix_len": 2,
+        "n_suffixes": 127
+      },
+      "baseline_suffix_3": {
+        "accuracy": 0.9796498905908096,
+        "total": 4570,
+        "suffix_len": 3,
+        "n_suffixes": 654
+      },
+      "baseline_suffix_4": {
+        "accuracy": 0.9733041575492342,
+        "total": 4570,
+        "suffix_len": 4,
+        "n_suffixes": 1897
+      },
+      "baseline_lookup": {
+        "accuracy": 0.8978118161925602,
+        "total": 4570,
+        "oov": 465,
+        "oov_rate": 0.10175054704595186,
+        "coverage": 0.8982494529540481,
+        "n_words": 7216
+      },
+      "train_time_s": 5.301608085632324,
+      "hdc": {
+        "accuracy": 0.6352297592997812,
+        "macro_f1": 0.6080846968632329,
+        "total": 4570,
+        "correct": 2903,
+        "eval_time_s": 6.151864528656006,
+        "per_class": {
+          "Past": {
+            "accuracy": 0.9278523489932886,
+            "total": 1788,
+            "correct": 1659
+          },
+          "Imp": {
+            "accuracy": 0.5307017543859649,
+            "total": 456,
+            "correct": 242
+          },
+          "Pres": {
+            "accuracy": 0.4036786060019361,
+            "total": 2066,
+            "correct": 834
+          },
+          "Fut": {
+            "accuracy": 0.6461538461538462,
+            "total": 260,
+            "correct": 168
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "experiment_id": "HDC-Esp-002",
+  "description": "Escalabilidad a vocabularios grandes (optimizado)",
+  "timestamp": "2026-10-17T20:39:38.334408",
+  "dimensions_tested": [
+    1024,
+    2048,
+    4096,
+    8192,
+    10000
+  ],
+  "vocab_sizes_tested": [
+    100,
+    500,
+    1000,
+    2000,
+    5000,
+    10000,
+    20000
+  ],
+  "target_error_rate": 0.05,
+  "results": {
+    "1024": {
+      "dimension": 1024,
+      "theoretical_capacity": 51,
+      "experiments": [
+        {
+          "dimension": 1024,
+          "vocab_size": 100,
+          "seed": 42,
+          "error_rate": 0.0,
+          "correct": 100,
+          "total": 100,
+          "mean_best_similarity": 1.0,
+          "min_similarity": 1.0,
+          "generation_time_ms": 1.3010501861572266,
+          "recovery_time_ms": 1.8687248229980469,
+          "recovery_time_per_item_us": 18.68724822998047,
+          "theoretical_capacity": 51,
+          "load_factor": 1.9607843137254901,
+          "max_pairwise_similarity_sampled": 0.115234375,
+          "timestamp": "2026-10-17T20:39:32.255948"
+        }
+      ]
+    },
+    "2048": {
+      "dimension": 2048,
+      "theoretical_capacity": 93,
+      "experiments": [
+        {
+          "dimension": 2048,
+          "vocab_size": 100,
+          "seed": 42,
+          "error_rate": 0.0,
+          "correct": 100,
+          "total": 100,
+          "mean_best_similarity": 0.9999999999999999,
+          "min_similarity": 0.9999999999999999,
+          "generation_time_ms": 10.22481918334961,
+          "recovery_time_ms": 2.411365509033203,
+          "recovery_time_per_item_us": 24.11365509033203,
+          "theoretical_capacity": 93,
+          "load_factor": 1.075268817204301,
+          "max_pairwise_similarity_sampled": 0.07324218749999999,
+          "timestamp": "2026-10-17T20:39:32.367915"
+        }
+      ]
+    },
+    "4096": {
+      "dimension": 4096,
+      "theoretical_capacity": 170,
+      "experiments": [
+        {
+          "dimension": 4096,
+          "vocab_size": 100,
+          "seed": 42,
+          "error_rate": 0.0,
+          "correct": 100,
+          "total": 100,
+          "mean_best_similarity": 1.0,
+          "min_similarity": 1.0,
+          "generation_time_ms": 4.188060760498047,
+          "recovery_time_ms": 152.3759365081787,
+          "recovery_time_per_item_us": 1523.759365081787,
+          "theoretical_capacity": 170,
+          "load_factor": 0.5882352941176471,
+          "max_pairwise_similarity_sampled": 0.05224609375,
+          "timestamp": "2026-10-17T20:39:32.672644"
+        },
+        {
+          "dimension": 4096,
+          "vocab_size": 500,
+          "seed": 42,
+          "error_rate": 0.0,
+          "correct": 500,
+          "total": 500,
+          "mean_best_similarity": 1.0,
+          "min_similarity": 1.0,
+          "generation_time_ms": 22.693157196044922,
+          "recovery_time_ms": 192.3539638519287,
+          "recovery_time_per_item_us": 384.7079277038574,
+          "theoretical_capacity": 170,
+          "load_factor": 2.9411764705882355,
+          "max_pairwise_similarity_sampled": 0.06640625,
+          "timestamp": "2026-10-17T20:39:33.086040"
+        }
+      ]
+    },
+    "8192": {
+      "dimension": 8192,
+      "theoretical_capacity": 315,
+      "experiments": [
+        {
+          "dimension": 8192,
+          "vocab_size": 100,
+          "seed": 42,
+          "error_rate": 0.0,
+          "correct": 100,
+          "total": 100,
+          "mean_best_similarity": 0.9999999999999999,
+          "min_similarity": 0.9999999999999999,
+          "generation_time_ms": 6.88624382019043,
+          "recovery_time_ms": 75.70815086364746,
+          "recovery_time_per_item_us": 757.0815086364746,
+          "theoretical_capacity": 315,
+          "load_factor": 0.31746031746031744,
+          "max_pairwise_similarity_sampled": 0.03808593749999999,
+          "timestamp": "2026-10-17T20:39:33.424584"
+        },
+        {
+          "dimension": 8192,
+          "vocab_size": 500,
+          "seed": 42,
+          "error_rate": 0.0,
+          "correct": 500,
+          "total": 500,
+          "mean_best_similarity": 0.9999999999999998,
+          "min_similarity": 0.9999999999999999,
+          "generation_time_ms": 97.77665138244629,
+          "recovery_time_ms": 301.6476631164551,
+          "recovery_time_per_item_us": 603.2953262329102,
+          "theoretical_capacity": 315,
+          "load_factor": 1.5873015873015872,
+          "max_pairwise_similarity_sampled": 0.03808593749999999,
+          "timestamp": "2026-10-17T20:39:34.108324"
+        },
+        {
+          "dimension": 8192,
+          "vocab_size": 1000,
+          "seed": 42,
+          "error_rate": 0.0,
+          "correct": 1000,
+          "total": 1000,
+          "mean_best_similarity": 0.9999999999999999,
+          "min_similarity": 0.9999999999999999,
+          "generation_time_ms": 123.52728843688965,
+          "recovery_time_ms": 533.7257385253906,
+          "recovery_time_per_item_us": 533.7257385253906,
+          "theoretical_capacity": 315,
+          "load_factor": 3.1746031746031744,
+          "max_pairwise_similarity_sampled": 0.03833007812499999,
+          "timestamp": "2026-10-17T20:39:35.136392"
+        }
+      ]
+    },
+    "10000": {
+      "dimension": 10000,
+      "theoretical_capacity": 376,
+      "experiments": [
+        {
+          "dimension": 10000,
+          "vocab_size": 100,
+          "seed": 42,
+          "error_rate": 0.0,
+          "correct": 100,
+          "total": 100,
+          "mean_best_similarity": 1.0000000000000018,
+          "min_similarity": 1.0000000000000022,
+          "generation_time_ms": 38.2542610168457,
+          "recovery_time_ms": 659.2962741851807,
+          "recovery_time_per_item_us": 6592.962741851807,
+          "theoretical_capacity": 376,
+          "load_factor": 0.26595744680851063,
+          "max_pairwise_similarity_sampled": 0.0396,
+          "timestamp": "2026-10-17T20:39:36.044115"
+        },
+        {
+          "dimension": 10000,
+          "vocab_size": 500,
+          "seed": 42,
+          "error_rate": 0.0,
+          "correct": 500,
+          "total": 500,
+          "mean_best_similarity": 1.000000000000002,
+          "min_similarity": 1.0000000000000022,
+          "generation_time_ms": 89.3251895904541,
+          "recovery_time_ms": 424.3447780609131,
+          "recovery_time_per_item_us": 848.6895561218262,
+          "theoretical_capacity": 376,
+          "load_factor": 1.3297872340425532,
+          "max_pairwise_similarity_sampled": 0.0352,
+          "timestamp": "2026-10-17T20:39:36.946682"
+        },
+        {
+          "dimension": 10000,
+          "vocab_size": 1000,
+          "seed": 42,
+          "error_rate": 0.0,
+          "correct": 1000,
+          "total": 1000,
+          "mean_best_similarity": 1.000000000000002,
+          "min_similarity": 1.0000000000000022,
+          "generation_time_ms": 164.27230834960938,
+          "recovery_time_ms": 818.0334568023682,
+          "recovery_time_per_item_us": 818.0334568023682,
+          "theoretical_capacity": 376,
+          "load_factor": 2.6595744680851063,
+          "max_pairwise_similarity_sampled": 0.0342,
+          "timestamp": "2026-10-17T20:39:38.317986"
+        }
+      ]
+    }
+  }
+}

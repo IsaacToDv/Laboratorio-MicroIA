@@ -1,0 +1,161 @@
+{
+  "experiment_id": "MORPH-003",
+  "description": "Codificación de sufijos explícita con HDC (sin bundles acumulativos)",
+  "corpus": "UD Spanish-AnCora",
+  "timestamp": "2026-10-17T21:13:52.347176",
+  "dimension": 10000,
+  "results": {
+    "POS": {
+      "feature": "POS",
+      "dimension": 10000,
+      "baseline_majority": {
+        "accuracy": 0.17863936443996867,
+        "total": 53622,
+        "majority_class": "NOUN"
+      },
+      "baseline_suffix_2": {
+        "accuracy": 0.7064078176867703,
+        "total": 53622
+      },
+      "baseline_suffix_3": {
+        "accuracy": 0.8118123158405133,
+        "total": 53622
+      },
+      "baseline_suffix_4": {
+        "accuracy": 0.8680951848122039,
+        "total": 53622
+      },
+      "train_time_s": 2.603393316268921,
+      "hdc_suffix": {
+        "longest_suffix": {
+          "accuracy": 0.8376039685203834,
+          "total": 53622,
+          "correct": 44914,
+          "no_prediction": 0,
+          "eval_time_s": 0.1377255916595459
+        },
+        "weighted_vote": {
+          "accuracy": 0.7848830703815598,
+          "total": 53622,
+          "correct": 42087,
+          "no_prediction": 0,
+          "eval_time_s": 0.16489028930664062
+        }
+      }
+    },
+    "Gender": {
+      "feature": "Gender",
+      "dimension": 10000,
+      "baseline_majority": {
+        "accuracy": 0.5861662308362816,
+        "total": 19503,
+        "majority_class": "Masc"
+      },
+      "baseline_suffix_2": {
+        "accuracy": 0.957903912218633,
+        "total": 19503
+      },
+      "baseline_suffix_3": {
+        "accuracy": 0.9785161257242475,
+        "total": 19503
+      },
+      "baseline_suffix_4": {
+        "accuracy": 0.9823616879454443,
+        "total": 19503
+      },
+      "train_time_s": 1.2896111011505127,
+      "hdc_suffix": {
+        "longest_suffix": {
+          "accuracy": 0.9866174434702354,
+          "total": 19503,
+          "correct": 19242,
+          "no_prediction": 1,
+          "eval_time_s": 0.045606136322021484
+        },
+        "weighted_vote": {
+          "accuracy": 0.9827206070860893,
+          "total": 19503,
+          "correct": 19166,
+          "no_prediction": 1,
+          "eval_time_s": 0.07603740692138672
+        }
+      }
+    },
+    "Number": {
+      "feature": "Number",
+      "dimension": 10000,
+      "baseline_majority": {
+        "accuracy": 0.7343327879456641,
+        "total": 26281,
+        "majority_class": "Sing"
+      },
+      "baseline_suffix_2": {
+        "accuracy": 0.9798333396750504,
+        "total": 26281
+      },
+      "baseline_suffix_3": {
+        "accuracy": 0.9920474867775199,
+        "total": 26281
+      },
+      "baseline_suffix_4": {
+        "accuracy": 0.9929226437350177,
+        "total": 26281
+      },
+      "train_time_s": 1.546957015991211,
+      "hdc_suffix": {
+        "longest_suffix": {
+          "accuracy": 0.989992770442525,
+          "total": 26281,
+          "correct": 26018,
+          "no_prediction": 1,
+          "eval_time_s": 0.1057884693145752
+        },
+        "weighted_vote": {
+          "accuracy": 0.9883185571325293,
+          "total": 26281,
+          "correct": 25974,
+          "no_prediction": 1,
+          "eval_time_s": 0.08774280548095703
+        }
+      }
+    },
+    "Tense": {
+      "feature": "Tense",
+      "dimension": 10000,
+      "baseline_majority": {
+        "accuracy": 0.45207877461706786,
+        "total": 4570,
+        "majority_class": "Pres"
+      },
+      "baseline_suffix_2": {
+        "accuracy": 0.9227571115973742,
+        "total": 4570
+      },
+      "baseline_suffix_3": {
+        "accuracy": 0.9796498905908096,
+        "total": 4570
+      },
+      "baseline_suffix_4": {
+        "accuracy": 0.9733041575492342,
+        "total": 4570
+      },
+      "train_time_s": 0.581885576248169,
+      "hdc_suffix": {
+        "longest_suffix": {
+          "accuracy": 0.9884026258205689,
+          "total": 4570,
+          "correct": 4517,
+          "no_prediction": 0,
+          "eval_time_s": 0.024521589279174805
+        },
+        "weighted_vote": {
+          "accuracy": 0.9849015317286652,
+          "total": 4570,
+          "correct": 4501,
+          "no_prediction": 0,
+          "eval_time_s": 0.0286104679107666
+        }
+      }
+    }
+  }
+}
