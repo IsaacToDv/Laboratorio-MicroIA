@@ -1,3 +1,8 @@
+# Laboratorio-MicroIA
+Esto es un laboratorio donde se orquestaron varios agentes en el entorno de LLM Arena, para más información, entra a el link de la coversación
+https://chatgpt.com/share/6ad3d93a-55a8-83e9-aabc-c8c9a2dd4723 
+
+comentario de: arena/28129a0f-laboratorio-microia
 # Laboratorio de Micro-IA Biomimética
 ## Computación Hiperdimensional — Redes Neuronales de Impulsos — Inferencia Activa
 
@@ -176,3 +181,4 @@ Para más información sobre este laboratorio, consulta la conversación origina
 **Última actualización:** 2026-10-17  
 **Versión:** 0.1.0  
 **Estado:** Investigación activa
+=======
