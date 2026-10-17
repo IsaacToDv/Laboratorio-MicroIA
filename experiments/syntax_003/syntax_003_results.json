@@ -1,0 +1,16 @@
+{
+  "experiment_id": "SYNTAX-003",
+  "description": "Análisis de dependencias completo (UAS + LAS)",
+  "corpus": "UD Spanish-AnCora",
+  "timestamp": "2026-10-17T21:47:28.169844",
+  "results": {
+    "uas": 0.6242586997874007,
+    "las": 0.5867927343254634,
+    "exact_match": 0.002324230098779779,
+    "total": 53622,
+    "uas_correct": 33474,
+    "las_correct": 31465,
+    "n_sentences": 1721,
+    "sentence_exact_match": 4
+  }
+}

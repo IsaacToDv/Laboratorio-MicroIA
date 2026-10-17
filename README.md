@@ -8,7 +8,19 @@ Investigación computacional para el estudio de arquitecturas de inteligencia ar
 
 ## 🎯 Estado Actual
 
-**Fase 1: Morfología** — ✅ **COMPLETADA**
+**Fase 1: Morfología** — ✅ **COMPLETADA**  
+**Fase 2: Sintaxis** — ✅ **COMPLETADA**
+
+### Fase 2: Sintaxis (4 experimentos)
+
+| Experimento | Resultado | Objetivo | Estado |
+|-------------|-----------|----------|--------|
+| SYNTAX-001: Dependencias (UAS) | 62.43% | 60-70% | ✅ |
+| SYNTAX-002: Relaciones | 87.59% | 60-75% | ✅ |
+| SYNTAX-003: Pipeline (LAS) | 58.68% | 55-65% | ✅ |
+| SYNTAX-004: Concordancia | 91.44% | >90% | ✅ |
+
+### Fase 1: Morfología (7 experimentos)
 
 | Experimento | Resultado | Estado |
 |-------------|-----------|--------|
@@ -20,7 +32,7 @@ Investigación computacional para el estudio de arquitecturas de inteligencia ar
 | MORPH-004: Contexto POS | 93.26% (techo teórico) | ✅ |
 | MORPH-005: Decodificación secuencial | 91.58% (bidireccional) | ✅ |
 
-**Hallazgo principal:** HDC con item memory + sufijos + contexto POS + decodificación bidireccional alcanza **91.58% accuracy** en POS tagging real (sin POS gold), solo 1.68% por debajo del techo teórico de 93.26%.
+**Totales:** 12 experimentos, 21 afirmaciones científicas validadas (CLAIM-001 a CLAIM-021)
 
 ---
 
@@ -128,6 +140,25 @@ python experiments/morph_005/run_experiment.py
 
 **Resultado esperado:** 91.58% accuracy con método bidireccional iterativo
 
+### 5. Sintaxis — Dependencias (rápido, ~10 seg)
+
+```bash
+# SYNTAX-001: Análisis de dependencias (UAS)
+python experiments/syntax_001/run_experiment.py
+
+# SYNTAX-002: Clasificación de relaciones
+python experiments/syntax_002/run_experiment.py
+
+# SYNTAX-003: Pipeline completo (LAS)
+python experiments/syntax_003/run_experiment.py
+
+# SYNTAX-004: Concordancia gramatical
+python experiments/syntax_004/run_experiment.py
+```
+
+**Resultados esperados:**
+- UAS: 62.43% | LAS: 58.68% | Relaciones: 87.59% | Concordancia: 91.44%
+
 ---
 
 ## 📊 Resultados Clave
@@ -157,6 +188,17 @@ python experiments/morph_005/run_experiment.py
 - Beam search NO mejora sobre greedy (modelo muy peaked)
 - Decodificación bidireccional recupera casi toda la brecha con el techo teórico
 - Solo 1.68% de diferencia entre rendimiento real y teórico
+
+### Fase 2: Sintaxis
+
+| Experimento | Métrica | Resultado | Objetivo |
+|-------------|---------|-----------|----------|
+| SYNTAX-001 | UAS | **62.43%** | 60-70% ✅ |
+| SYNTAX-002 | Accuracy | **87.59%** | 60-75% ✅ |
+| SYNTAX-003 | LAS | **58.68%** | 55-65% ✅ |
+| SYNTAX-004 | Concordancia | **91.44%** | >90% ✅ |
+
+**Comparación con estado del arte:** ~25-30 puntos por debajo de taggers profesionales (UDPipe, SpaCy), pero competitivo para métodos basados en lookup/HDC.
 
 ### MORPH-003: Clasificación Morfológica
 
@@ -190,7 +232,11 @@ Laboratorio-MicroIA/
 │   ├── morph_001/        # Clasificación (bundles)
 │   ├── morph_003/        # Clasificación (sufijos) ⭐
 │   ├── morph_004/        # Contexto POS ⭐
-│   └── morph_005/        # Decodificación secuencial ⭐
+│   ├── morph_005/        # Decodificación secuencial ⭐
+│   ├── syntax_001/       # Dependencias (UAS)
+│   ├── syntax_002/       # Clasificación de relaciones
+│   ├── syntax_003/       # Pipeline completo (LAS)
+│   └── syntax_004/       # Concordancia gramatical
 ├── tests/
 │   └── test_hdc.py       # 17 pruebas unitarias
 ├── docs/

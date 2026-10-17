@@ -1,0 +1,80 @@
+{
+  "experiment_id": "SYNTAX-004",
+  "description": "Concordancia gramatical",
+  "corpus": "UD Spanish-AnCora",
+  "timestamp": "2026-10-17T21:48:06.236511",
+  "results": {
+    "gold": {
+      "det_noun": {
+        "total": 6574,
+        "gender_accuracy": 0.9943717675692121,
+        "number_accuracy": 0.9981746273197445,
+        "full_accuracy": 0.9933069668390629,
+        "gender_correct": 6537,
+        "number_correct": 6562,
+        "full_correct": 6530,
+        "has_gender_info": 5657,
+        "has_number_info": 6413
+      },
+      "amod_noun": {
+        "total": 2623,
+        "gender_accuracy": 0.993518871521159,
+        "number_accuracy": 0.9908501715592832,
+        "full_accuracy": 0.987800228745711,
+        "gender_correct": 2606,
+        "number_correct": 2599,
+        "full_correct": 2591,
+        "has_gender_info": 1644,
+        "has_number_info": 2548
+      },
+      "nsubj_verb": {
+        "total": 2482,
+        "gender_accuracy": 0.9770346494762289,
+        "number_accuracy": 0.9669621273166801,
+        "full_accuracy": 0.9508460918614021,
+        "gender_correct": 2425,
+        "number_correct": 2400,
+        "full_correct": 2360,
+        "has_gender_info": 182,
+        "has_number_info": 1327
+      }
+    },
+    "suffix_model": {
+      "det_noun": {
+        "total": 6574,
+        "gender_accuracy": 0.9382415576513539,
+        "number_accuracy": 0.9879829631883176,
+        "full_accuracy": 0.9271372071797992,
+        "gender_correct": 6168,
+        "number_correct": 6495,
+        "full_correct": 6095,
+        "has_gender_info": 5657,
+        "has_number_info": 6413
+      },
+      "amod_noun": {
+        "total": 2623,
+        "gender_accuracy": 0.961875714830347,
+        "number_accuracy": 0.9771254288982082,
+        "full_accuracy": 0.9428135722455204,
+        "gender_correct": 2523,
+        "number_correct": 2563,
+        "full_correct": 2473,
+        "has_gender_info": 1644,
+        "has_number_info": 2548
+      },
+      "nsubj_verb": {
+        "total": 2482,
+        "gender_accuracy": 0.975825946817083,
+        "number_accuracy": 0.8674456083803385,
+        "full_accuracy": 0.8505237711522965,
+        "gender_correct": 2422,
+        "number_correct": 2153,
+        "full_correct": 2111,
+        "has_gender_info": 182,
+        "has_number_info": 1327
+      }
+    },
+    "total_gold_accuracy": 0.983046493706653,
+    "total_suffix_accuracy": 0.9143762308416816
+  }
+}

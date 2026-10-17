@@ -1,0 +1,73 @@
+{
+  "experiment_id": "SYNTAX-002",
+  "description": "Clasificación de relaciones de dependencia",
+  "corpus": "UD Spanish-AnCora",
+  "timestamp": "2026-10-17T21:46:23.380798",
+  "train_time_s": 1.2881135940551758,
+  "results": {
+    "baseline_majority": {
+      "accuracy": 0.15014601391933144,
+      "majority_class": "det"
+    },
+    "baseline_pos_pair": {
+      "accuracy": 0.8015926298907164
+    },
+    "syntax_002": {
+      "accuracy": 0.8758718436462646,
+      "total": 53622,
+      "correct": 46966,
+      "per_deprel": {
+        "det": {
+          "accuracy": 0.996272365805169,
+          "total": 8048,
+          "correct": 8018
+        },
+        "case": {
+          "accuracy": 0.9933014354066986,
+          "total": 7315,
+          "correct": 7266
+        },
+        "punct": {
+          "accuracy": 1.0,
+          "total": 6334,
+          "correct": 6334
+        },
+        "nmod": {
+          "accuracy": 0.9112859468258274,
+          "total": 3686,
+          "correct": 3359
+        },
+        "nsubj": {
+          "accuracy": 0.8172117039586919,
+          "total": 2905,
+          "correct": 2374
+        },
+        "amod": {
+          "accuracy": 0.985543018335684,
+          "total": 2836,
+          "correct": 2795
+        },
+        "obl": {
+          "accuracy": 0.5739692805173807,
+          "total": 2474,
+          "correct": 1420
+        },
+        "obj": {
+          "accuracy": 0.665788317962231,
+          "total": 2277,
+          "correct": 1516
+        },
+        "mark": {
+          "accuracy": 0.9716832721552177,
+          "total": 1907,
+          "correct": 1853
+        },
+        "advmod": {
+          "accuracy": 0.9378468368479467,
+          "total": 1802,
+          "correct": 1690
+        }
+      }
+    }
+  }
+}

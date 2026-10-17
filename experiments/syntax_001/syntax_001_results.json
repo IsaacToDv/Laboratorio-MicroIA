@@ -1,0 +1,60 @@
+{
+  "experiment_id": "SYNTAX-001",
+  "description": "Análisis de dependencias básico (UAS)",
+  "corpus": "UD Spanish-AnCora",
+  "timestamp": "2026-10-17T21:45:44.829145",
+  "train_time_s": 2.5257411003112793,
+  "distribution_analysis": {
+    "total": 453039,
+    "root_percentage": 0.03153591633391386,
+    "left_head_percentage": 0.4185776500477884,
+    "right_head_percentage": 0.5498864336182978,
+    "top_5_distances": [
+      [
+        "1",
+        138195
+      ],
+      [
+        "2",
+        63809
+      ],
+      [
+        "-1",
+        44149
+      ],
+      [
+        "-2",
+        43031
+      ],
+      [
+        "-3",
+        33116
+      ]
+    ]
+  },
+  "results": {
+    "baseline_root": {
+      "uas": 0.03209503561970833,
+      "total": 53622,
+      "correct": 1721
+    },
+    "baseline_left_adjacent": {
+      "uas": 0.09798217149677371,
+      "total": 53622,
+      "correct": 5254
+    },
+    "baseline_right_adjacent": {
+      "uas": 0.30547163477677075,
+      "total": 53622,
+      "correct": 16380
+    },
+    "syntax_001": {
+      "uas": 0.6242586997874007,
+      "total": 53622,
+      "correct": 33474,
+      "root_accuracy": 0.8070889018012783,
+      "root_total": 1721,
+      "root_correct": 1389
+    }
+  }
+}
