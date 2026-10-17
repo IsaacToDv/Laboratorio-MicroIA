@@ -20,6 +20,7 @@
 | MORPH-002 | k-NN en espacio HDC | ⚠️ No ejecutado | Limitaciones computacionales |
 | **MORPH-003** | **Codificación de sufijos** | ✅ **Completado** | **HDC competitivo: 83-99% accuracy** |
 | **MORPH-004** | **Contexto para POS** | ✅ **Completado** | **93.11% accuracy (+6.30%)** |
+| **MORPH-005** | **Decodificación secuencial** | ✅ **Completado** | **91.58% con método bidireccional** |
 
 ---
 
@@ -145,6 +146,78 @@
 
 ---
 
+## 🎯 MORPH-005: Decodificación Secuencial Real
+
+### 1. Decodificación greedy vs techo teórico
+
+**Resultados:**
+
+| Método | Token Accuracy | Sentence Accuracy | Δ vs Gold |
+|--------|----------------|-------------------|-----------|
+| **POS gold (techo)** | **93.26%** | 0.00% | — |
+| Greedy decoding | 86.96% | 9.30% | -6.30% |
+| Beam search k=3 | 86.96% | 9.30% | -6.30% |
+| Beam search k=5 | 86.96% | 9.30% | -6.30% |
+| Beam search k=10 | 86.96% | 9.30% | -6.30% |
+| **Bidireccional iterativo** | **91.58%** | **19.87%** | **-1.68%** ⭐ |
+
+**Conclusión:** La decodificación greedy cae 6.30 puntos, pero el método bidireccional iterativo recupera casi toda la brecha.
+
+### 2. Hallazgos sorprendentes
+
+#### Beam search NO mejora sobre greedy
+
+**Resultado inesperado:** Beam search con k=3, 5, 10 produce exactamente el mismo accuracy que greedy (86.96%).
+
+**Causa:** El modelo tiene distribuciones de probabilidad muy concentradas (peaked). La clase mayoritaria típicamente tiene >80% de probabilidad, así que beam search siempre converge a la misma secuencia que greedy.
+
+#### Decodificación bidireccional SÍ mejora
+
+**Resultado:** 91.58% accuracy (+4.62% sobre greedy, solo -1.68% vs techo).
+
+**Método:**
+1. Primera pasada: greedy izquierda-derecha
+2. Pasadas siguientes: refina usando predicciones de ambos lados
+3. Itera hasta convergencia (típicamente 2-3 pasadas)
+
+**Interpretación:** El contexto bilateral (izquierdo + derecho) es mucho más informativo que solo el izquierdo, incluso cuando el contexto derecho es predicho (no gold).
+
+### 3. Análisis de Sentence Accuracy
+
+**Definición:** Porcentaje de oraciones donde TODOS los tokens están correctamente etiquetados.
+
+| Método | Sentence Accuracy |
+|--------|-------------------|
+| Greedy | 9.30% |
+| Bidireccional | 19.87% |
+
+**Observación:** Incluso con 91.58% token accuracy, solo 19.87% de las oraciones están completamente correctas. Esto indica que los errores están distribuidos: la mayoría de oraciones tiene al menos un error.
+
+**Explicación matemática:**
+- Oración promedio: ~26 tokens
+- Probabilidad de oración perfecta: 0.9158^26 ≈ 10%
+- Observado: 19.87% (mejor que esperado, indica correlación positiva entre aciertos)
+
+### 4. Comparación con estado del arte
+
+| Sistema | Token Accuracy | Método |
+|---------|----------------|--------|
+| **MORPH-005 bidireccional** | **91.58%** | Lookup + contexto + iteración |
+| MORPH-005 greedy | 86.96% | Lookup + contexto |
+| MORPH-004 (gold) | 93.26% | Lookup + contexto gold |
+| UDPipe (stanza) | ~97-98% | Deep learning |
+| SpaCy es_core_news_lg | ~97% | Deep learning |
+
+**Brecha:** 5-6 puntos por debajo de taggers profesionales basados en deep learning.
+
+**Causas probables:**
+- Sin embeddings densos
+- Sin modelo de secuencia (RNN/Transformer)
+- Sin features morfológicas integradas
+- Sin entrenamiento end-to-end
+
+---
+
 ## 🔬 Decisiones Científicas
 
 ### Hipótesis evaluadas
@@ -162,7 +235,10 @@
 ✅ **CLAIM-011:** HDC con item memory de sufijos SÍ es competitivo (83-99%)  
 ✅ **CLAIM-012:** Item memory resuelve saturación de bundles (+34.4% mejora promedio)  
 ✅ **CLAIM-013:** Contexto POS mejora POS tagging en +6.30% (86.81% → 93.11%)  
-✅ **CLAIM-014:** POS de vecinos es más informativo que palabras (93.11% vs 89.88%)
+✅ **CLAIM-014:** POS de vecinos es más informativo que palabras (93.11% vs 89.88%)  
+✅ **CLAIM-015:** Decodificación greedy cae 6.30% vs techo teórico (93.26% → 86.96%)  
+✅ **CLAIM-016:** Beam search no mejora con modelos peaked (greedy = beam k=3,5,10)  
+✅ **CLAIM-017:** Decodificación bidireccional iterativa es efectiva (91.58%, solo -1.68% vs techo)
 
 ---
 
@@ -262,6 +338,8 @@
 |------------|--------|------------|
 | Representación HDC | ✅ Sólida | HDC-Esp-001, 002, 003 |
 | Aprendizaje morfológico | ✅ Competitivo | MORPH-003, 83-99% |
+| POS tagging con contexto | ✅ Competitivo | MORPH-004, 93.26% (gold) |
+| Decodificación secuencial | ✅ Efectiva | MORPH-005, 91.58% (real) |
 | Capacidad de bundles | ⚠️ Limitada | ~188 para D=10000 |
 | Item memory | ✅ Ilimitada | Sin saturación |
 | Procesamiento temporal | ⏳ Pendiente | Módulo B (SNN) |
@@ -277,18 +355,29 @@
 - ✅ `docs/experimentos/hdc_esp_001_resultados.md`
 - ✅ `docs/experimentos/hdc_esp_002_resultados.md`
 - ✅ `docs/experimentos/hdc_esp_003_resultados.md`
+- ✅ `docs/experimentos/morph_003_resultados.md`
+- ✅ `docs/experimentos/morph_004_resultados.md`
+- ✅ `docs/experimentos/morph_005_resultados.md`
 
 **Código:**
 - ✅ `src/hdc/` (módulo HDC completo)
-- ✅ `experiments/morph_001/` (clasificación morfológica)
-- ✅ `experiments/morph_002/` (k-NN, no ejecutado)
+- ✅ `experiments/hdc_esp_001/` (memoria para caracteres)
+- ✅ `experiments/hdc_esp_002/` (escalabilidad)
+- ✅ `experiments/hdc_esp_003/` (capacidad de bundles)
+- ✅ `experiments/morph_001/` (clasificación con bundles)
+- ✅ `experiments/morph_003/` (clasificación con sufijos)
+- ✅ `experiments/morph_004/` (contexto POS)
+- ✅ `experiments/morph_005/` (decodificación secuencial)
 
 **Datos:**
 - ✅ UD Spanish-AnCora descargado y analizado
 - ✅ `experiments/morph_001/morph_001_results.json`
+- ✅ `experiments/morph_003/morph_003_results.json`
+- ✅ `experiments/morph_004/morph_004_results.json`
+- ✅ `experiments/morph_005/morph_005_results.json`
 
 **Afirmaciones científicas:**
-- CLAIM-001 a CLAIM-010 registradas y clasificadas
+- CLAIM-001 a CLAIM-017 registradas y clasificadas (17 afirmaciones)
 
 ---
 

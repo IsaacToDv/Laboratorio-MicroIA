@@ -17,9 +17,10 @@ Investigación computacional para el estudio de arquitecturas de inteligencia ar
 | HDC-Esp-003: Bundles | Fórmula validada | ✅ |
 | MORPH-001: Clasificación (bundles) | 56-67% (no competitivo) | ✅ |
 | MORPH-003: Clasificación (sufijos) | 83-99% (competitivo) | ✅ |
-| **MORPH-004: Contexto POS** | **93.11%** (+6.30%) | ✅ |
+| MORPH-004: Contexto POS | 93.26% (techo teórico) | ✅ |
+| MORPH-005: Decodificación secuencial | 91.58% (bidireccional) | ✅ |
 
-**Hallazgo principal:** HDC con item memory + sufijos + contexto POS alcanza **93.11% accuracy** en POS tagging, acercándose a taggers profesionales (97-98%).
+**Hallazgo principal:** HDC con item memory + sufijos + contexto POS + decodificación bidireccional alcanza **91.58% accuracy** en POS tagging real (sin POS gold), solo 1.68% por debajo del techo teórico de 93.26%.
 
 ---
 
@@ -116,7 +117,16 @@ python experiments/morph_003/run_experiment.py
 python experiments/morph_004/run_experiment.py
 ```
 
-**Resultado esperado:** 93.11% accuracy con POS bilateral
+**Resultado esperado:** 93.26% accuracy con POS bilateral
+
+### 4. Decodificación Secuencial (medio, ~12 seg) ⭐
+
+```bash
+# MORPH-005: Decodificación secuencial real
+python experiments/morph_005/run_experiment.py
+```
+
+**Resultado esperado:** 91.58% accuracy con método bidireccional iterativo
 
 ---
 
@@ -130,9 +140,23 @@ python experiments/morph_004/run_experiment.py
 | Palabra anterior | 90.98% | +4.17% |
 | Palabra siguiente | 89.01% | +2.20% |
 | **POS anterior** | **92.08%** | **+5.27%** |
-| **POS bilateral** | **93.11%** | **+6.30%** ⭐ |
+| **POS bilateral** | **93.26%** | **+6.45%** ⭐ |
 
 **Conclusión:** El POS de palabras vecinas es más informativo que las palabras mismas.
+
+### MORPH-005: Decodificación Secuencial
+
+| Método | Token Accuracy | Sentence Accuracy | Δ vs Gold |
+|--------|----------------|-------------------|-----------|
+| POS gold (techo) | 93.26% | 0.00% | — |
+| Greedy decoding | 86.96% | 9.30% | -6.30% |
+| Beam search k=3,5,10 | 86.96% | 9.30% | -6.30% |
+| **Bidireccional iterativo** | **91.58%** | **19.87%** | **-1.68%** ⭐ |
+
+**Hallazgos clave:**
+- Beam search NO mejora sobre greedy (modelo muy peaked)
+- Decodificación bidireccional recupera casi toda la brecha con el techo teórico
+- Solo 1.68% de diferencia entre rendimiento real y teórico
 
 ### MORPH-003: Clasificación Morfológica
 
@@ -165,7 +189,8 @@ Laboratorio-MicroIA/
 │   ├── hdc_esp_003/      # Capacidad bundles
 │   ├── morph_001/        # Clasificación (bundles)
 │   ├── morph_003/        # Clasificación (sufijos) ⭐
-│   └── morph_004/        # Contexto POS ⭐
+│   ├── morph_004/        # Contexto POS ⭐
+│   └── morph_005/        # Decodificación secuencial ⭐
 ├── tests/
 │   └── test_hdc.py       # 17 pruebas unitarias
 ├── docs/
