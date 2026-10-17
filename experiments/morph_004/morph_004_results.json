@@ -1,0 +1,92 @@
+{
+  "experiment_id": "MORPH-004",
+  "description": "HDC con contexto para POS tagging",
+  "corpus": "UD Spanish-AnCora",
+  "timestamp": "2026-10-17T21:35:11.755588",
+  "results": {
+    "none": {
+      "description": "Sin contexto (MORPH-003)",
+      "accuracy": 0.8680951848122039,
+      "total": 53622,
+      "correct": 46549,
+      "context_used": 52942,
+      "fallback_used": 0,
+      "no_prediction": 680,
+      "context_rate": 0.9873186378725151,
+      "train_time_s": 0.7937984466552734,
+      "eval_time_s": 0.05428171157836914
+    },
+    "left_word": {
+      "description": "Palabra anterior",
+      "accuracy": 0.9098131363992391,
+      "total": 53622,
+      "correct": 48786,
+      "context_used": 46282,
+      "fallback_used": 6660,
+      "no_prediction": 680,
+      "context_rate": 0.8631158852709708,
+      "train_time_s": 1.5034139156341553,
+      "eval_time_s": 0.07213211059570312
+    },
+    "right_word": {
+      "description": "Palabra siguiente",
+      "accuracy": 0.8901383760396852,
+      "total": 53622,
+      "correct": 47731,
+      "context_used": 48145,
+      "fallback_used": 4797,
+      "no_prediction": 680,
+      "context_rate": 0.8978590876878892,
+      "train_time_s": 1.5631399154663086,
+      "eval_time_s": 0.08876633644104004
+    },
+    "bilateral": {
+      "description": "Palabras anterior + siguiente",
+      "accuracy": 0.8987728917235464,
+      "total": 53622,
+      "correct": 48194,
+      "context_used": 32113,
+      "fallback_used": 20829,
+      "no_prediction": 680,
+      "context_rate": 0.5988773264704785,
+      "train_time_s": 2.102755546569824,
+      "eval_time_s": 0.09913015365600586
+    },
+    "left_pos": {
+      "description": "POS anterior",
+      "accuracy": 0.9207787848271232,
+      "total": 53622,
+      "correct": 49374,
+      "context_used": 51515,
+      "fallback_used": 1427,
+      "no_prediction": 680,
+      "context_rate": 0.9607064264667488,
+      "train_time_s": 0.8642802238464355,
+      "eval_time_s": 0.05614471435546875
+    },
+    "bilateral_pos": {
+      "description": "POS anterior + siguiente",
+      "accuracy": 0.9310544179627764,
+      "total": 53622,
+      "correct": 49925,
+      "context_used": 48229,
+      "fallback_used": 4713,
+      "no_prediction": 680,
+      "context_rate": 0.8994256088918727,
+      "train_time_s": 1.353731393814087,
+      "eval_time_s": 0.07065153121948242
+    },
+    "full": {
+      "description": "Contexto completo",
+      "accuracy": 0.9015516019544217,
+      "total": 53622,
+      "correct": 48343,
+      "context_used": 28317,
+      "fallback_used": 24625,
+      "no_prediction": 680,
+      "context_rate": 0.5280854872999888,
+      "train_time_s": 2.096547842025757,
+      "eval_time_s": 0.10904812812805176
+    }
+  }
+}

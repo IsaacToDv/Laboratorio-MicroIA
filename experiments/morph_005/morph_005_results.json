@@ -1,0 +1,69 @@
+{
+  "experiment_id": "MORPH-005",
+  "description": "Decodificación secuencial para POS tagging",
+  "corpus": "UD Spanish-AnCora",
+  "timestamp": "2026-10-17T21:40:14.380527",
+  "train_time_s": 1.498131275177002,
+  "results": {
+    "gold_context": {
+      "token_accuracy": 0.9325836410428555,
+      "total_tokens": 53622,
+      "correct_tokens": 50007,
+      "eval_time_s": 0.09528398513793945,
+      "description": "POS gold (techo teórico)"
+    },
+    "greedy": {
+      "token_accuracy": 0.869624407892283,
+      "sentence_accuracy": 0.09296920395119117,
+      "total_tokens": 53622,
+      "correct_tokens": 46631,
+      "total_sentences": 1721,
+      "correct_sentences": 160,
+      "eval_time_s": 0.10122227668762207,
+      "description": "Greedy decoding"
+    },
+    "beam_3": {
+      "token_accuracy": 0.869624407892283,
+      "sentence_accuracy": 0.09296920395119117,
+      "total_tokens": 53622,
+      "correct_tokens": 46631,
+      "total_sentences": 1721,
+      "correct_sentences": 160,
+      "beam_width": 3,
+      "eval_time_s": 0.5082786083221436,
+      "description": "Beam search k=3"
+    },
+    "beam_5": {
+      "token_accuracy": 0.869624407892283,
+      "sentence_accuracy": 0.09296920395119117,
+      "total_tokens": 53622,
+      "correct_tokens": 46631,
+      "total_sentences": 1721,
+      "correct_sentences": 160,
+      "beam_width": 5,
+      "eval_time_s": 0.8254249095916748,
+      "description": "Beam search k=5"
+    },
+    "beam_10": {
+      "token_accuracy": 0.869624407892283,
+      "sentence_accuracy": 0.09296920395119117,
+      "total_tokens": 53622,
+      "correct_tokens": 46631,
+      "total_sentences": 1721,
+      "correct_sentences": 160,
+      "beam_width": 10,
+      "eval_time_s": 1.5354554653167725,
+      "description": "Beam search k=10"
+    },
+    "bidirectional": {
+      "token_accuracy": 0.9157994852858902,
+      "sentence_accuracy": 0.19872167344567113,
+      "total_tokens": 53622,
+      "correct_tokens": 49107,
+      "total_sentences": 1721,
+      "correct_sentences": 342,
+      "eval_time_s": 0.24487543106079102,
+      "description": "Bidireccional iterativo"
+    }
+  }
+}
