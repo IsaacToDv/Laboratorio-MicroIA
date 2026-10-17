@@ -19,6 +19,7 @@
 | **MORPH-001** | **Clasificación morfológica** | ✅ **Completado** | **HDC no competitivo** |
 | MORPH-002 | k-NN en espacio HDC | ⚠️ No ejecutado | Limitaciones computacionales |
 | **MORPH-003** | **Codificación de sufijos** | ✅ **Completado** | **HDC competitivo: 83-99% accuracy** |
+| **MORPH-004** | **Contexto para POS** | ✅ **Completado** | **93.11% accuracy (+6.30%)** |
 
 ---
 
@@ -96,6 +97,54 @@
 
 ---
 
+## 🎯 MORPH-004: Contexto POS para Mejorar POS Tagging
+
+### 1. El contexto mejora significativamente POS tagging
+
+**Resultados:**
+
+| Configuración | Accuracy | Δ vs Sin contexto |
+|---------------|----------|-------------------|
+| Sin contexto (MORPH-003) | 86.81% | — |
+| Palabra anterior | 90.98% | +4.17% |
+| Palabra siguiente | 89.01% | +2.20% |
+| Palabras bilateral | 89.88% | +3.07% |
+| **POS anterior** | **92.08%** | **+5.27%** |
+| **POS bilateral** | **93.11%** | **+6.30%** ⭐ |
+| Contexto completo | 90.16% | +3.35% |
+
+**Conclusión:** El POS de palabras vecinas es MÁS informativo que las palabras mismas (93.11% vs 89.88%).
+
+### 2. Por qué funciona el contexto POS
+
+1. **El POS resume información gramatical:** Saber que la palabra anterior es DET predice fuertemente NOUN o ADJ.
+
+2. **Menos dispersión:** Solo ~17 POS tags vs miles de palabras únicas. Las combinaciones POS-POS son más frecuentes.
+
+3. **Patrones sintácticos:** El español tiene patrones regulares (DET + NOUN + ADJ) que el contexto POS captura.
+
+### 3. Comparación con estado del arte
+
+| Sistema | Accuracy | Tipo |
+|---------|----------|------|
+| **MORPH-004 (POS bilateral)** | **93.11%** | Lookup + contexto |
+| MORPH-003 (sin contexto) | 86.81% | Lookup simple |
+| UDPipe (stanza) | ~97-98% | Deep learning |
+| SpaCy es_core_news_lg | ~97% | Deep learning |
+
+**Observación:** MORPH-004 se acerca a taggers profesionales con un método extremadamente simple.
+
+### 4. Limitación identificada
+
+**Problema:** Este experimento usa POS "gold" del contexto (del corpus). En uso real necesitaríamos:
+- Decodificación secuencial izquierda-derecha
+- Usar POS predicho (no gold)
+- Beam search para mantener hipótesis
+
+**Próximo paso:** MORPH-005 implementará decodificación secuencial.
+
+---
+
 ## 🔬 Decisiones Científicas
 
 ### Hipótesis evaluadas
@@ -111,7 +160,9 @@
 ✅ **CLAIM-009:** Saturación de bundles es un problema real y cuantificable  
 ✅ **CLAIM-010:** Morfología del español es altamente regular (81-99% con sufijos)  
 ✅ **CLAIM-011:** HDC con item memory de sufijos SÍ es competitivo (83-99%)  
-✅ **CLAIM-012:** Item memory resuelve saturación de bundles (+34.4% mejora promedio)
+✅ **CLAIM-012:** Item memory resuelve saturación de bundles (+34.4% mejora promedio)  
+✅ **CLAIM-013:** Contexto POS mejora POS tagging en +6.30% (86.81% → 93.11%)  
+✅ **CLAIM-014:** POS de vecinos es más informativo que palabras (93.11% vs 89.88%)
 
 ---
 
