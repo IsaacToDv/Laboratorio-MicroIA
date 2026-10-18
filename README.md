@@ -11,9 +11,29 @@ Investigación computacional para el estudio de arquitecturas de inteligencia ar
 **Fase 1: Morfología** — ✅ **COMPLETADA**  
 **Fase 2: Sintaxis** — ✅ **COMPLETADA**  
 **Fase 3: Semántica** — ✅ **COMPLETADA**  
-**Fase 4: Discurso** — ✅ **COMPLETADA**
+**Fase 4: Discurso** — ✅ **COMPLETADA**  
+**Fase 5: Pragmática** — ✅ **COMPLETADA**  
+**Fase 6: Cierre SNN-FEP** — ✅ **COMPLETADA**
 
-**Totales:** 19 experimentos · 29 afirmaciones científicas validadas
+**Totales:** 27 experimentos · 37 afirmaciones científicas validadas · **v1.0.0**
+
+### Fase 6: Cierre SNN-FEP (4 experimentos)
+
+| Experimento | Métrica | Resultado | Estado |
+|-------------|---------|-----------|--------|
+| FINAL-001: SNN-POS (LIF+STDP) | Accuracy | 17.93% | ⚠️ |
+| FINAL-002: FEP Active Inference | Accuracy | **76.73%** | ✅ |
+| FINAL-003: Benchmarking | Ensemble | **92.78%** | ✅ |
+| FINAL-004: Síntesis final | — | Documento | ✅ |
+
+### Fase 5: Pragmática / Integración (4 experimentos)
+
+| Experimento | Métrica | Resultado | Estado |
+|-------------|---------|-----------|--------|
+| PRAGMATICS-001: Pipeline integrado | Throughput | **52,313 tok/s** | ✅ |
+| PRAGMATICS-002: Comprensión (SVO) | F1 | **70.79%** | ✅ |
+| PRAGMATICS-003: Análisis errores | Cascade rate | **40.10%** | ✅ |
+| PRAGMATICS-004: Robustez | Degradación | **7.16%** (20% ruido) | ✅ |
 
 ### Fase 4: Discurso (4 experimentos)
 
@@ -75,18 +95,6 @@ git clone --depth 1 https://github.com/UniversalDependencies/UD_Spanish-AnCora.g
 cd ../..
 ```
 
-### Windows (PowerShell)
-
-```powershell
-git clone https://github.com/IsaacToDv/Laboratorio-MicroIA.git
-cd Laboratorio-MicroIA
-python -m venv venv; .\venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-mkdir -p data\corpus; cd data\corpus
-git clone --depth 1 https://github.com/UniversalDependencies/UD_Spanish-AnCora.git
-cd ..\..
-```
-
 ### Verificación
 
 ```bash
@@ -141,6 +149,24 @@ python experiments/discourse_003/run_experiment.py
 python experiments/discourse_004/run_experiment.py
 ```
 
+### 6. Pragmática (~1 min)
+
+```bash
+python experiments/pragmatics_001/run_experiment.py
+python experiments/pragmatics_002/run_experiment.py
+python experiments/pragmatics_003/run_experiment.py
+python experiments/pragmatics_004/run_experiment.py
+```
+
+### 7. Cierre SNN-FEP (~1 min)
+
+```bash
+python experiments/final_001/run_experiment.py
+python experiments/final_002/run_experiment.py
+python experiments/final_003/run_experiment.py
+python experiments/final_004/run_experiment.py
+```
+
 ---
 
 ## 📊 Resultados Destacados
@@ -148,7 +174,7 @@ python experiments/discourse_004/run_experiment.py
 ### Morfología
 | Tarea | Mejor resultado | Método |
 |-------|----------------|--------|
-| POS tagging | 91.58% | Bidireccional iterativo |
+| POS tagging | 97.44% | Item memory + sufijos |
 | Gender | 98.66% | Sufijos + item memory |
 | Number | 99.00% | Sufijos + item memory |
 | Tense | 98.84% | Sufijos + item memory |
@@ -177,6 +203,21 @@ python experiments/discourse_004/run_experiment.py
 | Entity tracking | Purity=47.44% |
 | Correferencia | 31.80% (limitación documentada) |
 
+### Pragmática / Integración
+| Tarea | Resultado |
+|-------|-----------|
+| Pipeline throughput | 52,313 tokens/s |
+| Extracción SVO | F1=70.79% |
+| Q&A | 100% tasa de respuesta |
+| Robustez (20% ruido) | 7.16% degradación |
+
+### Cierre SNN-FEP
+| Tarea | Resultado |
+|-------|-----------|
+| FEP (Active Inference) | 76.73% accuracy |
+| Ensemble (votación) | 92.78% accuracy |
+| SNN (LIF + STDP) | 17.93% (exploratorio) |
+
 ---
 
 ## 📁 Estructura del Proyecto
@@ -185,23 +226,27 @@ python experiments/discourse_004/run_experiment.py
 Laboratorio-MicroIA/
 ├── src/
 │   ├── hdc/              # Módulo HDC (core, item_memory, sequence_encoder)
-│   ├── snn/              # Módulo SNN (pendiente)
-│   ├── active_inf/       # Módulo FEP (pendiente)
-│   └── interface/        # Integración (pendiente)
+│   ├── snn/              # Módulo SNN
+│   ├── active_inf/       # Módulo FEP
+│   └── interface/        # Integración
 ├── experiments/
-│   ├── hdc_esp_001..003/ # Validación HDC
-│   ├── morph_001..005/   # Morfología
-│   ├── syntax_001..004/  # Sintaxis
-│   ├── semantics_001..004/ # Semántica
-│   └── discourse_001..004/ # Discurso
-├── tests/test_hdc.py     # 17 pruebas unitarias
+│   ├── hdc_esp_001..003/    # Validación HDC
+│   ├── morph_001..005/      # Morfología
+│   ├── syntax_001..004/     # Sintaxis
+│   ├── semantics_001..004/  # Semántica
+│   ├── discourse_001..004/  # Discurso
+│   ├── pragmatics_001..004/ # Pragmática
+│   └── final_001..004/      # Cierre SNN-FEP
+├── tests/test_hdc.py        # 17 pruebas unitarias
 ├── docs/
 │   ├── fase_1_resumen_ejecutivo.md
 │   ├── fase_2_resumen_ejecutivo.md
 │   ├── fase_3_resumen_ejecutivo.md
 │   ├── fase_4_resumen_ejecutivo.md
-│   └── experimentos/     # 19+ informes detallados
-├── data/corpus/          # UD Spanish-AnCora
+│   ├── fase_5_resumen_ejecutivo.md
+│   ├── fase_6_resumen_ejecutivo.md
+│   └── experimentos/        # 23+ informes detallados
+├── data/corpus/             # UD Spanish-AnCora
 └── README.md
 ```
 
@@ -213,6 +258,8 @@ Laboratorio-MicroIA/
 - **[Fase 2: Sintaxis](docs/fase_2_resumen_ejecutivo.md)**
 - **[Fase 3: Semántica](docs/fase_3_resumen_ejecutivo.md)**
 - **[Fase 4: Discurso](docs/fase_4_resumen_ejecutivo.md)**
+- **[Fase 5: Pragmática](docs/fase_5_resumen_ejecutivo.md)**
+- **[Fase 6: Cierre SNN-FEP](docs/fase_6_resumen_ejecutivo.md)**
 - **[Evaluación Inicial Crítica](docs/00_evaluacion_inicial_critica.md)**
 - **Informes de experimentos:** [docs/experimentos/](docs/experimentos/)
 
@@ -230,17 +277,26 @@ Laboratorio-MicroIA/
 8. **La similitud semántica distribucional** muestra estructura (empresa-banco: 0.98)
 9. **La segmentación temática adaptativa** supera baselines por +79% (F1=66.71%)
 10. **La correferencia profunda requiere más que features superficiales** (limitación documentada)
+11. **Pipeline integrado: 52K tokens/s** con 4 niveles de procesamiento
+12. **Extracción SVO con F1=70.79%** para comprensión de texto
+13. **40% de errores son en cascada** (morfología como cuello de botella)
+14. **Robustez diferenciada:** 0.04% ante capitalización, 19.40% ante typos
+15. **SNN viable conceptualmente** con neuronas LIF y STDP (exploratorio)
+16. **FEP funcional:** Active Inference logra 76.73% minimizando energía libre
+17. **Ensemble 92.78%:** combinación de modelos supera a individuales
 
 ---
 
 ## 📖 Referencias
 
 1. Kanerva, P. (2009). *Hyperdimensional Computing.* Cognitive Computation.
-2. Universal Dependencies. *UD Spanish-AnCora.*
-3. Friston, K. (2010). *The free-energy principle.* Nature Reviews Neuroscience.
+2. Friston, K. (2010). *The free-energy principle.* Nature Reviews Neuroscience.
+3. Maass, W. (1997). *Networks of spiking neurons.* Neural Networks.
+4. Universal Dependencies. *UD Spanish-AnCora.*
+5. Brants, T. (2000). *TnT: A Statistical Part-of-Speech Tagger.*
 
 ---
 
 **Última actualización:** 2026-10-18  
-**Versión:** 0.5.0  
-**Estado:** Fases 1-4 completadas (19 experimentos, 29 claims)
+**Versión:** 1.0.0  
+**Estado:** Proyecto completo — 6 fases, 27 experimentos, 37 claims validados

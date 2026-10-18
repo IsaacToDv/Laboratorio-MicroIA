@@ -1,0 +1,33 @@
+{
+  "experiment_id": "FINAL-003",
+  "description": "Benchmarking comparativo de modelos POS",
+  "corpus": "UD Spanish-AnCora",
+  "timestamp": "2026-10-18T22:54:59.629405",
+  "results": {
+    "suffix": {
+      "accuracy": 0.904969930784069,
+      "train_time": 0.2624244689941406,
+      "eval_time": 0.032320499420166016
+    },
+    "ngram": {
+      "accuracy": 0.8832974015658686,
+      "train_time": 0.21052861213684082,
+      "eval_time": 0.32620954513549805
+    },
+    "context": {
+      "accuracy": 0.4779870645637127,
+      "train_time": 0.6521337032318115,
+      "eval_time": 0.08480262756347656
+    },
+    "ensemble": {
+      "accuracy": 0.9278338817655736,
+      "eval_time": 0.4653496742248535
+    },
+    "majority": {
+      "accuracy": 0.17933734256212414
+    }
+  },
+  "best_model": "ensemble",
+  "best_accuracy": 0.9278338817655736,
+  "baseline_accuracy": 0.17933734256212414
+}

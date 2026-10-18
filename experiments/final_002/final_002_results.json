@@ -1,0 +1,81 @@
+{
+  "experiment_id": "FINAL-002",
+  "description": "Free Energy Principle para desambiguación POS",
+  "corpus": "UD Spanish-AnCora",
+  "timestamp": "2026-10-18T22:54:50.311458",
+  "fep_config": {
+    "n_classes": 14,
+    "model": "Free Energy Minimization + Active Inference",
+    "features": "sufijos + forma + capitalización",
+    "context": "bigramas POS (transiciones)"
+  },
+  "results_with_context": {
+    "accuracy": 0.767275615567911,
+    "correct": 13524,
+    "total": 17626,
+    "avg_free_energy": 12.373342711245407
+  },
+  "results_without_context": {
+    "accuracy": 0.7512197889481448,
+    "avg_free_energy": 11.267536232462941
+  },
+  "baseline_accuracy": 0.17933734256212414,
+  "per_class": {
+    "ADJ": {
+      "accuracy": 0.7041373926619828,
+      "support": 1281
+    },
+    "ADP": {
+      "accuracy": 0.9045112781954887,
+      "support": 2660
+    },
+    "DET": {
+      "accuracy": 0.7707703927492447,
+      "support": 2648
+    },
+    "PUNCT": {
+      "accuracy": 1.0,
+      "support": 1994
+    },
+    "NOUN": {
+      "accuracy": 0.8279025624802278,
+      "support": 3161
+    },
+    "PROPN": {
+      "accuracy": 0.8287971905179983,
+      "support": 1139
+    },
+    "VERB": {
+      "accuracy": 0.8611670020120724,
+      "support": 1491
+    },
+    "NUM": {
+      "accuracy": 0.7473309608540926,
+      "support": 281
+    },
+    "CCONJ": {
+      "accuracy": 0.1316793893129771,
+      "support": 524
+    },
+    "PRON": {
+      "accuracy": 0.16063348416289594,
+      "support": 884
+    },
+    "ADV": {
+      "accuracy": 0.5897832817337462,
+      "support": 646
+    },
+    "AUX": {
+      "accuracy": 0.339662447257384,
+      "support": 474
+    },
+    "SCONJ": {
+      "accuracy": 0.8477272727272728,
+      "support": 440
+    },
+    "SYM": {
+      "accuracy": 0.0,
+      "support": 3
+    }
+  }
+}
