@@ -125,15 +125,15 @@ source venv/bin/activate       # Linux/Mac
 # venv\Scripts\activate        # Windows
 
 # 3. Instalar dependencias
-pip install numpy scipy conllu
+pip install -r requirements.txt
 
 # 4. Descargar el corpus en español
 mkdir -p data/corpus && cd data/corpus
 git clone --depth 1 https://github.com/UniversalDependencies/UD_Spanish-AnCora.git
 cd ../..
 
-# 5. Ejecutar un experimento
-python experiments/semantics_001/run_experiment.py
+# 5. Ejecutar demo interactivo
+python demo.py
 ```
 
 ### Ejecutar todos los experimentos
