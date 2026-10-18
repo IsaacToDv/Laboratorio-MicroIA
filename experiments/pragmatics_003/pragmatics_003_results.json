@@ -1,0 +1,114 @@
+{
+  "experiment_id": "PRAGMATICS-003",
+  "description": "Análisis sistemático de errores por nivel",
+  "corpus": "UD Spanish-AnCora",
+  "timestamp": "2026-10-18T22:38:50.932599",
+  "results": {
+    "total_tokens": 35708,
+    "total_errors": 49527,
+    "error_rate": 1.3870001120197155,
+    "avg_sent_error_rate": 1.3902782001585485,
+    "cascade_rate": 0.4009933975407354,
+    "morph_accuracy": 0.5056569956312311
+  },
+  "top_morph_errors": {
+    "ADP→NOUN": 4211,
+    "PUNCT→NOUN": 4020,
+    "DET→NOUN": 3797,
+    "CCONJ→NOUN": 857,
+    "PRON→NOUN": 795,
+    "PROPN→NOUN": 660,
+    "ADJ→NOUN": 599,
+    "PRON→SCONJ": 577,
+    "NOUN→ADJ": 431,
+    "NUM→NOUN": 351,
+    "ADV→NOUN": 323,
+    "AUX→NOUN": 301,
+    "DET→PROPN": 292,
+    "PROPN→ADJ": 227,
+    "AUX→VERB": 211
+  },
+  "top_syntax_errors": {
+    "punct→nmod": 4020,
+    "det→nmod": 3806,
+    "case→nmod": 3758,
+    "obl→nmod": 1238,
+    "obj→nmod": 1074,
+    "nsubj→nmod": 875,
+    "cc→nmod": 861,
+    "amod→nmod": 489,
+    "advcl→root": 476,
+    "conj→nmod": 423,
+    "acl:relcl→root": 407,
+    "mark→nmod": 376,
+    "nsubj→mark": 367,
+    "nmod→flat": 341,
+    "conj→root": 340
+  },
+  "semantic_errors": {
+    "ner_miss": 1131,
+    "ner_false": 807
+  },
+  "pos_accuracy": {
+    "ADJ": {
+      "accuracy": 0.6034063260340633,
+      "total": 2466
+    },
+    "ADP": {
+      "accuracy": 0.22457702582368655,
+      "total": 5615
+    },
+    "ADV": {
+      "accuracy": 0.6346955796497081,
+      "total": 1199
+    },
+    "AUX": {
+      "accuracy": 0.28114285714285714,
+      "total": 875
+    },
+    "CCONJ": {
+      "accuracy": 0.11326530612244898,
+      "total": 980
+    },
+    "DET": {
+      "accuracy": 0.2239057239057239,
+      "total": 5346
+    },
+    "INTJ": {
+      "accuracy": 0.0,
+      "total": 0
+    },
+    "NOUN": {
+      "accuracy": 0.8253968253968254,
+      "total": 6363
+    },
+    "NUM": {
+      "accuracy": 0.4297297297297297,
+      "total": 740
+    },
+    "PRON": {
+      "accuracy": 0.05463474524248005,
+      "total": 1629
+    },
+    "PROPN": {
+      "accuracy": 0.5673297628156083,
+      "total": 2614
+    },
+    "PUNCT": {
+      "accuracy": 0.0014903129657228018,
+      "total": 4026
+    },
+    "SCONJ": {
+      "accuracy": 0.8970944309927361,
+      "total": 826
+    },
+    "SYM": {
+      "accuracy": 0.0,
+      "total": 12
+    },
+    "VERB": {
+      "accuracy": 0.8697381504806099,
+      "total": 3017
+    }
+  }
+}

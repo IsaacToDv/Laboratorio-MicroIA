@@ -1,0 +1,105 @@
+{
+  "experiment_id": "PRAGMATICS-004",
+  "description": "Robustez ante ruido en texto de entrada",
+  "corpus": "UD Spanish-AnCora",
+  "timestamp": "2026-10-18T22:44:12.360708",
+  "baseline_accuracy": 0.903835243390446,
+  "noise_results": {
+    "typo": {
+      "0.05": {
+        "accuracy": 0.8450584364007716,
+        "degradation": 0.06503044378883938,
+        "tokens": 17626
+      },
+      "0.1": {
+        "accuracy": 0.8009190967888347,
+        "degradation": 0.11386604732910682,
+        "tokens": 17626
+      },
+      "0.2": {
+        "accuracy": 0.7285260410756836,
+        "degradation": 0.19396145879103638,
+        "tokens": 17626
+      },
+      "0.3": {
+        "accuracy": 0.6679337342562124,
+        "degradation": 0.2610005649362878,
+        "tokens": 17626
+      },
+      "0.5": {
+        "accuracy": 0.597242709633496,
+        "degradation": 0.33921285543908103,
+        "tokens": 17626
+      }
+    },
+    "case": {
+      "0.05": {
+        "accuracy": 0.903835243390446,
+        "degradation": 0.0,
+        "tokens": 17626
+      },
+      "0.1": {
+        "accuracy": 0.9037217746510836,
+        "degradation": 0.00012554139727580577,
+        "tokens": 17626
+      },
+      "0.2": {
+        "accuracy": 0.9034381028026779,
+        "degradation": 0.00043939489046513594,
+        "tokens": 17626
+      },
+      "0.3": {
+        "accuracy": 0.9033813684329967,
+        "degradation": 0.0005021655891031002,
+        "tokens": 17626
+      },
+      "0.5": {
+        "accuracy": 0.9030976965845909,
+        "degradation": 0.0008160190822924304,
+        "tokens": 17626
+      }
+    },
+    "ocr": {
+      "0.05": {
+        "accuracy": 0.8992964938159537,
+        "degradation": 0.005021655891030143,
+        "tokens": 17626
+      },
+      "0.1": {
+        "accuracy": 0.8940201974356065,
+        "degradation": 0.010859330864352593,
+        "tokens": 17626
+      },
+      "0.2": {
+        "accuracy": 0.8855100419834335,
+        "degradation": 0.020274935660033973,
+        "tokens": 17626
+      },
+      "0.3": {
+        "accuracy": 0.8762623397254057,
+        "degradation": 0.03050655953800766,
+        "tokens": 17626
+      },
+      "0.5": {
+        "accuracy": 0.8535685918529445,
+        "degradation": 0.055614838993158,
+        "tokens": 17626
+      }
+    }
+  },
+  "comparison": {
+    "Typo": {
+      "accuracy_20": 0.7285260410756836,
+      "degradation_20": 0.19396145879103638
+    },
+    "Case": {
+      "accuracy_20": 0.9034381028026779,
+      "degradation_20": 0.00043939489046513594
+    },
+    "OCR": {
+      "accuracy_20": 0.8855100419834335,
+      "degradation_20": 0.020274935660033973
+    }
+  },
+  "avg_degradation_20": 0.07155859644717849
+}

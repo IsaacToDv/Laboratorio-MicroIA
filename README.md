@@ -11,9 +11,19 @@ Investigación computacional para el estudio de arquitecturas de inteligencia ar
 **Fase 1: Morfología** — ✅ **COMPLETADA**  
 **Fase 2: Sintaxis** — ✅ **COMPLETADA**  
 **Fase 3: Semántica** — ✅ **COMPLETADA**  
-**Fase 4: Discurso** — ✅ **COMPLETADA**
+**Fase 4: Discurso** — ✅ **COMPLETADA**  
+**Fase 5: Pragmática** — ✅ **COMPLETADA**
 
-**Totales:** 19 experimentos · 29 afirmaciones científicas validadas
+**Totales:** 23 experimentos · 33 afirmaciones científicas validadas
+
+### Fase 5: Pragmática / Integración (4 experimentos)
+
+| Experimento | Métrica | Resultado | Estado |
+|-------------|---------|-----------|--------|
+| PRAGMATICS-001: Pipeline integrado | Throughput | **52,313 tok/s** | ✅ |
+| PRAGMATICS-002: Comprensión (SVO) | F1 | **70.79%** | ✅ |
+| PRAGMATICS-003: Análisis errores | Cascade rate | **40.10%** | ✅ |
+| PRAGMATICS-004: Robustez | Degradación | **7.16%** (20% ruido) | ✅ |
 
 ### Fase 4: Discurso (4 experimentos)
 
@@ -141,6 +151,15 @@ python experiments/discourse_003/run_experiment.py
 python experiments/discourse_004/run_experiment.py
 ```
 
+### 6. Pragmática / Integración (~1 min)
+
+```bash
+python experiments/pragmatics_001/run_experiment.py
+python experiments/pragmatics_002/run_experiment.py
+python experiments/pragmatics_003/run_experiment.py
+python experiments/pragmatics_004/run_experiment.py
+```
+
 ---
 
 ## 📊 Resultados Destacados
@@ -177,6 +196,14 @@ python experiments/discourse_004/run_experiment.py
 | Entity tracking | Purity=47.44% |
 | Correferencia | 31.80% (limitación documentada) |
 
+### Pragmática / Integración
+| Tarea | Resultado |
+|-------|-----------|
+| Pipeline throughput | 52,313 tokens/s |
+| Extracción SVO | F1=70.79% |
+| Q&A | 100% tasa de respuesta |
+| Robustez (20% ruido) | 7.16% degradación |
+
 ---
 
 ## 📁 Estructura del Proyecto
@@ -193,7 +220,8 @@ Laboratorio-MicroIA/
 │   ├── morph_001..005/   # Morfología
 │   ├── syntax_001..004/  # Sintaxis
 │   ├── semantics_001..004/ # Semántica
-│   └── discourse_001..004/ # Discurso
+│   ├── discourse_001..004/ # Discurso
+│   └── pragmatics_001..004/ # Pragmática
 ├── tests/test_hdc.py     # 17 pruebas unitarias
 ├── docs/
 │   ├── fase_1_resumen_ejecutivo.md
@@ -213,6 +241,7 @@ Laboratorio-MicroIA/
 - **[Fase 2: Sintaxis](docs/fase_2_resumen_ejecutivo.md)**
 - **[Fase 3: Semántica](docs/fase_3_resumen_ejecutivo.md)**
 - **[Fase 4: Discurso](docs/fase_4_resumen_ejecutivo.md)**
+- **[Fase 5: Pragmática](docs/fase_5_resumen_ejecutivo.md)**
 - **[Evaluación Inicial Crítica](docs/00_evaluacion_inicial_critica.md)**
 - **Informes de experimentos:** [docs/experimentos/](docs/experimentos/)
 
@@ -230,6 +259,10 @@ Laboratorio-MicroIA/
 8. **La similitud semántica distribucional** muestra estructura (empresa-banco: 0.98)
 9. **La segmentación temática adaptativa** supera baselines por +79% (F1=66.71%)
 10. **La correferencia profunda requiere más que features superficiales** (limitación documentada)
+11. **Pipeline integrado: 52K tokens/s** con 4 niveles de procesamiento
+12. **Extracción SVO con F1=70.79%** para comprensión de texto
+13. **40% de errores son en cascada** (morfología como cuello de botella)
+14. **Robustez diferenciada:** 0.04% ante capitalización, 19.40% ante typos
 
 ---
 
@@ -242,5 +275,5 @@ Laboratorio-MicroIA/
 ---
 
 **Última actualización:** 2026-10-18  
-**Versión:** 0.5.0  
-**Estado:** Fases 1-4 completadas (19 experimentos, 29 claims)
+**Versión:** 1.0.0  
+**Estado:** Proyecto completo — 5 fases, 23 experimentos, 33 claims validados

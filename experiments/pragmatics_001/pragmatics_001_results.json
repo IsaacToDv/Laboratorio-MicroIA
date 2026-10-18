@@ -1,0 +1,36 @@
+{
+  "experiment_id": "PRAGMATICS-001",
+  "description": "Pipeline integrado de 4 niveles",
+  "corpus": "UD Spanish-AnCora",
+  "timestamp": "2026-10-18T22:38:38.565303",
+  "level_results": {
+    "morph_pos": {
+      "correct": 7767.0,
+      "total": 17626.0,
+      "accuracy": 0.44065584931351415
+    },
+    "syntax_uas": {
+      "correct": 2410.0,
+      "total": 17626.0,
+      "accuracy": 0.13672983093157834
+    },
+    "syntax_las": {
+      "correct": 963.0,
+      "total": 17626.0,
+      "accuracy": 0.054635198002950185
+    },
+    "sem_ner": {
+      "correct": 16768.0,
+      "total": 17626.0,
+      "accuracy": 0.9513219108135709
+    }
+  },
+  "throughput_tokens_per_sec": 52312.729006674075,
+  "discourse_info": {
+    "entities": 147,
+    "mentions": 262,
+    "boundaries": 1
+  },
+  "cascade_theoretical": 0.05731790597061518,
+  "average_accuracy": 0.39583569726540335
+}
