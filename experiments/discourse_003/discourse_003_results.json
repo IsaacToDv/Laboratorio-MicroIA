@@ -1,0 +1,53 @@
+{
+  "experiment_id": "DISCOURSE-003",
+  "description": "Clasificación de relaciones discursivas entre oraciones",
+  "corpus": "UD Spanish-AnCora",
+  "timestamp": "2026-10-18T22:11:19.555938",
+  "accuracy": 0.5651162790697675,
+  "weighted_f1": 0.6591717767066132,
+  "baseline_accuracy": 0.8860465116279069,
+  "f1_per_class": {
+    "consecuencia": {
+      "precision": 0.46153846153846156,
+      "recall": 0.8571428571428571,
+      "f1": 0.6,
+      "support": 7
+    },
+    "causa": {
+      "precision": 0.10246679316888045,
+      "recall": 0.8852459016393442,
+      "f1": 0.1836734693877551,
+      "support": 61
+    },
+    "contraste": {
+      "precision": 0.23809523809523808,
+      "recall": 0.625,
+      "f1": 0.3448275862068965,
+      "support": 48
+    },
+    "adición": {
+      "precision": 0.3380281690140845,
+      "recall": 0.6666666666666666,
+      "f1": 0.44859813084112155,
+      "support": 36
+    },
+    "elaboración": {
+      "precision": 1.0,
+      "recall": 0.541994750656168,
+      "f1": 0.7029787234042553,
+      "support": 1524
+    },
+    "temporal": {
+      "precision": 0.22772277227722773,
+      "recall": 0.6571428571428571,
+      "f1": 0.3382352941176471,
+      "support": 35
+    },
+    "condición": {
+      "precision": 0.16071428571428573,
+      "recall": 1.0,
+      "f1": 0.27692307692307694,
+      "support": 9
+    }
+  }
+}

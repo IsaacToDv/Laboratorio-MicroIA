@@ -1,0 +1,16 @@
+{
+  "experiment_id": "DISCOURSE-004",
+  "description": "Entity tracking a lo largo del discurso",
+  "corpus": "UD Spanish-AnCora",
+  "timestamp": "2026-10-18T22:11:27.528358",
+  "results": {
+    "total_entities": 1398,
+    "total_mentions": 2133,
+    "singletons": 1121,
+    "multi_mention_entities": 277,
+    "avg_mentions_per_entity": 1.5257510729613735,
+    "avg_span_sentences": 1.2567954220314734,
+    "cluster_purity": 0.4744491326769808,
+    "multi_mention_ratio": 0.19814020028612303
+  }
+}

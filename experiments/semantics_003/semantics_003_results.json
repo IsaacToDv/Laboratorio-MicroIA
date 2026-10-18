@@ -1,0 +1,70 @@
+{
+  "experiment_id": "SEMANTICS-003",
+  "description": "Named Entity Recognition",
+  "corpus": "UD Spanish-AnCora",
+  "timestamp": "2026-10-18T21:25:11.726101",
+  "ne_stats": {
+    "total": 453039,
+    "ne_count": 33427
+  },
+  "type_distribution": {
+    "LOC": 4374,
+    "ORG": 5287,
+    "OTHER": 16989,
+    "PER": 6777
+  },
+  "results": {
+    "baseline": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "tp": 3971,
+      "fp": 0,
+      "fn": 0,
+      "tn": 49651
+    },
+    "semantics_003": {
+      "precision": 1.0,
+      "recall": 0.6285570385293378,
+      "f1": 0.7719189732488017,
+      "tp": 2496,
+      "fp": 0,
+      "fn": 1475,
+      "tn": 49651,
+      "per_type": {
+        "PER": {
+          "precision": 0.7128712871287128,
+          "recall": 0.077502691065662,
+          "f1": 0.13980582524271845,
+          "tp": 72,
+          "fp": 29,
+          "fn": 857
+        },
+        "OTHER": {
+          "precision": 0.606532663316583,
+          "recall": 0.6025961058412381,
+          "f1": 0.6045579764588028,
+          "tp": 1207,
+          "fp": 783,
+          "fn": 796
+        },
+        "LOC": {
+          "precision": 0.680952380952381,
+          "recall": 0.28830645161290325,
+          "f1": 0.4050991501416431,
+          "tp": 143,
+          "fp": 67,
+          "fn": 353
+        },
+        "ORG": {
+          "precision": 0.5538461538461539,
+          "recall": 0.19889502762430938,
+          "f1": 0.2926829268292683,
+          "tp": 108,
+          "fp": 87,
+          "fn": 435
+        }
+      }
+    }
+  }
+}
