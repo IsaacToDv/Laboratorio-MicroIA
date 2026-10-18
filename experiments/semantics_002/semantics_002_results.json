@@ -1,0 +1,45 @@
+{
+  "experiment_id": "SEMANTICS-002",
+  "description": "Semantic Role Labeling",
+  "corpus": "UD Spanish-AnCora",
+  "timestamp": "2026-10-18T21:24:32.338090",
+  "role_distribution": {
+    "A0": 21351,
+    "A1": 32758,
+    "OTHER": 41521,
+    "AM": 51797
+  },
+  "results": {
+    "baseline": {
+      "accuracy": 0.34952116507055025,
+      "majority_role": "AM"
+    },
+    "semantics_002": {
+      "accuracy": 0.7861959539865133,
+      "total": 17647,
+      "correct": 13874,
+      "per_role": {
+        "AM": {
+          "accuracy": 0.7371919584954605,
+          "total": 6168,
+          "correct": 4547
+        },
+        "OTHER": {
+          "accuracy": 0.8878486055776893,
+          "total": 5020,
+          "correct": 4457
+        },
+        "A1": {
+          "accuracy": 0.7961115374776158,
+          "total": 3909,
+          "correct": 3112
+        },
+        "A0": {
+          "accuracy": 0.6894117647058824,
+          "total": 2550,
+          "correct": 1758
+        }
+      }
+    }
+  }
+}

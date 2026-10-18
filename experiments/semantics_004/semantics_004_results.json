@@ -1,0 +1,110 @@
+{
+  "experiment_id": "SEMANTICS-004",
+  "description": "Similitud semántica (distributional semantics con HDC)",
+  "corpus": "UD Spanish-AnCora",
+  "timestamp": "2026-10-18T21:25:53.671286",
+  "n_words": 4723,
+  "n_contexts": 48806,
+  "build_time_s": 4.843355655670166,
+  "results": {
+    "clustering": {
+      "animales": {
+        "precision": 0.0,
+        "correct": 0,
+        "evaluated": 70,
+        "words_found": 7,
+        "total_words": 10
+      },
+      "profesiones": {
+        "precision": 0.125,
+        "correct": 10,
+        "evaluated": 80,
+        "words_found": 8,
+        "total_words": 8
+      },
+      "lugares": {
+        "precision": 0.1,
+        "correct": 8,
+        "evaluated": 80,
+        "words_found": 8,
+        "total_words": 8
+      },
+      "tiempo": {
+        "precision": 0.125,
+        "correct": 10,
+        "evaluated": 80,
+        "words_found": 8,
+        "total_words": 8
+      },
+      "economía": {
+        "precision": 0.0875,
+        "correct": 7,
+        "evaluated": 80,
+        "words_found": 8,
+        "total_words": 8
+      },
+      "overall": {
+        "precision": 0.08974358974358974,
+        "correct": 35,
+        "evaluated": 390
+      }
+    },
+    "similarity_pairs": {
+      "similar_pairs": [
+        {
+          "pair": "perro-gato",
+          "similarity": 0.439
+        },
+        {
+          "pair": "presidente-ministro",
+          "similarity": 0.6108
+        },
+        {
+          "pair": "ciudad-país",
+          "similarity": 0.8694
+        },
+        {
+          "pair": "año-mes",
+          "similarity": 0.5452
+        },
+        {
+          "pair": "millón-dólar",
+          "similarity": 0.0494
+        },
+        {
+          "pair": "empresa-banco",
+          "similarity": 0.9788
+        },
+        {
+          "pair": "día-semana",
+          "similarity": 0.545
+        }
+      ],
+      "different_pairs": [
+        {
+          "pair": "perro-presidente",
+          "similarity": 0.57
+        },
+        {
+          "pair": "ciudad-millón",
+          "similarity": 0.0432
+        },
+        {
+          "pair": "año-gato",
+          "similarity": 0.3488
+        },
+        {
+          "pair": "empresa-día",
+          "similarity": 0.5786
+        },
+        {
+          "pair": "país-dólar",
+          "similarity": 0.2556
+        }
+      ],
+      "avg_similar": 0.5768000000000001,
+      "avg_different": 0.35924,
+      "separation": 0.2175600000000001
+    }
+  }
+}

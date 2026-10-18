@@ -1,0 +1,71 @@
+{
+  "experiment_id": "SEMANTICS-001",
+  "description": "Word Sense Disambiguation",
+  "corpus": "UD Spanish-AnCora",
+  "timestamp": "2026-10-18T21:23:56.076609",
+  "n_ambiguous_words": 1322,
+  "results": {
+    "baseline": {
+      "accuracy": 0.955209331882856,
+      "total": 185686,
+      "correct": 177369
+    },
+    "semantics_001": {
+      "accuracy": 0.9700459759439001,
+      "total": 21533,
+      "correct": 20888,
+      "per_form": {
+        "de": {
+          "accuracy": 0.9984038308060654,
+          "total": 3759,
+          "correct": 3753
+        },
+        "la": {
+          "accuracy": 0.9952830188679245,
+          "total": 1908,
+          "correct": 1899
+        },
+        "en": {
+          "accuracy": 0.9992700729927008,
+          "total": 1370,
+          "correct": 1369
+        },
+        "a": {
+          "accuracy": 0.9992260061919505,
+          "total": 1292,
+          "correct": 1291
+        },
+        "y": {
+          "accuracy": 1.0,
+          "total": 1113,
+          "correct": 1113
+        },
+        "los": {
+          "accuracy": 0.9956803455723542,
+          "total": 926,
+          "correct": 922
+        },
+        "por": {
+          "accuracy": 1.0,
+          "total": 531,
+          "correct": 531
+        },
+        "un": {
+          "accuracy": 0.9923809523809524,
+          "total": 525,
+          "correct": 521
+        },
+        "las": {
+          "accuracy": 1.0,
+          "total": 491,
+          "correct": 491
+        },
+        "con": {
+          "accuracy": 1.0,
+          "total": 416,
+          "correct": 416
+        }
+      }
+    }
+  }
+}
