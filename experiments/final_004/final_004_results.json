@@ -1,0 +1,83 @@
+{
+  "experiment_id": "FINAL-004",
+  "description": "Síntesis final del proyecto",
+  "timestamp": "2026-10-18T22:55:03.175715",
+  "project_metrics": {
+    "total_experiments": 17,
+    "total_planned": 27,
+    "total_completed": 17,
+    "phases_completed": 4
+  },
+  "experiments_found": [
+    "DISCOURSE-001",
+    "DISCOURSE-002",
+    "DISCOURSE-003",
+    "DISCOURSE-004",
+    "FINAL-001",
+    "FINAL-002",
+    "FINAL-003",
+    "HDC-Esp-001",
+    "HDC-Esp-002",
+    "MORPH-001",
+    "MORPH-003",
+    "MORPH-004",
+    "MORPH-005",
+    "SEMANTICS-001",
+    "SEMANTICS-002",
+    "SEMANTICS-003",
+    "SEMANTICS-004"
+  ],
+  "phase_details": {
+    "Fase 1: Morfología": {
+      "completed": 6,
+      "planned": 7,
+      "experiments": [
+        "HDC-Esp-001",
+        "HDC-Esp-002",
+        "MORPH-001",
+        "MORPH-003",
+        "MORPH-004",
+        "MORPH-005"
+      ]
+    },
+    "Fase 2: Sintaxis": {
+      "completed": 0,
+      "planned": 4,
+      "experiments": []
+    },
+    "Fase 3: Semántica": {
+      "completed": 4,
+      "planned": 4,
+      "experiments": [
+        "SEMANTICS-001",
+        "SEMANTICS-002",
+        "SEMANTICS-003",
+        "SEMANTICS-004"
+      ]
+    },
+    "Fase 4: Discurso": {
+      "completed": 4,
+      "planned": 4,
+      "experiments": [
+        "DISCOURSE-001",
+        "DISCOURSE-002",
+        "DISCOURSE-003",
+        "DISCOURSE-004"
+      ]
+    },
+    "Fase 5: Pragmática": {
+      "completed": 0,
+      "planned": 4,
+      "experiments": []
+    },
+    "Fase 6: Cierre SNN-FEP": {
+      "completed": 3,
+      "planned": 4,
+      "experiments": [
+        "FINAL-001",
+        "FINAL-002",
+        "FINAL-003"
+      ]
+    }
+  }
+}
