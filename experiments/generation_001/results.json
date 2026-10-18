@@ -1,0 +1,16 @@
+{
+  "experiment_id": "GENERATION-001",
+  "timestamp": "2026-10-18T23:18:03.272974",
+  "config": {
+    "dimensions": 10000,
+    "max_sentences": 1000,
+    "corpus": "data/corpus/UD_Spanish-AnCora/es_ancora-ud-train.conllu"
+  },
+  "metrics": {
+    "sequences_stored": 999,
+    "vocabulary_size": 7286,
+    "memory_size_mb": 38.10882568359375,
+    "avg_words_per_sequence": 33.447447447447445,
+    "recovery_rate": 100.0
+  }
+}
