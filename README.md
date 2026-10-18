@@ -199,7 +199,8 @@ Laboratorio-MicroIA/
 │   ├── fase_1_resumen_ejecutivo.md
 │   ├── fase_2_resumen_ejecutivo.md
 │   ├── fase_3_resumen_ejecutivo.md
-│   └── experimentos/     # 15+ informes detallados
+│   ├── fase_4_resumen_ejecutivo.md
+│   └── experimentos/     # 19+ informes detallados
 ├── data/corpus/          # UD Spanish-AnCora
 └── README.md
 ```
