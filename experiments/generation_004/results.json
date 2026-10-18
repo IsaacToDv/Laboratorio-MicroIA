@@ -1,0 +1,76 @@
+{
+  "experiment_id": "GENERATION-004",
+  "timestamp": "2026-10-18T23:19:02.701170",
+  "config": {
+    "dimensions": 10000,
+    "max_sentences_train": 2000,
+    "num_eval_sentences": 100,
+    "corpus": "data/corpus/UD_Spanish-AnCora/es_ancora-ud-train.conllu"
+  },
+  "metrics": {
+    "perplexity": {
+      "mean": 1625.6974412478946,
+      "std": 882.7028416145172,
+      "median": 1481.5596111752309,
+      "min": 189.7975284252,
+      "max": 4314.081258240851,
+      "corpus_baseline": 1781.7451519049057
+    },
+    "diversity": {
+      "type_token_ratio": 0.35971943887775554,
+      "entropy": 4.80003761603138,
+      "unique_words": 359,
+      "total_words": 998
+    },
+    "repetition": {
+      "bigram_repetition": 0.178743961352657,
+      "trigram_repetition": 0.13836477987421383
+    }
+  },
+  "examples": {
+    "best_texts": [
+      {
+        "text": "En el centro \" .",
+        "perplexity": 189.7975284252
+      },
+      {
+        "text": "El año pasado .",
+        "perplexity": 229.04990588230604
+      },
+      {
+        "text": "La conductividad observada .",
+        "perplexity": 400.9904069644335
+      },
+      {
+        "text": "En la que se exige el fin de las investigaciones .",
+        "perplexity": 416.81499147289014
+      },
+      {
+        "text": "El que se destaca la importancia de el mundo .",
+        "perplexity": 422.26381523318906
+      }
+    ],
+    "worst_texts": [
+      {
+        "text": "Para su desgracia ,",
+        "perplexity": 3100.743019824864
+      },
+      {
+        "text": "Según un equipo de férrea disciplina defensiva ,",
+        "perplexity": 3103.4946406106615
+      },
+      {
+        "text": "Para el viaje hacia el Este se estimó un retraso de 40 nanosegundos en 41 horas",
+        "perplexity": 3567.937869694401
+      },
+      {
+        "text": "Durante el traslado ,",
+        "perplexity": 3739.4540204991195
+      },
+      {
+        "text": "Las exportaciones que Uruguay vende a Argentina se verá disminuido ,",
+        "perplexity": 4314.081258240851
+      }
+    ]
+  }
+}

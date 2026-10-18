@@ -1,0 +1,76 @@
+{
+  "experiment_id": "GENERATION-003",
+  "timestamp": "2026-10-18T23:18:47.058483",
+  "config": {
+    "dimensions": 10000,
+    "max_sentences": 2000,
+    "corpus": "data/corpus/UD_Spanish-AnCora/es_ancora-ud-train.conllu"
+  },
+  "metrics": {
+    "total_generated": 18,
+    "avg_length": 8.833333333333334,
+    "std_length": 3.8188130791298667,
+    "min_length": 5,
+    "max_length": 17,
+    "vocabulary_size": 62,
+    "type_token_ratio": 0.389937106918239,
+    "total_tokens": 159,
+    "unique_types": 62
+  },
+  "examples": {
+    "generated_texts": [
+      "El presidente de la Comisión de el Mercado de el jamón curado ,",
+      "El presidente de la Autoridad Palestina .",
+      "El presidente de la poderosa Cámara de el Legislativo ,",
+      "La economía canaria en los últimos dos meses .",
+      "La economía de el país de el presidente de la Comisión de el Mercado de el",
+      "La economía de el país ,",
+      "En la ciudad de Cañete ,",
+      "En la ciudad de Cañete ,",
+      "En la ciudad de Cañete ,",
+      "Los científicos y técnicos y el sector productivo ."
+    ],
+    "top_words": [
+      [
+        "de",
+        19
+      ],
+      [
+        "el",
+        11
+      ],
+      [
+        ",",
+        10
+      ],
+      [
+        "la",
+        8
+      ],
+      [
+        "El",
+        6
+      ],
+      [
+        ".",
+        6
+      ],
+      [
+        "La",
+        6
+      ],
+      [
+        "y",
+        6
+      ],
+      [
+        "presidente",
+        4
+      ],
+      [
+        "economía",
+        3
+      ]
+    ]
+  }
+}

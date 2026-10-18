@@ -27,6 +27,10 @@ Es un conjunto de **20 experimentos científicos** que implementan y evalúan mo
           ↓
  ┌─────────────────┐
  │  SNN / FEP      │  ¿Puede un cerebro artificial hacer lo mismo?
+ └────────┬────────┘
+          ↓
+ ┌─────────────────┐
+ │   Generación    │  Producir texto coherente (HDC + Memoria + FEP)
  └─────────────────┘
 ```
 
@@ -95,6 +99,17 @@ A diferencia de los modelos de lenguaje modernos (GPT, BERT), este proyecto usa 
 ```
 **Resultado:** 76.73% accuracy con Active Inference
 
+### 8. Generar texto coherente en español
+
+```python
+from src.generation.text_generator import create_generator
+
+gen = create_generator()
+print(gen.complete_sentence("El presidente"))
+# → "El presidente de la Autoridad Palestina."
+```
+**Resultado:** Genera oraciones coherentes con TTR=0.39 y perplejidad similar al corpus original
+
 ---
 
 ## Instalación rápida
@@ -138,6 +153,9 @@ for i in 001 002 003 004; do python experiments/discourse_$i/run_experiment.py; 
 
 # Cierre SNN-FEP (4 experimentos)
 for i in 001 002 003 004; do python experiments/final_$i/run_experiment.py; done
+
+# Generación de Texto (4 experimentos)
+for i in 001 002 003 004; do python experiments/generation_$i/run_experiment.py; done
 ```
 
 > ⏱️ **Tiempo total estimado:** ~5 minutos en un laptop moderno.
@@ -159,6 +177,9 @@ for i in 001 002 003 004; do python experiments/final_$i/run_experiment.py; done
 | DISCOURSE-004 | Entity tracking | Purity | **47.44%** |
 | FINAL-002 | FEP (Active Inference) | Accuracy | **76.73%** |
 | FINAL-003 | Ensemble (3 modelos) | Accuracy | **92.78%** |
+| GENERATION-001 | Memoria de secuencias | Recuperación | **100%** |
+| GENERATION-003 | Generación de texto | TTR | **0.390** |
+| GENERATION-004 | Calidad (perplejidad) | PPL | **1,625** |
 
 ### Comparación con estado del arte
 
@@ -167,6 +188,7 @@ for i in 001 002 003 004; do python experiments/final_$i/run_experiment.py; done
 | POS tagging | 93.26% | ~97% (Stanza) | ~4 pts |
 | NER | F1=77.19% | ~90% (Stanza) | ~13 pts |
 | WSD | 97.00% | ~95% (BERT-based) | comparable |
+| Generación | PPL=1,625 | PPL~20 (GPT-2) | Grande, pero sin GPU |
 
 ---
 
@@ -191,7 +213,7 @@ Este proyecto es **investigación exploratoria**, no un producto listo para prod
 - **Velocidad**: el pipeline procesa 52,000+ tokens/segundo en CPU
 
 ### Lo que NO incluye
-- ❌ No es un modelo de lenguaje generativo (no genera texto)
+- ❌ No es un modelo de lenguaje generativo avanzado (genera oraciones cortas, no párrafos)
 - ❌ No usa GPU ni training profundo
 - ❌ No tiene embeddings pre-entrenados (todo se aprende del corpus)
 - ❌ No es multilingüe (solo español)
@@ -206,12 +228,13 @@ Laboratorio-MicroIA/
 ├── src/                        # Código fuente de los módulos
 │   └── hdc/                    #   Computación Hiperdimensional
 │
-├── experiments/                # Experimentos ejecutables (20)
+├── experiments/                # Experimentos ejecutables (24)
 │   ├── hdc_esp_001..003/       #   Validación de HDC
 │   ├── morph_001..005/         #   Morfología
 │   ├── semantics_001..004/     #   Semántica
 │   ├── discourse_001..004/     #   Discurso
-│   └── final_001..004/         #   Cierre SNN-FEP
+│   ├── final_001..004/         #   Cierre SNN-FEP
+│   └── generation_001..004/    #   Generación de Texto
 │
 ├── docs/                       # Documentación científica
 │   ├── fase_*_resumen_*.md     #   Resúmenes ejecutivos por fase
@@ -238,8 +261,9 @@ Cada experimento tiene:
 | [Fase 3: Semántica](docs/fase_3_resumen_ejecutivo.md) | WSD + SRL + NER + espacio semántico |
 | [Fase 4: Discurso](docs/fase_4_resumen_ejecutivo.md) | Correferencia + segmentación + tracking |
 | [Fase 6: Cierre](docs/fase_6_resumen_ejecutivo.md) | SNN + FEP + benchmarking + síntesis |
+| [Fase 7: Generación](docs/fase_7_resumen_ejecutivo.md) | Generación de texto con HDC + Memoria + FEP |
 | [Síntesis final](experiments/final_004/sintesis_final.md) | Documento consolidado del proyecto |
-| [Reportes individuales](docs/experimentos/) | 19 informes de experimentos |
+| [Reportes individuales](docs/experimentos/) | 23 informes de experimentos |
 
 ---
 
@@ -253,6 +277,7 @@ Cada experimento tiene:
 6. **La segmentación temática emerge** de medir similitud léxica entre oraciones consecutivas
 7. **Las SNN necesitan más desarrollo** — el paradigma es prometedor pero STDP simple no basta
 8. **40% de los errores se propagan en cascada** — un error morfológico genera errores sintácticos y semánticos
+9. **La memoria asociativa HDC puede generar texto** — almacenando secuencias y recuperando por contexto con FEP, se generan oraciones coherentes sin redes neuronales profundas
 
 ---
 
@@ -277,4 +302,4 @@ Todos los experimentos usan **[UD Spanish-AnCora](https://universaldependencies.
 
 **Licencia:** Ver archivo LICENSE en el repositorio.  
 **Corpus:** UD Spanish-AnCora bajo licencia CC BY-SA 4.0.  
-**Versión:** 1.0.0 · Octubre 2026
+**Versión:** 1.1.0 · Octubre 2026 · Incluye Fase 7: Generación de Texto
