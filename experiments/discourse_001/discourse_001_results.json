@@ -1,0 +1,36 @@
+{
+  "experiment_id": "DISCOURSE-001",
+  "description": "Resolución de correferencia",
+  "corpus": "UD Spanish-AnCora",
+  "timestamp": "2026-10-18T22:08:55.897499",
+  "pronoun_distribution": {
+    "la": 16739,
+    "los": 7036,
+    "se": 5145,
+    "las": 4350,
+    "su": 2924,
+    "lo": 1686,
+    "sus": 1037,
+    "le": 849,
+    "les": 247,
+    "él": 206,
+    "ellos": 176,
+    "ello": 116,
+    "ella": 97,
+    "ellas": 56
+  },
+  "results": {
+    "baseline": {
+      "total_pronouns": 4813,
+      "with_candidates": 4688,
+      "correct": 2498,
+      "accuracy": 0.5328498293515358
+    },
+    "discourse_001": {
+      "total_pronouns": 4813,
+      "with_candidates": 4688,
+      "correct": 1491,
+      "accuracy": 0.31804607508532423
+    }
+  }
+}
