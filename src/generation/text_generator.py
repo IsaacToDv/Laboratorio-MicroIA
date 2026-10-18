@@ -282,6 +282,7 @@ class TextGenerator:
         1. Busca secuencias en memoria que contengan el contexto reciente
         2. Extrae la siguiente palabra de cada match
         3. Selecciona con FEP (energía libre mínima)
+        4. Aplica mecanismo de fatiga para evitar repeticiones
         
         Args:
             prefix: Texto inicial (ej: "El presidente")
@@ -308,6 +309,31 @@ class TextGenerator:
                 # Fallback: usar selector FEP con vocabulario completo
                 candidates = list(self.vocabulary)[:100]
             
+            # Filtrar palabras repetidas consecutivamente (mecanismo de fatiga)
+            if len(generated) >= 2:
+                last_two = set(generated[-2:])
+                filtered_candidates = [c for c in candidates if c not in last_two]
+                if filtered_candidates:
+                    candidates = filtered_candidates
+            
+            # Evitar repetir la misma palabra más de 2 veces en ventana de 5
+            if len(generated) >= 5:
+                recent_window = generated[-5:]
+                # Contar ocurrencias de cada candidata en ventana reciente
+                diverse_candidates = []
+                for c in candidates:
+                    count = recent_window.count(c)
+                    # Palabras funcionales pueden repetirse más
+                    if c in ['de', 'la', 'el', 'y', 'en', 'a', 'que', 'por', 'con']:
+                        if count < 3:
+                            diverse_candidates.append(c)
+                    else:
+                        if count < 2:
+                            diverse_candidates.append(c)
+                
+                if diverse_candidates:
+                    candidates = diverse_candidates
+            
             # Seleccionar siguiente palabra
             if temperature <= 0.1:
                 # Determinista: mínima energía libre
@@ -316,11 +342,17 @@ class TextGenerator:
                 # Estocástico: muestreo ponderado por energía libre
                 next_word = self._sample_with_temperature(generated, candidates, temperature)
             
-            # Detener si es punto final
-            if next_word in ['.', '!', '?', '.', ',', ';']:
+            # Manejo mejorado de puntuación
+            if next_word in ['.', '!', '?', ',', ';']:
                 if step > 3:  # Solo parar si ya generamos algo
                     generated.append(next_word)
                     break
+                else:
+                    # Muy corto, intentar otra candidata
+                    continue
+            
+            # Evitar empezar con puntuación
+            if step == 0 and next_word in [',', '.', '!', '?', ';', ':']:
                 continue
             
             generated.append(next_word)
