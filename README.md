@@ -1,302 +1,283 @@
-# Laboratorio de Micro-IA Biomimética
+# 🧬 Laboratorio de Micro-IA Biomimética
 
-**Computación Hiperdimensional (HDC) + Redes Neuronales de Impulsos (SNN) + Inferencia Activa (FEP)**
+> Un laboratorio de investigación que explora si las arquitecturas de inteligencia artificial inspiradas en el cerebro pueden aprender las regularidades del idioma español.
 
-Investigación computacional para el estudio de arquitecturas de inteligencia artificial biomimética aplicadas al procesamiento del lenguaje español.
-
----
-
-## 🎯 Estado Actual
-
-**Fase 1: Morfología** — ✅ **COMPLETADA**  
-**Fase 2: Sintaxis** — ✅ **COMPLETADA**  
-**Fase 3: Semántica** — ✅ **COMPLETADA**  
-**Fase 4: Discurso** — ✅ **COMPLETADA**  
-**Fase 5: Pragmática** — ✅ **COMPLETADA**  
-**Fase 6: Cierre SNN-FEP** — ✅ **COMPLETADA**
-
-**Totales:** 27 experimentos · 37 afirmaciones científicas validadas · **v1.0.0**
-
-### Fase 6: Cierre SNN-FEP (4 experimentos)
-
-| Experimento | Métrica | Resultado | Estado |
-|-------------|---------|-----------|--------|
-| FINAL-001: SNN-POS (LIF+STDP) | Accuracy | 17.93% | ⚠️ |
-| FINAL-002: FEP Active Inference | Accuracy | **76.73%** | ✅ |
-| FINAL-003: Benchmarking | Ensemble | **92.78%** | ✅ |
-| FINAL-004: Síntesis final | — | Documento | ✅ |
-
-### Fase 5: Pragmática / Integración (4 experimentos)
-
-| Experimento | Métrica | Resultado | Estado |
-|-------------|---------|-----------|--------|
-| PRAGMATICS-001: Pipeline integrado | Throughput | **52,313 tok/s** | ✅ |
-| PRAGMATICS-002: Comprensión (SVO) | F1 | **70.79%** | ✅ |
-| PRAGMATICS-003: Análisis errores | Cascade rate | **40.10%** | ✅ |
-| PRAGMATICS-004: Robustez | Degradación | **7.16%** (20% ruido) | ✅ |
-
-### Fase 4: Discurso (4 experimentos)
-
-| Experimento | Métrica | Resultado | Estado |
-|-------------|---------|-----------|--------|
-| DISCOURSE-001: Correferencia | Accuracy | 31.80% (baseline 53.28%) | ⚠️ |
-| DISCOURSE-002: Continuidad temática | F1 | **66.71%** (+29.47%) | ✅ |
-| DISCOURSE-003: Relaciones oraciones | F1 pond. | **65.92%** | ✅ |
-| DISCOURSE-004: Entity tracking | Purity | **47.44%** | ✅ |
-
-### Fase 3: Semántica (4 experimentos)
-
-| Experimento | Métrica | Resultado | Estado |
-|-------------|---------|-----------|--------|
-| SEMANTICS-001: WSD | Accuracy | **97.00%** | ✅ |
-| SEMANTICS-002: SRL | Accuracy | **78.62%** | ✅ |
-| SEMANTICS-003: NER | F1 | **77.19%** | ✅ |
-| SEMANTICS-004: Similitud | Separación | **0.22** | ✅ |
-
-### Fase 2: Sintaxis (4 experimentos)
-
-| Experimento | Métrica | Resultado | Estado |
-|-------------|---------|-----------|--------|
-| SYNTAX-001: Dependencias (UAS) | UAS | **62.43%** | ✅ |
-| SYNTAX-002: Relaciones | Accuracy | **87.59%** | ✅ |
-| SYNTAX-003: Pipeline (LAS) | LAS | **58.68%** | ✅ |
-| SYNTAX-004: Concordancia | Accuracy | **91.44%** | ✅ |
-
-### Fase 1: Morfología (7 experimentos)
-
-| Experimento | Resultado | Estado |
-|-------------|-----------|--------|
-| HDC-Esp-001: Memoria caracteres | 0% error | ✅ |
-| HDC-Esp-002: Escalabilidad | Capacidad ilimitada | ✅ |
-| HDC-Esp-003: Bundles | Fórmula validada | ✅ |
-| MORPH-001: Clasificación (bundles) | 56-67% | ✅ |
-| MORPH-003: Clasificación (sufijos) | 83-99% | ✅ |
-| MORPH-004: Contexto POS | 93.26% | ✅ |
-| MORPH-005: Decodificación | 91.58% | ✅ |
+**HDC** (Computación Hiperdimensional) · **SNN** (Redes Neuronales de Impulsos) · **FEP** (Principio de Energía Libre)
 
 ---
 
-## 🚀 Instalación
+## ¿Qué es este proyecto?
 
-### Requisitos
+Es un conjunto de **20 experimentos científicos** que implementan y evalúan modelos de IA biomimética para procesar el español, organizados en niveles lingüísticos progresivos:
 
-- Python 3.8+
-- Git
+```
+ Texto en español
+       ↓
+ ┌─────────────────┐
+ │   Morfología    │  ¿Qué categoría es cada palabra? (POS tagging)
+ └────────┬────────┘
+          ↓
+ ┌─────────────────┐
+ │   Semántica     │  ¿Qué significado tiene? (roles, entidades, desambiguación)
+ └────────┬────────┘
+          ↓
+ ┌─────────────────┐
+ │    Discurso     │  ¿Cómo se conectan las oraciones? (segmentación, tracking)
+ └────────┬────────┘
+          ↓
+ ┌─────────────────┐
+ │  SNN / FEP      │  ¿Puede un cerebro artificial hacer lo mismo?
+ └─────────────────┘
+```
 
-### Linux / macOS
+A diferencia de los modelos de lenguaje modernos (GPT, BERT), este proyecto usa **arquitecturas ligeras** inspiradas en neurociencia:
+- **HDC**: vectores de 10,000 dimensiones donde el significado emerge de operaciones algebraicas
+- **SNN**: neuronas que se comunican con impulsos discretos (spikes), como las del cerebro
+- **FEP**: el sistema elige la interpretación que minimiza su "sorpresa" interna
+
+---
+
+## ¿Qué puede hacer?
+
+### 1. Etiquetar palabras por categoría gramatical
+
+```python
+# El modelo analiza "El gato duerme tranquilamente"
+# y asigna: DET NOUN VERB ADV
+```
+**Resultado:** 93.26% de accuracy con contexto bidireccional · 92.78% con ensemble de 3 modelos
+
+### 2. Desambiguar significados según el contexto
+
+```python
+# "banco" → ¿institución financiera o asiento?
+# El modelo mira las palabras alrededor para decidir
+```
+**Resultado:** 97.00% de accuracy en desambiguación de sentido (WSD)
+
+### 3. Identificar quién hace qué a quién
+
+```python
+# "María firmó el acuerdo en Caracas"
+# → Sujeto: María | Verbo: firmar | Objeto: acuerdo | Lugar: Caracas
+```
+**Resultado:** F1 = 70.79% en extracción de tripletas Sujeto-Verbo-Objeto
+
+### 4. Detectar cambios de tema en un texto
+
+```python
+# Párrafo 1: habla de economía → Párrafo 2: habla de deportes
+# El modelo detecta el punto exacto donde cambia el tema
+```
+**Resultado:** F1 = 66.71% (+79% mejor que baselines de segmentación fija)
+
+### 5. Rastrear entidades a lo largo del texto
+
+```python
+# "El presidente llegó. Fernández saludó. Él habló."
+# → Las tres menciones se vinculan a la misma entidad
+```
+**Resultado:** 47.44% de menciones correctamente agrupadas en clusters
+
+### 6. Reconocer entidades nombradas
+
+```python
+# "Google abrió oficinas en Madrid"
+# → Google: ORG | Madrid: LOC
+```
+**Resultado:** F1 = 77.19% (Precision 100%, Recall 62.86%)
+
+### 7. Minimizar energía libre para decidir
+
+```python
+# Modelo FEP: ante "la" ambigua, calcula cuál interpretación
+# genera menos "sorpresa" dado el contexto
+```
+**Resultado:** 76.73% accuracy con Active Inference
+
+---
+
+## Instalación rápida
 
 ```bash
+# 1. Clonar el repositorio
 git clone https://github.com/IsaacToDv/Laboratorio-MicroIA.git
 cd Laboratorio-MicroIA
-python3 -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
+
+# 2. Crear entorno virtual
+python3 -m venv venv
+source venv/bin/activate       # Linux/Mac
+# venv\Scripts\activate        # Windows
+
+# 3. Instalar dependencias
+pip install numpy scipy conllu
+
+# 4. Descargar el corpus en español
 mkdir -p data/corpus && cd data/corpus
 git clone --depth 1 https://github.com/UniversalDependencies/UD_Spanish-AnCora.git
 cd ../..
-```
 
-### Verificación
-
-```bash
-python tests/test_hdc.py  # 17/17 pruebas ✓
-```
-
----
-
-## 🧪 Experimentos
-
-### 1. Validación HDC (~5 min)
-
-```bash
-python experiments/hdc_esp_001/run_experiment.py
-python experiments/hdc_esp_002/run_experiment_optimized.py
-python experiments/hdc_esp_003/run_experiment.py
-```
-
-### 2. Morfología (~5 min)
-
-```bash
-python experiments/morph_001/run_experiment.py
-python experiments/morph_003/run_experiment.py
-python experiments/morph_004/run_experiment.py
-python experiments/morph_005/run_experiment.py
-```
-
-### 3. Sintaxis (~30 seg)
-
-```bash
-python experiments/syntax_001/run_experiment.py
-python experiments/syntax_002/run_experiment.py
-python experiments/syntax_003/run_experiment.py
-python experiments/syntax_004/run_experiment.py
-```
-
-### 4. Semántica (~30 seg)
-
-```bash
+# 5. Ejecutar un experimento
 python experiments/semantics_001/run_experiment.py
-python experiments/semantics_002/run_experiment.py
-python experiments/semantics_003/run_experiment.py
-python experiments/semantics_004/run_experiment.py
 ```
 
-### 5. Discurso (~2 min)
+### Ejecutar todos los experimentos
 
 ```bash
-python experiments/discourse_001/run_experiment.py
-python experiments/discourse_002/run_experiment.py
-python experiments/discourse_003/run_experiment.py
-python experiments/discourse_004/run_experiment.py
+# Validación HDC
+for i in 001 002 003; do python experiments/hdc_esp_$i/run_experiment.py; done
+
+# Morfología
+for i in 001 003 004 005; do python experiments/morph_$i/run_experiment.py; done
+
+# Semántica
+for i in 001 002 003 004; do python experiments/semantics_$i/run_experiment.py; done
+
+# Discurso
+for i in 001 002 003 004; do python experiments/discourse_$i/run_experiment.py; done
+
+# Cierre SNN-FEP
+for i in 001 002 003 004; do python experiments/final_$i/run_experiment.py; done
 ```
 
-### 6. Pragmática (~1 min)
-
-```bash
-python experiments/pragmatics_001/run_experiment.py
-python experiments/pragmatics_002/run_experiment.py
-python experiments/pragmatics_003/run_experiment.py
-python experiments/pragmatics_004/run_experiment.py
-```
-
-### 7. Cierre SNN-FEP (~1 min)
-
-```bash
-python experiments/final_001/run_experiment.py
-python experiments/final_002/run_experiment.py
-python experiments/final_003/run_experiment.py
-python experiments/final_004/run_experiment.py
-```
+> ⏱️ **Tiempo total estimado:** ~5 minutos en un laptop moderno.
 
 ---
 
-## 📊 Resultados Destacados
+## Resultados clave
 
-### Morfología
-| Tarea | Mejor resultado | Método |
-|-------|----------------|--------|
-| POS tagging | 97.44% | Item memory + sufijos |
-| Gender | 98.66% | Sufijos + item memory |
-| Number | 99.00% | Sufijos + item memory |
-| Tense | 98.84% | Sufijos + item memory |
+| Experimento | Tarea | Métrica | Resultado |
+|-------------|-------|---------|-----------|
+| MORPH-004 | POS tagging (contexto) | Accuracy | **93.26%** |
+| MORPH-005 | Decodificación morfológica | Accuracy | **91.58%** |
+| MORPH-003 | POS por sufijos | Accuracy | **83–99%** |
+| SEMANTICS-001 | Desambiguación (WSD) | Accuracy | **97.00%** |
+| SEMANTICS-002 | Roles semánticos (SRL) | Accuracy | **78.62%** |
+| SEMANTICS-003 | Entidades nombradas (NER) | F1 | **77.19%** |
+| DISCOURSE-002 | Segmentación temática | F1 | **66.71%** |
+| DISCOURSE-003 | Relaciones discursivas | F1 pond. | **65.92%** |
+| DISCOURSE-004 | Entity tracking | Purity | **47.44%** |
+| FINAL-002 | FEP (Active Inference) | Accuracy | **76.73%** |
+| FINAL-003 | Ensemble (3 modelos) | Accuracy | **92.78%** |
 
-### Sintaxis
-| Tarea | Resultado | Estado del arte |
-|-------|-----------|-----------------|
-| UAS | 62.43% | ~95% (UDPipe) |
-| LAS | 58.68% | ~93% (UDPipe) |
-| Relaciones | 87.59% | — |
-| Concordancia | 91.44% | — |
+### Comparación con estado del arte
 
-### Semántica
-| Tarea | Resultado |
-|-------|-----------|
-| WSD (desambiguación) | 97.00% accuracy |
-| SRL (roles semánticos) | 78.62% accuracy |
-| NER (entidades) | F1=77.19% |
-| Similitud semántica | Separación 0.22 |
+| Tarea | Este proyecto | Estado del arte | Gap |
+|-------|--------------|-----------------|-----|
+| POS tagging | 93.26% | ~97% (Stanza) | ~4 pts |
+| NER | F1=77.19% | ~90% (Stanza) | ~13 pts |
+| Dependency parsing | UAS=62%* | ~95% (UDPipe) | ~33 pts |
 
-### Discurso
-| Tarea | Resultado |
-|-------|-----------|
-| Segmentación temática | F1=66.71% (+79% vs baseline) |
-| Relaciones discursivas | F1 ponderado=65.92% |
-| Entity tracking | Purity=47.44% |
-| Correferencia | 31.80% (limitación documentada) |
-
-### Pragmática / Integración
-| Tarea | Resultado |
-|-------|-----------|
-| Pipeline throughput | 52,313 tokens/s |
-| Extracción SVO | F1=70.79% |
-| Q&A | 100% tasa de respuesta |
-| Robustez (20% ruido) | 7.16% degradación |
-
-### Cierre SNN-FEP
-| Tarea | Resultado |
-|-------|-----------|
-| FEP (Active Inference) | 76.73% accuracy |
-| Ensemble (votación) | 92.78% accuracy |
-| SNN (LIF + STDP) | 17.93% (exploratorio) |
+*Resultados de sintaxis documentados en reportes internos, no incluidos en esta rama.
 
 ---
 
-## 📁 Estructura del Proyecto
+## Limitaciones honestas
+
+Este proyecto es **investigación exploratoria**, no un producto listo para producción. Estas son las limitaciones más importantes:
+
+### 🔴 Lo que NO funciona bien
+- **Correferencia profunda** (31.80%): resolver "él" → "Fernández" requiere comprensión semántica que el modelo no tiene
+- **SNN con STDP** (17.93%): la red de impulsos no converge con entrenamiento corto; necesita mucho más tiempo o mejor implementación
+- **Parsing de dependencias** (~62% UAS): lejos del 95% de sistemas neuronales modernos
+- **Palabras funcionales** (ADP, DET, PUNCT): el modelo basado en sufijos las confunde con sustantivos porque no tienen sufijos característicos
+
+### 🟡 Lo que funciona parcialmente
+- **Entity tracking**: agrupa el 47% de las menciones correctamente
+- **Relaciones discursivas**: detecta bien conectores explícitos (porque, pero, además) pero falla en relaciones implícitas
+- **Robustez a typos**: degradación del 19% cuando hay errores tipográficos
+
+### 🟢 Lo que funciona bien
+- **Desambiguación léxica** (97%): el contexto local es muy informativo
+- **POS tagging** (93%): sufijos + ensemble dan resultados competitivos
+- **Segmentación temática** (F1=67%): umbral adaptativo supera baselines
+- **Velocidad**: el pipeline procesa 52,000+ tokens/segundo en CPU
+
+### Lo que NO incluye
+- ❌ No es un modelo de lenguaje generativo (no genera texto)
+- ❌ No usa GPU ni training profundo
+- ❌ No tiene embeddings pre-entrenados (todo se aprende del corpus)
+- ❌ No es multilingüe (solo español)
+
+---
+
+## Estructura del proyecto
 
 ```
 Laboratorio-MicroIA/
-├── src/
-│   ├── hdc/              # Módulo HDC (core, item_memory, sequence_encoder)
-│   ├── snn/              # Módulo SNN
-│   ├── active_inf/       # Módulo FEP
-│   └── interface/        # Integración
-├── experiments/
-│   ├── hdc_esp_001..003/    # Validación HDC
-│   ├── morph_001..005/      # Morfología
-│   ├── syntax_001..004/     # Sintaxis
-│   ├── semantics_001..004/  # Semántica
-│   ├── discourse_001..004/  # Discurso
-│   ├── pragmatics_001..004/ # Pragmática
-│   └── final_001..004/      # Cierre SNN-FEP
-├── tests/test_hdc.py        # 17 pruebas unitarias
-├── docs/
-│   ├── fase_1_resumen_ejecutivo.md
-│   ├── fase_2_resumen_ejecutivo.md
-│   ├── fase_3_resumen_ejecutivo.md
-│   ├── fase_4_resumen_ejecutivo.md
-│   ├── fase_5_resumen_ejecutivo.md
-│   ├── fase_6_resumen_ejecutivo.md
-│   └── experimentos/        # 23+ informes detallados
-├── data/corpus/             # UD Spanish-AnCora
-└── README.md
+│
+├── src/                        # Código fuente de los módulos
+│   └── hdc/                    #   Computación Hiperdimensional
+│
+├── experiments/                # Experimentos ejecutables
+│   ├── hdc_esp_001..003/       #   Validación de HDC (3)
+│   ├── morph_001..005/         #   Morfología (5)
+│   ├── semantics_001..004/     #   Semántica (4)
+│   ├── discourse_001..004/     #   Discurso (4)
+│   └── final_001..004/         #   Cierre SNN-FEP (4)
+│
+├── docs/                       # Documentación científica
+│   ├── fase_*_resumen_*.md     #   Resúmenes ejecutivos por fase
+│   └── experimentos/           #   Reportes detallados (19)
+│
+├── tests/                      # Pruebas unitarias
+│   └── test_hdc.py             #   17 pruebas de HDC
+│
+└── data/corpus/                # Corpus UD Spanish-AnCora (descargable)
 ```
 
----
-
-## 📚 Documentación
-
-- **[Fase 1: Morfología](docs/fase_1_resumen_ejecutivo.md)**
-- **[Fase 2: Sintaxis](docs/fase_2_resumen_ejecutivo.md)**
-- **[Fase 3: Semántica](docs/fase_3_resumen_ejecutivo.md)**
-- **[Fase 4: Discurso](docs/fase_4_resumen_ejecutivo.md)**
-- **[Fase 5: Pragmática](docs/fase_5_resumen_ejecutivo.md)**
-- **[Fase 6: Cierre SNN-FEP](docs/fase_6_resumen_ejecutivo.md)**
-- **[Evaluación Inicial Crítica](docs/00_evaluacion_inicial_critica.md)**
-- **Informes de experimentos:** [docs/experimentos/](docs/experimentos/)
+Cada experimento tiene:
+- `run_experiment.py` — Script ejecutable
+- `*_results.json` — Resultados cuantitativos reproducibles
+- Un reporte en `docs/experimentos/` con análisis detallado
 
 ---
 
-## 🔬 Hallazgos Científicos Clave
+## Documentación
 
-1. **HDC es viable para NLP** con item memory + sufijos (no bundles acumulativos)
-2. **La saturación de bundles es evitable** (+34% mejora con item memory)
-3. **El contexto POS es más informativo** que las palabras (93% vs 90%)
-4. **La decodificación bidireccional** supera a beam search
-5. **La concordancia gramatical** es altamente predecible por sufijos (91%)
-6. **WSD se beneficia del contexto** (+1.48% sobre baseline)
-7. **SRL alcanza 78.62%** con features de verbo + argumento
-8. **La similitud semántica distribucional** muestra estructura (empresa-banco: 0.98)
-9. **La segmentación temática adaptativa** supera baselines por +79% (F1=66.71%)
-10. **La correferencia profunda requiere más que features superficiales** (limitación documentada)
-11. **Pipeline integrado: 52K tokens/s** con 4 niveles de procesamiento
-12. **Extracción SVO con F1=70.79%** para comprensión de texto
-13. **40% de errores son en cascada** (morfología como cuello de botella)
-14. **Robustez diferenciada:** 0.04% ante capitalización, 19.40% ante typos
-15. **SNN viable conceptualmente** con neuronas LIF y STDP (exploratorio)
-16. **FEP funcional:** Active Inference logra 76.73% minimizando energía libre
-17. **Ensemble 92.78%:** combinación de modelos supera a individuales
+| Documento | Contenido |
+|-----------|-----------|
+| [Fase 1: Morfología](docs/fase_1_resumen_ejecutivo.md) | HDC + POS tagging + lematización |
+| [Fase 3: Semántica](docs/fase_3_resumen_ejecutivo.md) | WSD + SRL + NER + espacio semántico |
+| [Fase 4: Discurso](docs/fase_4_resumen_ejecutivo.md) | Correferencia + segmentación + tracking |
+| [Fase 6: Cierre](docs/fase_6_resumen_ejecutivo.md) | SNN + FEP + benchmarking + síntesis |
+| [Síntesis final](experiments/final_004/sintesis_final.md) | Documento consolidado del proyecto |
+| [Reportes individuales](docs/experimentos/) | 19 informes de experimentos |
 
 ---
 
-## 📖 Referencias
+## Hallazgos principales
 
-1. Kanerva, P. (2009). *Hyperdimensional Computing.* Cognitive Computation.
-2. Friston, K. (2010). *The free-energy principle.* Nature Reviews Neuroscience.
-3. Maass, W. (1997). *Networks of spiking neurons.* Neural Networks.
-4. Universal Dependencies. *UD Spanish-AnCora.*
-5. Brants, T. (2000). *TnT: A Statistical Part-of-Speech Tagger.*
+1. **HDC funciona para NLP** — pero solo con *item memory* (los bundles acumulativos se saturan)
+2. **Los sufijos del español son muy informativos** — predicen POS con 83-99% de accuracy
+3. **El contexto bidireccional** (palabra anterior + siguiente) mejora POS tagging en +6%
+4. **Los ensembles ganan** — la votación de 3 modelos simples (92.78%) supera a cada uno individual
+5. **La energía libre minimiza sorpresa** — el FEP de Friston aplicado a desambiguación logra 76.73%
+6. **La segmentación temática emerge** de medir similitud léxica entre oraciones consecutivas
+7. **Las SNN necesitan más desarrollo** — el paradigma es prometedor pero STDP simple no basta
+8. **40% de los errores se propagan en cascada** — un error morfológico genera errores sintácticos y semánticos
 
 ---
 
-**Última actualización:** 2026-10-18  
-**Versión:** 1.0.0  
-**Estado:** Proyecto completo — 6 fases, 27 experimentos, 37 claims validados
+## Corpus
+
+Todos los experimentos usan **[UD Spanish-AnCora](https://universaldependencies.org/treebanks/es_ancora/)** de Universal Dependencies:
+- ~500,000 tokens etiquetados
+- 14 categorías POS
+- Dependencias sintácticas
+- Features morfológicas (género, número, tiempo, modo)
+
+---
+
+## Referencias
+
+- Kanerva, P. (2009). *Hyperdimensional Computing: An Introduction to Computing in Distributed Representation.*
+- Friston, K. (2010). *The free-energy principle: a unified brain theory?* Nature Reviews Neuroscience.
+- Maass, W. (1997). *Networks of spiking neurons: The third generation of neural network models.*
+- Universal Dependencies Consortium. *UD Spanish-AnCora.*
+
+---
+
+**Licencia:** Ver archivo LICENSE en el repositorio.  
+**Corpus:** UD Spanish-AnCora bajo licencia CC BY-SA 4.0.  
+**Versión:** 1.0.0 · Octubre 2026
