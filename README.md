@@ -65,7 +65,7 @@ python demo.py
 Escribe lo que quieras. La IA detecta el tema y elige la identidad automáticamente.
 
 ```
-🧬 Micro-IA Biomimética v5
+🧬 Micro-IA Biomimética v6 — Deep Cognition
 Escribe libremente. Usa /help para comandos.
 ────────────────────────────────────────────
 
@@ -183,23 +183,33 @@ Laboratorio-MicroIA/
 
 ---
 
-## 🔬 Arquitectura
+## 🔬 Arquitectura (v6 Deep Cognition)
 
-El generador combina tres componentes biomiméticos:
+El generador combina **ocho componentes biomiméticos**:
 
 1. **Memoria HDC** (hipocampo) — 20,000 dimensiones, almacena secuencias como vectores hiperdimensionales con índice invertido para búsqueda O(1)
 
 2. **Selector FEP** (Free Energy Principle) — Interpolación de n-gramas (1 a 5) con pesos exponenciales. Minimiza energía libre para seleccionar la siguiente palabra
 
-3. **Clasificador de intención** — Analiza palabras clave del prompt y selecciona automáticamente la identidad más apropiada
+3. **Embeddings semánticos** (LSA/SVD) — Matriz de co-ocurrencia PPMI reducida a 150 dimensiones. La IA **entiende** que "amor" ≈ "corazón" ≈ "alma"
 
-**Generación multi-estrategia:**
+4. **Clasificador de intención** — Analiza palabras clave del prompt y selecciona automáticamente la identidad más apropiada
+
+5. **Memoria conversacional** — Recuerda los últimos 10 turnos, extrae temas recurrentes, enriquece prompts cortos con contexto
+
+6. **Modelo de temas** (k-means) — Agrupa oraciones del corpus en 20 temas semánticos. Permite búsqueda por tema, no solo por keyword
+
+7. **Scoring de coherencia** — Evalúa la respuesta completa en 4 dimensiones: relevancia semántica (40%), diversidad léxica (25%), coherencia local (20%), estructura (15%)
+
+8. **Tokenizador robusto** — Separa puntuación, maneja signos de apertura (¿¡), guiones internos, normalización
+
+**Generación multi-candidato con scoring:**
 ```
-1. Coincidencia exacta (5→4→3→2→1 palabras de contexto)
-2. Búsqueda por palabras clave (índice invertido)
-3. Continuaciones estadísticas (n-gramas 1-5)
-4. Splicing multi-oración (combina fragmentos relevantes)
-5. Fallback con palabras frecuentes
+1. Splicing multi-oración (combina fragmentos relevantes)
+2. Generación secuencial con re-ranking semántico
+3. Búsqueda temática por similitud de embeddings
+4. CoherenceScorer evalúa los 3 candidatos
+5. Selecciona el de mayor calidad global
 ```
 
 ---
@@ -216,7 +226,7 @@ Este proyecto implementa **7 fases de investigación** documentadas en `archive/
 | 4 | Discurso (correferencia) | 66.71% F1 |
 | 5 | Pragmática (pipeline) | 52K tokens/s |
 | 6 | SNN-FEP (spiking + energía libre) | — |
-| 7 | Generación (HDC + FEP + identidades) | v5.0.0 |
+| 7 | Generación (HDC + FEP + identidades) | v6.0.0 |
 
 **Total:** 24 experimentos, 41 claims validados.
 
@@ -238,4 +248,4 @@ Los textos literarios incluidos son de dominio público o licencias compatibles.
 
 ---
 
-**Versión:** 5.0.0 · Octubre 2025 · Prompt libre + arquitectura expandida
+**Versión:** 6.0.0 · Octubre 2025 · Deep Cognition — Semántica real + memoria conversacional + scoring de coherencia

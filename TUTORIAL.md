@@ -128,7 +128,7 @@ python demo.py
 
 Verás:
 ```
-🧬 Micro-IA Biomimética v5
+🧬 Micro-IA Biomimética v6 — Deep Cognition
 Escribe libremente. Usa /help para comandos.
 ────────────────────────────────────────────
 

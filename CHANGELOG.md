@@ -2,6 +2,33 @@
 
 Todas las versiones notables de este proyecto se documentan en este archivo.
 
+## [6.0.0] - 2025-10-18
+
+### 🧠 Deep Cognition — Infraestructura de IA más inteligente
+
+#### Nuevos módulos de IA (5)
+- **`semantic_memory.py`** — Embeddings semánticos por co-ocurrencia (LSA/SVD, 150 dim). La IA entiende que "amor" ≈ "corazón"
+- **`tokenizer.py`** — Tokenizador robusto para español (separa puntuación, maneja ¿¡, guiones)
+- **`coherence.py`** — Scoring de coherencia global en 4 dimensiones (relevancia, diversidad, coherencia local, estructura)
+- **`conversation.py`** — Memoria conversacional (recuerda 10 turnos, extrae temas recurrentes)
+- **`topics.py`** — Modelo de temas k-means (20 clusters semánticos del corpus)
+
+#### Mejoras del generador
+- Generación multi-candidato: splicing + secuencial + temática
+- Re-ranking semántico de candidatos antes de selección
+- CoherenceScorer elige el mejor candidato evaluando respuesta completa
+- Memoria conversacional automática (registra turnos)
+- Búsqueda temática por similitud de embeddings (no solo keywords)
+- Post-procesamiento (limpieza, mayúsculas automáticas)
+
+#### Problemas resueltos de v5
+- ~~Vectores aleatorios sin semántica~~ → Embeddings reales por co-ocurrencia
+- ~~Tokenizador split()~~ → Tokenizador robusto
+- ~~Sin memoria conversacional~~ → Recuerda contexto entre turnos
+- ~~Clasificador hardcodeado~~ → Keywords ampliados + enriquecimiento por contexto
+- ~~Sin scoring de coherencia~~ → Evaluación global de respuesta
+- ~~Búsqueda solo por keyword~~ → Búsqueda semántica por tema
+
 ## [5.0.0] - 2025-10-18
 
 ### 🧠 Arquitectura expandida + Prompt libre
@@ -184,6 +211,7 @@ Todas las versiones notables de este proyecto se documentan en este archivo.
 
 | Versión | Fecha | Descripción |
 |---------|-------|-------------|
+| 6.0.0 | 2025-10 | **Deep Cognition** - Semántica real, memoria conversacional, scoring de coherencia |
 | 5.0.0 | 2025-10 | **Prompt libre** - Arquitectura expandida, auto-detección de identidad |
 | 4.0.0 | 2025-01 | **Identidades de IA** - Literatura clásica, 5 personalidades |
 | 3.0.0 | 2025-01 | **Versión Final** - Datasets Hugging Face, multi-disciplina |
