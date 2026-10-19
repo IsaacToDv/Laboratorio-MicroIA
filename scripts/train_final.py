@@ -48,7 +48,7 @@ def main():
     
     # Entrenar generador
     print(f"{Colors.BLUE}🧠 Entrenando generador...{Colors.END}")
-    gen = TextGenerator(dim=10000)
+    gen = TextGenerator(dim=20000)
     
     # Entrenar memoria HDC
     print("   Almacenando secuencias en memoria HDC...")

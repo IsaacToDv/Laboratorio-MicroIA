@@ -1,13 +1,19 @@
 #!/usr/bin/env python3
 """
-Demo interactivo del generador de texto biomimético
+Demo simplificado - Prompt Libre
 
-Características:
-- Interfaz colorida y amigable
-- Selección de identidades de IA
-- Control de parámetros de generación
-- Ejemplos predefinidos
-- Modo interactivo
+Escribe lo que quieras. La IA identifica automáticamente el tipo de
+consulta y se adapta. Sin menús, sin opciones complicadas.
+
+Comandos opcionales:
+    /poeta       - Cambiar a voz poética
+    /filosofo    - Cambiar a voz filosófica
+    /narrador    - Cambiar a voz narrativa
+    /ensayista   - Cambiar a voz ensayística
+    /contemporaneo - Voz moderna
+    /auto        - Auto-detectar identidad (default)
+    /help        - Ver comandos
+    /salir       - Terminar
 
 Uso:
     python demo.py
@@ -17,348 +23,210 @@ import sys
 import os
 from pathlib import Path
 
-# Agregar src al path
 sys.path.insert(0, str(Path(__file__).parent / 'src'))
+sys.path.insert(0, str(Path(__file__).parent / 'scripts'))
 
 from generation import TextGenerator, load_identity, list_identities
+from generation.text_generator import classify_intent
 
 
-class Colors:
+class C:
     """Colores para terminal."""
-    GREEN = '\033[92m'
-    RED = '\033[91m'
-    YELLOW = '\033[93m'
-    BLUE = '\033[94m'
-    MAGENTA = '\033[95m'
-    CYAN = '\033[96m'
-    BOLD = '\033[1m'
-    DIM = '\033[2m'
-    END = '\033[0m'
+    G = '\033[92m'    # Verde
+    R = '\033[91m'    # Rojo
+    Y = '\033[93m'    # Amarillo
+    B = '\033[94m'    # Azul
+    M = '\033[95m'    # Magenta
+    CY = '\033[96m'   # Cyan
+    D = '\033[2m'     # Dim
+    BOLD = '\033[1m'  # Bold
+    E = '\033[0m'     # End
 
 
-def print_banner():
-    """Imprime el banner del proyecto."""
-    banner = f"""
-{Colors.CYAN}╔═══════════════════════════════════════════════════════════════╗
-║                                                               ║
-║   🧬 Laboratorio de Micro-IA Biomimética                      ║
-║                                                               ║
-║   Generador de Texto con Identidades de IA                    ║
-║   Inspirado en Neurociencia y Literatura Clásica              ║
-║                                                               ║
-╚═══════════════════════════════════════════════════════════════╝{Colors.END}
-"""
-    print(banner)
+# Comandos para cambiar identidad
+IDENTITY_COMMANDS = {
+    '/poeta': 'poeta',
+    '/filosofo': 'filosofo',
+    '/narrador': 'narrador',
+    '/ensayista': 'ensayista',
+    '/contemporaneo': 'contemporaneo',
+    '/contemporáneo': 'contemporaneo',
+}
 
 
-def print_menu():
-    """Imprime el menú principal."""
-    print(f"\n{Colors.BOLD}📋 Menú Principal{Colors.END}\n")
-    print(f"  {Colors.BLUE}1.{Colors.END} Generar texto con identidad predefinida")
-    print(f"  {Colors.BLUE}2.{Colors.END} Ver ejemplos por disciplina")
-    print(f"  {Colors.BLUE}3.{Colors.END} Modo interactivo (escribe tus propios prompts)")
-    print(f"  {Colors.BLUE}4.{Colors.END} Información del proyecto")
-    print(f"  {Colors.BLUE}5.{Colors.END} Salir")
-    print()
-
-
-def load_generator():
-    """Carga el generador de texto desde cualquier fuente de datos disponible."""
-    print(f"\n{Colors.CYAN}⏳ Cargando generador...{Colors.END}")
+def load_gen():
+    """Carga el generador desde cualquier fuente disponible."""
+    print(f"\n{C.CY}⏳ Cargando...{C.E}", end="", flush=True)
     
-    # Agregar scripts al path para importar data_loader
-    sys.path.insert(0, str(Path(__file__).parent / 'scripts'))
-    
-    # Intentar 1: Cargar corpus pre-entrenado si existe
-    trained_corpus_path = Path("models/trained_corpus.json")
-    if trained_corpus_path.exists():
+    # Intentar 1: Modelo pre-entrenado
+    trained = Path("models/trained_corpus.json")
+    if trained.exists():
         try:
             import json
-            with open(trained_corpus_path, 'r', encoding='utf-8') as f:
+            with open(trained, 'r', encoding='utf-8') as f:
                 data = json.load(f)
             
-            raw_sentences = data.get('sentences', [])
+            raw = data.get('sentences', [])
             sentences = []
-            for text in raw_sentences:
+            for text in raw:
                 words = text.strip().split()
                 if len(words) >= 3:
                     sentences.append(words)
             
             if sentences:
-                gen = TextGenerator(dim=10000)
+                gen = TextGenerator(dim=20000)
                 for sent in sentences:
                     gen.memory.store_sequence(sent)
                 gen.selector.train(sentences)
                 gen.is_trained = True
-                print(f"{Colors.GREEN}✓ Modelo pre-entrenado cargado ({len(sentences)} oraciones){Colors.END}")
+                print(f"\r{C.G}✓ Modelo cargado ({len(sentences):,} oraciones, dim=20,000){C.E}            ")
                 return gen
         except Exception:
             pass
     
-    # Intentar 2: Cargar desde corpus UD AnCora directamente
-    corpus_path = "data/corpus/UD_Spanish-AnCora/es_ancora-ud-train.conllu"
-    if Path(corpus_path).exists():
-        try:
-            gen = TextGenerator(dim=10000)
-            gen.train_from_corpus(corpus_path, max_sentences=3000)
-            print(f"{Colors.GREEN}✓ Generador cargado desde UD AnCora{Colors.END}")
-            return gen
-        except Exception:
-            pass
+    # Intentar 2: Corpus UD AnCora
+    corpus = "data/corpus/UD_Spanish-AnCora/es_ancora-ud-train.conllu"
+    if Path(corpus).exists():
+        gen = TextGenerator(dim=20000)
+        gen.train_from_corpus(corpus, max_sentences=5000)
+        print(f"\r{C.G}✓ Generador cargado (UD AnCora, dim=20,000){C.E}            ")
+        return gen
     
-    # Intentar 3: Cargar con data_loader (busca todas las fuentes)
+    # Intentar 3: data_loader
     try:
         from data_loader import ensure_data_available
-        all_sentences, sources = ensure_data_available(min_sentences=50)
-        
-        if all_sentences:
-            gen = TextGenerator(dim=10000)
-            for sent in all_sentences:
+        all_sents, sources = ensure_data_available(min_sentences=50)
+        if all_sents:
+            gen = TextGenerator(dim=20000)
+            for sent in all_sents:
                 gen.memory.store_sequence(sent)
-            gen.selector.train(all_sentences)
+            gen.selector.train(all_sents)
             gen.is_trained = True
-            source_names = ', '.join(sources.keys())
-            print(f"{Colors.GREEN}✓ Generador cargado ({len(all_sentences)} oraciones de: {source_names}){Colors.END}")
+            print(f"\r{C.G}✓ Generador cargado ({len(all_sents):,} oraciones){C.E}            ")
             return gen
     except Exception:
         pass
     
-    # No hay datos disponibles
-    print(f"{Colors.RED}❌ Error: No hay datos para el generador{Colors.END}")
-    print(f"\n{Colors.YELLOW}Descarga al menos una fuente de datos:{Colors.END}\n")
-    print(f"  {Colors.BLUE}Opción 1 - Corpus UD AnCora (más rápido):{Colors.END}")
-    print(f"    {Colors.YELLOW}bash scripts/setup_corpus.sh{Colors.END}")
-    print()
-    print(f"  {Colors.BLUE}Opción 2 - Literatura clásica:{Colors.END}")
-    print(f"    {Colors.YELLOW}python scripts/download_literature.py{Colors.END}")
-    print()
-    print(f"  {Colors.BLUE}Opción 3 - Datasets multi-disciplina:{Colors.END}")
-    print(f"    {Colors.YELLOW}python scripts/download_datasets.py{Colors.END}")
-    print()
-    print(f"  Después entrena con: {Colors.YELLOW}python scripts/train_final.py{Colors.END}")
+    print(f"\r{C.R}✗ No hay datos. Ejecuta: bash scripts/setup_corpus.sh{C.E}            ")
     return None
 
 
-def select_identity():
-    """Permite seleccionar una identidad."""
-    identities = list_identities()
-    
-    print(f"\n{Colors.BOLD}🎭 Identidades disponibles:{Colors.END}\n")
-    
-    for i, identity_name in enumerate(identities, 1):
-        identity = load_identity(identity_name)
-        print(f"  {Colors.BLUE}{i}.{Colors.END} {Colors.BOLD}{identity.name}{Colors.END}")
-        print(f"     {Colors.DIM}{identity.description}{Colors.END}")
-        print(f"     {Colors.DIM}Estilo: {identity.style} | Tono: {identity.emotional_tone}{Colors.END}")
-        print()
-    
-    while True:
-        try:
-            choice = input(f"{Colors.YELLOW}Selecciona una identidad (1-{len(identities)}): {Colors.END}").strip()
-            idx = int(choice) - 1
-            if 0 <= idx < len(identities):
-                return identities[idx]
-            else:
-                print(f"{Colors.RED}Opción no válida{Colors.END}")
-        except ValueError:
-            print(f"{Colors.RED}Ingresa un número{Colors.END}")
-        except KeyboardInterrupt:
-            return None
+def show_help():
+    """Muestra la ayuda."""
+    print(f"""
+{C.BOLD}🧬 Laboratorio de Micro-IA Biomimética{C.E}
+{C.D}Escribe lo que quieras. La IA se adapta automáticamente.{C.E}
 
+{C.BOLD}Comandos:{C.E}
+  {C.B}/poeta{C.E}        Voz poética (Neruda, Lorca, Paz)
+  {C.B}/filosofo{C.E}     Voz filosófica (Unamuno, Ortega, Zambrano)
+  {C.B}/narrador{C.E}     Voz narrativa (García Márquez, Borges)
+  {C.B}/ensayista{C.E}    Voz ensayística (Paz, Vargas Llosa)
+  {C.B}/contemporaneo{C.E} Voz moderna (Bolaño, Marías)
+  {C.B}/auto{C.E}         Auto-detectar identidad {C.D}(default){C.E}
+  {C.B}/help{C.E}         Esta ayuda
+  {C.B}/salir{C.E}        Terminar
 
-def generate_with_identity(gen):
-    """Genera texto con una identidad seleccionada."""
-    identity_name = select_identity()
-    if not identity_name:
-        return
-    
-    identity = load_identity(identity_name)
-    gen.set_identity(identity)
-    
-    print(f"\n{Colors.GREEN}✓ Identidad configurada: {identity.name}{Colors.END}")
-    print(f"{Colors.DIM}  Estilo: {identity.style}{Colors.END}")
-    print(f"{Colors.DIM}  Tono: {identity.emotional_tone}{Colors.END}")
-    print(f"{Colors.DIM}  Temperatura: {identity.temperature}{Colors.END}")
-    
-    # Prompts sugeridos
-    prompts = [
-        "El amor",
-        "El tiempo",
-        "La vida",
-        "La muerte",
-        "La memoria"
-    ]
-    
-    print(f"\n{Colors.BOLD}💡 Prompts sugeridos:{Colors.END}")
-    for i, prompt in enumerate(prompts, 1):
-        print(f"  {Colors.BLUE}{i}.{Colors.END} {prompt}")
-    print(f"  {Colors.BLUE}0.{Colors.END} Escribir mi propio prompt")
-    
-    while True:
-        try:
-            choice = input(f"\n{Colors.YELLOW}Selecciona un prompt (0-{len(prompts)}): {Colors.END}").strip()
-            idx = int(choice)
-            
-            if idx == 0:
-                prompt = input(f"{Colors.YELLOW}Escribe tu prompt: {Colors.END}").strip()
-            elif 1 <= idx <= len(prompts):
-                prompt = prompts[idx - 1]
-            else:
-                print(f"{Colors.RED}Opción no válida{Colors.END}")
-                continue
-            
-            if not prompt:
-                continue
-            
-            # Generar texto
-            print(f"\n{Colors.CYAN}⏳ Generando...{Colors.END}\n")
-            
-            for i in range(3):
-                text = gen.generate(prompt, max_words=20)
-                print(f"{Colors.MAGENTA}{i+1}.{Colors.END} {text}")
-                print()
-            
-            again = input(f"{Colors.YELLOW}¿Generar más? (s/n): {Colors.END}").strip().lower()
-            if again != 's':
-                break
-                
-        except ValueError:
-            print(f"{Colors.RED}Ingresa un número{Colors.END}")
-        except KeyboardInterrupt:
-            break
-
-
-def show_examples_by_discipline(gen):
-    """Muestra ejemplos por disciplina."""
-    disciplinas = {
-        "Política": ["El presidente", "El gobierno", "Las elecciones"],
-        "Economía": ["La economía", "El mercado", "La inflación"],
-        "Ciencia": ["Los científicos", "La investigación", "El estudio"],
-        "Tecnología": ["La tecnología", "La inteligencia artificial", "Los datos"],
-        "Cultura": ["La película", "El libro", "La música"]
-    }
-    
-    # Usar identidad por defecto
-    identity = load_identity('contemporaneo')
-    gen.set_identity(identity)
-    
-    print(f"\n{Colors.BOLD}📚 Ejemplos por Disciplina{Colors.END}\n")
-    
-    for disciplina, prompts in disciplinas.items():
-        print(f"{Colors.CYAN}{'=' * 60}{Colors.END}")
-        print(f"{Colors.BOLD}{disciplina}{Colors.END}")
-        print(f"{Colors.CYAN}{'=' * 60}{Colors.END}\n")
-        
-        for prompt in prompts:
-            print(f"{Colors.YELLOW}Prompt:{Colors.END} {prompt}")
-            text = gen.generate(prompt, max_words=15)
-            print(f"{Colors.GREEN}→{Colors.END} {text}\n")
-    
-    input(f"\n{Colors.DIM}Presiona Enter para continuar...{Colors.END}")
-
-
-def interactive_mode(gen):
-    """Modo interactivo."""
-    print(f"\n{Colors.BOLD}🎮 Modo Interactivo{Colors.END}\n")
-    print(f"{Colors.DIM}Escribe tus propios prompts y genera texto.{Colors.END}")
-    print(f"{Colors.DIM}Escribe 'salir' para terminar.{Colors.END}\n")
-    
-    # Seleccionar identidad
-    identity_name = select_identity()
-    if not identity_name:
-        return
-    
-    identity = load_identity(identity_name)
-    gen.set_identity(identity)
-    
-    print(f"\n{Colors.GREEN}✓ Modo interactivo activado con identidad: {identity.name}{Colors.END}\n")
-    
-    while True:
-        try:
-            prompt = input(f"{Colors.CYAN}Tu prompt:{Colors.END} ").strip()
-            
-            if prompt.lower() in ['salir', 'exit', 'quit']:
-                break
-            
-            if not prompt:
-                continue
-            
-            print(f"\n{Colors.CYAN}⏳ Generando...{Colors.END}\n")
-            text = gen.generate(prompt, max_words=20)
-            print(f"{Colors.MAGENTA}→{Colors.END} {text}\n")
-            
-        except KeyboardInterrupt:
-            break
-    
-    print(f"\n{Colors.GREEN}✓ Modo interactivo terminado{Colors.END}")
-
-
-def show_info():
-    """Muestra información del proyecto."""
-    print(f"\n{Colors.BOLD}📖 Información del Proyecto{Colors.END}\n")
-    
-    print(f"{Colors.CYAN}Nombre:{Colors.END} Laboratorio de Micro-IA Biomimética")
-    print(f"{Colors.CYAN}Versión:{Colors.END} 4.0.0")
-    print(f"{Colors.CYAN}Descripción:{Colors.END} Generador de texto en español con identidades de IA\n")
-    
-    print(f"{Colors.BOLD}Características:{Colors.END}")
-    print(f"  • Inspirado en neurociencia (HDC, FEP, mecanismos de fatiga)")
-    print(f"  • 5 identidades de IA (Poeta, Filósofo, Narrador, Ensayista, Contemporáneo)")
-    print(f"  • Literatura clásica de 15+ autores hispanos")
-    print(f"  • Datasets multi-disciplina (115,000+ oraciones)")
-    print(f"  • Sin necesidad de GPU\n")
-    
-    print(f"{Colors.BOLD}Autores inspiradores:{Colors.END}")
-    print(f"  • Poesía: Neruda, Lorca, Paz, Vallejo")
-    print(f"  • Filosofía: Unamuno, Ortega y Gasset, Zambrano")
-    print(f"  • Narrativa: García Márquez, Borges, Cortázar")
-    print(f"  • Ensayo: Borges, Paz, Vargas Llosa\n")
-    
-    print(f"{Colors.BOLD}Enlaces:{Colors.END}")
-    print(f"  • Repositorio: https://github.com/IsaacToDv/Laboratorio-MicroIA")
-    print(f"  • Documentación: README.md")
-    print(f"  • Guía de contribución: CONTRIBUTING.md\n")
-    
-    input(f"{Colors.DIM}Presiona Enter para continuar...{Colors.END}")
+{C.BOLD}Ejemplos:{C.E}
+  {C.D}El amor es...{C.E}              → {C.M}detecta: poeta{C.E}
+  {C.D}¿Quién fue Platón?{C.E}         → {C.M}detecta: filósofo{C.E}
+  {C.D}Había una vez...{C.E}           → {C.M}detecta: narrador{C.E}
+  {C.D}La sociedad moderna...{C.E}      → {C.M}detecta: ensayista{C.E}
+  {C.D}¿Qué es Google?{C.E}            → {C.M}detecta: contemporáneo{C.E}
+""")
 
 
 def main():
-    """Función principal."""
-    print_banner()
+    """Demo con prompt libre simplificado."""
+    # Banner minimalista
+    print(f"\n{C.BOLD}🧬 Micro-IA Biomimética v3{C.E}")
+    print(f"{C.D}Escribe libremente. Usa /help para comandos.{C.E}")
     
-    # Verificar instalación
-    print(f"{Colors.CYAN}🔍 Verificando instalación...{Colors.END}")
-    
-    gen = load_generator()
+    gen = load_gen()
     if not gen:
         return 1
     
-    # Menú principal
+    auto_mode = True
+    current_identity = None
+    turn_count = 0
+    
+    print(f"{C.D}{'─' * 60}{C.E}")
+    print()
+    
     while True:
-        print_menu()
-        
         try:
-            choice = input(f"{Colors.YELLOW}Selecciona una opción (1-5): {Colors.END}").strip()
+            # Prompt simple
+            prompt = input(f"{C.CY}❯{C.E} ").strip()
             
-            if choice == '1':
-                generate_with_identity(gen)
-            elif choice == '2':
-                show_examples_by_discipline(gen)
-            elif choice == '3':
-                interactive_mode(gen)
-            elif choice == '4':
-                show_info()
-            elif choice == '5':
-                print(f"\n{Colors.GREEN}¡Hasta luego! 👋{Colors.END}\n")
-                break
-            else:
-                print(f"{Colors.RED}Opción no válida{Colors.END}")
-        
+            if not prompt:
+                continue
+            
+            # ═══ COMANDOS ═══
+            if prompt.startswith('/'):
+                cmd = prompt.lower().strip()
+                
+                if cmd in ('/salir', '/exit', '/quit', '/q'):
+                    print(f"\n{C.G}¡Hasta luego! 👋{C.E}\n")
+                    break
+                
+                if cmd == '/help':
+                    show_help()
+                    continue
+                
+                if cmd == '/auto':
+                    auto_mode = True
+                    gen.set_auto_identity(True)
+                    gen.identity = None
+                    current_identity = None
+                    print(f"{C.G}✓{C.E} Modo automático activado {C.D}(detecta identidad por tema){C.E}")
+                    continue
+                
+                if cmd in IDENTITY_COMMANDS:
+                    identity_name = IDENTITY_COMMANDS[cmd]
+                    identity = load_identity(identity_name)
+                    gen.set_identity(identity)
+                    gen._auto_identity = False
+                    auto_mode = False
+                    current_identity = identity
+                    print(f"{C.G}✓{C.E} {identity.name} {C.D}({identity.emotional_tone}){C.E}")
+                    continue
+                
+                # Comando no reconocido
+                print(f"{C.Y}?{C.E} Comando no reconocido. Usa {C.B}/help{C.E}")
+                continue
+            
+            # ═══ GENERACIÓN ═══
+            turn_count += 1
+            
+            # Auto-detectar identidad si está en modo auto
+            if auto_mode:
+                intent = classify_intent(prompt)
+                try:
+                    new_identity = load_identity(intent['identity'])
+                    if current_identity is None or current_identity.name != new_identity.name:
+                        gen.identity = new_identity
+                        current_identity = new_identity
+                        # Mostrar identidad detectada
+                        if intent['confidence'] > 0:
+                            print(f"  {C.D}🎭 {new_identity.name} ({new_identity.emotional_tone}){C.E}")
+                        else:
+                            gen.identity = new_identity
+                except Exception:
+                    pass
+            
+            # Generar respuesta
+            text = gen.generate(prompt, max_words=30)
+            
+            # Mostrar respuesta
+            print(f"  {C.G}→{C.E} {text}")
+            print()
+            
         except KeyboardInterrupt:
-            print(f"\n\n{Colors.GREEN}¡Hasta luego! 👋{Colors.END}\n")
+            print(f"\n\n{C.G}¡Hasta luego! 👋{C.E}\n")
             break
         except Exception as e:
-            print(f"\n{Colors.RED}❌ Error: {e}{Colors.END}")
+            print(f"  {C.R}✗ Error: {e}{C.E}")
+            print()
     
     return 0
 
