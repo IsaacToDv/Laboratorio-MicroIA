@@ -69,7 +69,7 @@ def load_json_dataset(json_path, max_sentences=2000):
     return sentences
 
 
-def load_all_available_data(max_per_source=3000):
+def load_all_available_data(max_per_source=10000):
     """
     Busca y carga todos los datos disponibles.
     
@@ -98,7 +98,9 @@ def load_all_available_data(max_per_source=3000):
         for json_file in sorted(datasets_dir.glob("*.json")):
             if json_file.name == "combined.json":
                 continue
-            ds_sents = load_json_dataset(str(json_file), max_sentences=max_per_source)
+            # Wikipedia puede tener muchas oraciones, cargar más
+            ds_max = max_per_source * 5 if 'wikipedia' in json_file.stem else max_per_source
+            ds_sents = load_json_dataset(str(json_file), max_sentences=ds_max)
             if ds_sents:
                 all_sentences.extend(ds_sents)
                 sources[json_file.stem] = len(ds_sents)
