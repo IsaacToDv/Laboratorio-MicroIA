@@ -2,7 +2,55 @@
 
 Todas las versiones notables de este proyecto se documentan en este archivo.
 
-## [3.0.0] - 2025-01-XX
+## [4.0.0] - 2025-01-18
+
+### 🎭 Identidades de IA y Literatura Clásica
+
+#### Añadido
+- **Sistema de identidades de IA** (`src/generation/identity.py`)
+  - 5 identidades predefinidas: Poeta, Filósofo, Narrador, Ensayista, Contemporáneo
+  - Inspiradas en autores hispanos clásicos (Neruda, Lorca, Borges, García Márquez, Unamuno, etc.)
+  - Vocabulary bias para priorizar palabras del estilo
+  - Temperatura automática según identidad
+  - Patrones de oraciones y tono emocional configurables
+  - Soporte para identidades personalizadas (JSON)
+
+- **Literatura clásica en español** (`scripts/download_literature.py`)
+  - Textos de Project Gutenberg (dominio público)
+  - Poesía: Neruda, Lorca, Machado, Bécquer, Paz
+  - Filosofía: Unamuno, Ortega y Gasset, Zambrano
+  - Narrativa: García Márquez, Borges, Cortázar, Allende
+  - Datasets de Hugging Face (BookCorpus)
+
+- **Entrenamiento con literatura** (`scripts/train_with_literature.py`)
+  - Combina UD AnCora + Hugging Face + literatura clásica
+  - Hasta 115,000+ oraciones de entrenamiento
+  - Preserva voces de autores clásicos
+
+- **Ejemplos con identidades** (`examples/identidades.py`)
+  - Demo interactivo con las 5 identidades
+  - Generación con diferentes estilos literarios
+
+#### Mejorado
+- **Generador de texto** (`src/generation/text_generator.py`)
+  - Método `set_identity()` para configurar personalidad
+  - `_apply_vocabulary_bias()` para priorizar palabras del estilo
+  - Temperatura automática si no se especifica
+  - Integración completa con sistema de identidades
+
+- **Módulo generation** (`src/generation/__init__.py`)
+  - Exporta todas las clases de identidad
+  - Documentación actualizada con ejemplos
+  - Versión actualizada a 4.0.0
+
+#### Cambiado
+- **README.md**
+  - Sección completa de identidades de IA
+  - Lista de autores hispanos incluidos
+  - Ejemplos de uso con diferentes identidades
+  - Instrucciones para crear identidades personalizadas
+
+### [3.0.0] - 2025-01-XX
 
 ### 🎉 Versión Final - Proyecto Consolidado
 
@@ -106,6 +154,7 @@ Todas las versiones notables de este proyecto se documentan en este archivo.
 
 | Versión | Fecha | Descripción |
 |---------|-------|-------------|
+| 4.0.0 | 2025-01 | **Identidades de IA** - Literatura clásica, 5 personalidades |
 | 3.0.0 | 2025-01 | **Versión Final** - Datasets Hugging Face, multi-disciplina |
 | 2.0.0 | 2025-01 | Limpieza para demo - Estructura simplificada |
 | 1.1.1 | 2025-01 | Mejoras y consolidación - Demo interactivo |
@@ -119,10 +168,13 @@ Todas las versiones notables de este proyecto se documentan en este archivo.
 - **Fases de investigación**: 7
 - **Experimentos científicos**: 24
 - **Claims validados**: 41
-- **Datasets soportados**: 5+ (UD AnCora + Hugging Face)
-- **Líneas de código**: ~5,000+
-- **Documentación**: ~50 páginas
+- **Identidades de IA**: 5 (Poeta, Filósofo, Narrador, Ensayista, Contemporáneo)
+- **Autores hispanos**: 15+ (Neruda, Lorca, Borges, García Márquez, Unamuno, etc.)
+- **Datasets soportados**: 7+ (UD AnCora + Hugging Face + Literatura clásica)
+- **Oraciones de entrenamiento**: ~115,000+
+- **Líneas de código**: ~5,500+
+- **Documentación**: ~60 páginas
 
 ---
 
-**Proyecto terminado y consolidado como demo funcional.**
+**Proyecto terminado y consolidado con identidad y voz humana.**
