@@ -74,7 +74,7 @@ def load_gen():
                     sentences.append(words)
             
             if sentences:
-                gen = TextGenerator(dim=20000)
+                gen = TextGenerator(dim=10000)
                 gen.train_from_sentences(sentences)
                 print(f"\r{C.G}✓ Modelo cargado ({len(sentences):,} oraciones, Deep Cognition){C.E}            ")
                 return gen
@@ -84,7 +84,7 @@ def load_gen():
     # Intentar 2: Corpus UD AnCora
     corpus = "data/corpus/UD_Spanish-AnCora/es_ancora-ud-train.conllu"
     if Path(corpus).exists():
-        gen = TextGenerator(dim=20000)
+        gen = TextGenerator(dim=10000)
         gen.train_from_corpus(corpus, max_sentences=5000)
         print(f"\r{C.G}✓ Generador cargado (UD AnCora, dim=20,000){C.E}            ")
         return gen
@@ -94,7 +94,7 @@ def load_gen():
         from data_loader import ensure_data_available
         all_sents, sources = ensure_data_available(min_sentences=50)
         if all_sents:
-            gen = TextGenerator(dim=20000)
+            gen = TextGenerator(dim=10000)
             gen.train_from_sentences(all_sents)
             print(f"\r{C.G}✓ Generador cargado ({len(all_sents):,} oraciones, Deep Cognition){C.E}            ")
             return gen

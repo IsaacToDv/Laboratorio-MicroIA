@@ -141,9 +141,9 @@ def is_content_word(word: str) -> bool:
 # ═══════════════════════════════════════════════════════════════════
 
 class HDCSequenceMemory:
-    """Memoria asociativa hiperdimensional (dim=20,000)."""
+    """Memoria asociativa hiperdimensional optimizada en memoria."""
     
-    def __init__(self, dim: int = 20000):
+    def __init__(self, dim: int = 10000):
         self.dim = dim
         self.item_memory = {}
         self.sequence_memory = []
@@ -153,7 +153,8 @@ class HDCSequenceMemory:
     
     def _get_item_vector(self, word: str) -> np.ndarray:
         if word not in self.item_memory:
-            vec = self.rng.choice([-1, 1], size=self.dim).astype(np.float32)
+            # Usar int8 para reducir memoria (solo {-1, +1})
+            vec = self.rng.choice([-1, 1], size=self.dim).astype(np.int8)
             self.item_memory[word] = vec
         return self.item_memory[word]
     
@@ -162,12 +163,12 @@ class HDCSequenceMemory:
     
     def _bundle(self, vectors):
         if not vectors:
-            return np.zeros(self.dim, dtype=np.float32)
-        return np.sign(np.sum(vectors, axis=0)).astype(np.float32)
+            return np.zeros(self.dim, dtype=np.int8)
+        return np.sign(np.sum(vectors, axis=0)).astype(np.int8)
     
     def encode_sequence(self, words: List[str], position_encoding=True) -> np.ndarray:
         if not words:
-            return np.zeros(self.dim, dtype=np.float32)
+            return np.zeros(self.dim, dtype=np.int8)
         vecs = []
         for i, word in enumerate(words):
             wv = self._get_item_vector(word.lower())
@@ -179,10 +180,10 @@ class HDCSequenceMemory:
         return self._bundle(vecs)
     
     def store_sequence(self, words: List[str], context: Optional[str] = None):
-        seq_vec = self.encode_sequence(words)
+        # NO almacenar vector HDC (ahorra ~10KB por oración)
+        # Solo se genera bajo demanda en find_similar
         idx = len(self.sequence_memory)
         self.sequence_memory.append({
-            'vector': seq_vec,
             'words': words,
             'words_lower': [w.lower() for w in words],
             'context': context,
@@ -343,7 +344,7 @@ class TextGenerator:
     - Tokenizer: tokenización robusta
     """
     
-    def __init__(self, dim: int = 20000):
+    def __init__(self, dim: int = 10000):
         self.dim = dim
         self.memory = HDCSequenceMemory(dim=dim)
         self.selector = FreeEnergySelector()
@@ -792,6 +793,6 @@ class TextGenerator:
 def create_generator(corpus_path=None):
     if corpus_path is None:
         corpus_path = "data/corpus/UD_Spanish-AnCora/es_ancora-ud-train.conllu"
-    gen = TextGenerator(dim=20000)
+    gen = TextGenerator(dim=10000)
     gen.train_from_corpus(corpus_path, max_sentences=5000)
     return gen

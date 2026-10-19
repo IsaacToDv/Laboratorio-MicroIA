@@ -47,3 +47,6 @@ experiments/*/results_*.json
 # Variables de entorno
 .env
 .env.local
+models/
+venv/
+data/

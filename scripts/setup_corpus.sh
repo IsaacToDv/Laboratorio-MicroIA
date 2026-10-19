@@ -55,7 +55,7 @@ echo ""
 
 # Clonar el repositorio (solo lo necesario)
 echo "   Clonando repositorio UniversalDependencies/UD_Spanish-AnCora..."
-if git clone --depth=1 https://github.com/UniversalDependencies/UD_Spanish-AnCora.git "$TEMP_DIR" 2>&1 | grep -v "Cloning"; then
+if git clone --depth=1 https://github.com/UniversalDependencies/UD_Spanish-AnCora.git "$TEMP_DIR" >/dev/null 2>&1; then
     echo -e "   ${GREEN}✓ Repositorio clonado${NC}"
 else
     echo -e "   ${RED}✗ Error clonando repositorio${NC}"
