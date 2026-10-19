@@ -14,7 +14,13 @@ Uso:
 import json
 import requests
 from pathlib import Path
-from datasets import load_dataset
+
+# Import opcional de datasets (no todos los entornos lo tienen)
+try:
+    from datasets import load_dataset
+    HAS_DATASETS = True
+except ImportError:
+    HAS_DATASETS = False
 
 
 def download_project_gutenberg():
@@ -55,6 +61,10 @@ def download_literature_datasets():
     """Descarga datasets de literatura de Hugging Face."""
     print("\n📖 Descargando datasets de literatura de Hugging Face...")
     
+    if not HAS_DATASETS:
+        print("   ⚠ Módulo 'datasets' no disponible (los textos locales son suficientes)")
+        return []
+    
     sentences = []
     
     try:
@@ -72,6 +82,7 @@ def download_literature_datasets():
         print(f"   ✓ BookCorpus: {len(sentences)} oraciones")
     except Exception as e:
         print(f"   ⚠ Error con BookCorpus: {e}")
+        print(f"   ℹ Los textos locales (poesía, filosofía, narrativa) son suficientes")
     
     return sentences
 

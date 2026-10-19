@@ -63,27 +63,80 @@ def print_menu():
 
 
 def load_generator():
-    """Carga el generador de texto."""
+    """Carga el generador de texto desde cualquier fuente de datos disponible."""
     print(f"\n{Colors.CYAN}⏳ Cargando generador...{Colors.END}")
     
+    # Agregar scripts al path para importar data_loader
+    sys.path.insert(0, str(Path(__file__).parent / 'scripts'))
+    
+    # Intentar 1: Cargar corpus pre-entrenado si existe
+    trained_corpus_path = Path("models/trained_corpus.json")
+    if trained_corpus_path.exists():
+        try:
+            import json
+            with open(trained_corpus_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            
+            raw_sentences = data.get('sentences', [])
+            sentences = []
+            for text in raw_sentences:
+                words = text.strip().split()
+                if len(words) >= 3:
+                    sentences.append(words)
+            
+            if sentences:
+                gen = TextGenerator(dim=10000)
+                for sent in sentences:
+                    gen.memory.store_sequence(sent)
+                gen.selector.train(sentences)
+                gen.is_trained = True
+                print(f"{Colors.GREEN}✓ Modelo pre-entrenado cargado ({len(sentences)} oraciones){Colors.END}")
+                return gen
+        except Exception:
+            pass
+    
+    # Intentar 2: Cargar desde corpus UD AnCora directamente
     corpus_path = "data/corpus/UD_Spanish-AnCora/es_ancora-ud-train.conllu"
+    if Path(corpus_path).exists():
+        try:
+            gen = TextGenerator(dim=10000)
+            gen.train_from_corpus(corpus_path, max_sentences=3000)
+            print(f"{Colors.GREEN}✓ Generador cargado desde UD AnCora{Colors.END}")
+            return gen
+        except Exception:
+            pass
     
-    if not Path(corpus_path).exists():
-        print(f"{Colors.RED}❌ Error: Corpus no encontrado{Colors.END}")
-        print(f"\n{Colors.YELLOW}Solución:{Colors.END}")
-        print(f"  1. Ejecuta: {Colors.BLUE}bash scripts/setup_corpus.sh{Colors.END}")
-        print(f"  2. Luego: {Colors.BLUE}python scripts/train_with_literature.py{Colors.END}")
-        print(f"  3. Vuelve a ejecutar este demo")
-        return None
-    
+    # Intentar 3: Cargar con data_loader (busca todas las fuentes)
     try:
-        gen = TextGenerator(dim=10000)
-        gen.train_from_corpus(corpus_path, max_sentences=3000)
-        print(f"{Colors.GREEN}✓ Generador cargado exitosamente{Colors.END}")
-        return gen
-    except Exception as e:
-        print(f"{Colors.RED}❌ Error al cargar generador: {e}{Colors.END}")
-        return None
+        from data_loader import ensure_data_available
+        all_sentences, sources = ensure_data_available(min_sentences=50)
+        
+        if all_sentences:
+            gen = TextGenerator(dim=10000)
+            for sent in all_sentences:
+                gen.memory.store_sequence(sent)
+            gen.selector.train(all_sentences)
+            gen.is_trained = True
+            source_names = ', '.join(sources.keys())
+            print(f"{Colors.GREEN}✓ Generador cargado ({len(all_sentences)} oraciones de: {source_names}){Colors.END}")
+            return gen
+    except Exception:
+        pass
+    
+    # No hay datos disponibles
+    print(f"{Colors.RED}❌ Error: No hay datos para el generador{Colors.END}")
+    print(f"\n{Colors.YELLOW}Descarga al menos una fuente de datos:{Colors.END}\n")
+    print(f"  {Colors.BLUE}Opción 1 - Corpus UD AnCora (más rápido):{Colors.END}")
+    print(f"    {Colors.YELLOW}bash scripts/setup_corpus.sh{Colors.END}")
+    print()
+    print(f"  {Colors.BLUE}Opción 2 - Literatura clásica:{Colors.END}")
+    print(f"    {Colors.YELLOW}python scripts/download_literature.py{Colors.END}")
+    print()
+    print(f"  {Colors.BLUE}Opción 3 - Datasets multi-disciplina:{Colors.END}")
+    print(f"    {Colors.YELLOW}python scripts/download_datasets.py{Colors.END}")
+    print()
+    print(f"  Después entrena con: {Colors.YELLOW}python scripts/train_final.py{Colors.END}")
+    return None
 
 
 def select_identity():
