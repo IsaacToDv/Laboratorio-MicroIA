@@ -48,7 +48,7 @@ def main():
     
     # Entrenar generador (usa train_from_sentences para activar todos los componentes)
     print(f"{Colors.BLUE}🧠 Entrenando generador (Deep Cognition)...{Colors.END}")
-    gen = TextGenerator(dim=20000)
+    gen = TextGenerator(dim=10000)
     gen.train_from_sentences(all_sentences)
     
     # Guardar modelo entrenado

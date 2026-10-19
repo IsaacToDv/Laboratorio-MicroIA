@@ -51,7 +51,7 @@ def main():
                     sentences.append(words)
             
             if sentences:
-                gen = TextGenerator(dim=20000)
+                gen = TextGenerator(dim=10000)
                 gen.train_from_sentences(sentences)
                 print(f"✓ Modelo pre-entrenado cargado ({len(sentences)} oraciones)\n")
         except Exception:
@@ -61,7 +61,7 @@ def main():
     if gen is None:
         corpus_path = "data/corpus/UD_Spanish-AnCora/es_ancora-ud-train.conllu"
         if Path(corpus_path).exists():
-            gen = TextGenerator(dim=20000)
+            gen = TextGenerator(dim=10000)
             gen.train_from_corpus(corpus_path, max_sentences=3000)
             print("✓ Generador listo (UD AnCora)\n")
     
@@ -71,7 +71,7 @@ def main():
             from data_loader import ensure_data_available
             all_sentences, sources = ensure_data_available(min_sentences=50)
             if all_sentences:
-                gen = TextGenerator(dim=20000)
+                gen = TextGenerator(dim=10000)
                 gen.train_from_sentences(all_sentences)
                 print(f"✓ Generador listo ({len(all_sentences)} oraciones)\n")
         except Exception:
