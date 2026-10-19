@@ -2,374 +2,256 @@
 
 **Guía paso a paso para principiantes**
 
-Este tutorial te llevará desde la instalación hasta la generación de tu primer texto con identidades de IA.
+Desde la instalación hasta tu primera generación de texto. Sin conocimientos previos requeridos.
+
+**Tiempo estimado:** 10-15 minutos
 
 ---
 
-## 🎯 ¿Qué aprenderás?
+## 📋 Requisitos
 
-1. ✅ Instalar el proyecto desde cero
-2. ✅ Descargar datasets de entrenamiento
-3. ✅ Entrenar tu propio generador de texto
-4. ✅ Generar texto con diferentes identidades (poeta, filósofo, etc.)
-5. ✅ Personalizar la generación
-
-**Tiempo estimado:** 15-20 minutos
-
----
-
-## 📋 Requisitos previos
-
-- **Python 3.7+** instalado en tu sistema
-- **Git** para clonar el repositorio
-- **Conexión a internet** para descargar datasets
+- **Python 3.8+** (verifica con `python3 --version`)
+- **Git** (verifica con `git --version`)
+- **Conexión a internet** (para descargar datos)
 - **Espacio en disco:** ~500 MB
 
 ---
 
-## 🚀 Paso 1: Instalación (5 minutos)
+## 🚀 Paso 1: Instalar
 
-### 1.1 Clonar el repositorio
+### Opción rápida (recomendada)
 
 ```bash
 git clone https://github.com/IsaacToDv/Laboratorio-MicroIA.git
 cd Laboratorio-MicroIA
-```
-
-### 1.2 Crear entorno virtual (⚠️ OBLIGATORIO en Linux moderno)
-
-**Linux/Mac:**
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-**Windows:**
-```cmd
-python -m venv venv
-venv\Scripts\activate
-```
-
-**⚠️ Importante:** Si ves el error "externally-managed-environment", es porque tu sistema Linux (Arch, Fedora, Ubuntu 23.04+) protege Python del sistema. **El entorno virtual es la solución correcta.**
-
-### 1.3 Instalar dependencias
-
-```bash
-pip install -r requirements.txt
-```
-
-**Opción alternativa: Instalación automática**
-```bash
 bash install.sh
 ```
 
-Este script crea el entorno virtual, instala dependencias y descarga datos básicos automáticamente.
+Este script crea el entorno virtual, instala dependencias y te pregunta qué datos descargar.
 
-### 1.4 Verificar instalación
+### Opción manual
+
+```bash
+git clone https://github.com/IsaacToDv/Laboratorio-MicroIA.git
+cd Laboratorio-MicroIA
+
+# Entorno virtual (obligatorio en Linux moderno)
+python3 -m venv venv
+source venv/bin/activate     # Linux/Mac
+# venv\Scripts\activate      # Windows
+
+pip install -r requirements.txt
+```
+
+> **¿Error "externally-managed-environment"?** Es normal en Arch, Fedora, Ubuntu 23.04+. El entorno virtual lo soluciona.
+
+### Verificar instalación
 
 ```bash
 python scripts/check_installation.py
 ```
 
-Deberías ver:
-```
-✓ Python 3.9.7
-✓ numpy instalado
-✓ conllu instalado
-```
+Deberías ver ✓ en Python, numpy, scipy y conllu.
 
 ---
 
-## 📦 Paso 2: Descargar datos (5 minutos)
+## 📦 Paso 2: Descargar datos
 
-### 2.1 Descargar corpus principal
+Necesitas al menos una fuente de datos. Elige según tu tiempo y conexión:
 
-El corpus UD AnCora es el dataset base en español:
+### Opción A: Corpus UD AnCora (~2 min, 150 MB)
 
 ```bash
 bash scripts/setup_corpus.sh
 ```
 
-**¿Qué hace?**
-- Descarga ~150 MB de texto en español
-- Incluye noticias, artículos y textos literarios
-- Se guarda en `data/corpus/UD_Spanish-AnCora/`
+Corpus lingüístico con ~15,000 oraciones de noticias y textos en español.
 
-### 2.2 (Opcional) Descargar datasets adicionales
-
-Para mejorar la calidad del generador:
+### Opción B: Wikipedia (~5 min, ~500 MB)
 
 ```bash
-# Datasets de Hugging Face (Wikipedia, noticias, etc.)
 python scripts/download_datasets.py
+```
 
-# Literatura clásica (Neruda, Borges, García Márquez, etc.)
+Descarga ~47,000 oraciones de Wikipedia en español. Mucho más vocabulario.
+
+### Opción C: Literatura clásica (~1 min)
+
+```bash
 python scripts/download_literature.py
 ```
 
-**Nota:** Estos pasos son opcionales pero recomendados para mejor calidad.
+Textos de Cervantes, poesía, filosofía y narrativa (~30,000 oraciones).
+
+> **Puedes combinar:** cuantos más datos descargues, mejor será la generación.
 
 ---
 
-## 🧠 Paso 3: Entrenar el generador (2-3 minutos)
-
-### 3.1 Entrenamiento básico
+## 🧠 Paso 3: Entrenar
 
 ```bash
+# Entrenamiento estándar
 python scripts/train_final.py
 ```
 
-**¿Qué hace?**
-- Lee el corpus UD AnCora
-- Construye memoria asociativa (HDC)
-- Entrena modelo de predicción (FEP)
-- Guarda el modelo en `models/`
+Busca automáticamente todos los datos disponibles (UD AnCora, Wikipedia, literatura) y entrena el generador.
 
-Deberías ver:
+Deberías ver algo como:
 ```
-Cargando corpus...
-✓ 3000 oraciones cargadas
-Entrenando memoria HDC...
-✓ Memoria construida
-Entrenando selector FEP...
-✓ Modelo entrenado
+📖 Buscando datos disponibles...
+   ✓ 47288 oraciones de wikipedia
+   ✓ 15000 oraciones de UD AnCora
+   Total: 62288 oraciones de 2 fuente(s)
+
+🧠 Entrenando generador...
+   ✓ 62288 secuencias almacenadas
+   ✓ Selector FEP entrenado
+   ✓ Vocabulario: 85000 palabras
+
+✅ Entrenamiento completado
 ```
 
-### 3.2 (Opcional) Entrenamiento completo con literatura
-
-Si descargaste los datasets adicionales:
-
+Si descargaste literatura, puedes usar:
 ```bash
 python scripts/train_with_literature.py
 ```
 
-Esto entrena con Wikipedia, noticias, literatura clásica, etc.
-
 ---
 
-## 🎮 Paso 4: Probar el generador (5 minutos)
+## 🎮 Paso 4: Generar texto
 
-### 4.1 Ejecutar el demo interactivo
+### El demo de prompt libre
 
 ```bash
 python demo.py
 ```
 
-Verás un menú interactivo:
-
+Verás:
 ```
-╔═══════════════════════════════════════════════════════════════╗
-║                                                               ║
-║   🧬 Laboratorio de Micro-IA Biomimética                      ║
-║                                                               ║
-║   Generador de Texto con Identidades de IA                    ║
-║                                                               ║
-╚═══════════════════════════════════════════════════════════════╝
+🧬 Micro-IA Biomimética v5
+Escribe libremente. Usa /help para comandos.
+────────────────────────────────────────────
 
-📋 Menú Principal
-
-  1. Generar texto con identidad predefinida
-  2. Ver ejemplos por disciplina
-  3. Modo interactivo (escribe tus propios prompts)
-  4. Información del proyecto
-  5. Salir
+❯ _
 ```
 
-### 4.2 Generar tu primer texto
+**Solo escribe lo que quieras.** La IA detecta el tema y adopta la identidad más adecuada automáticamente.
 
-1. Selecciona opción **1** (Generar texto con identidad)
-2. Elige una identidad (ej: **Poeta**)
-3. Selecciona un prompt sugerido (ej: **El amor**)
-4. ¡Observa la magia! ✨
-
-**Ejemplo de salida:**
-```
-✓ Identidad configurada: Poeta
-  Estilo: poético
-  Tono: melancólico y apasionado
-  Temperatura: 1.2
-
-1. El amor es como el agua que corre entre los dedos del tiempo
-2. El amor, esa herida que no cicatriza en el alma
-3. El amor es el silencio que habita en la memoria
-```
-
-### 4.3 Probar diferentes identidades
-
-Repite el proceso con otras identidades:
-
-- **Filósofo**: Texto reflexivo y profundo
-- **Narrador**: Estilo narrativo con detalles
-- **Ensayista**: Analítico y culto
-- **Contemporáneo**: Moderno y accesible
-
-### 4.4 Modo interactivo
-
-Selecciona opción **3** para escribir tus propios prompts:
+### Ejemplos de uso
 
 ```
-Tu prompt: La inteligencia artificial
+❯ El amor es como el agua
+  🎭 Poeta (melancólico y apasionado)
+  → El amor es como el agua que corre entre las piedras del tiempo...
 
-→ La inteligencia artificial revoluciona la manera en que entendemos la conciencia
+❯ ¿Quién fue Platón?
+  🎭 Filósofo (reflexivo y cuestionador)
+  → Quién fue Platón y su influencia en el pensamiento occidental...
+
+❯ ¿Qué es Google?
+  🎭 Contemporáneo (directo y observador)
+  → Qué es Google y su impacto en la tecnología moderna...
 ```
+
+### Comandos útiles
+
+```
+/poeta         ← forzar voz poética
+/filosofo      ← forzar voz filosófica
+/narrador      ← forzar voz narrativa
+/ensayista     ← forzar voz ensayística
+/contemporaneo ← forzar voz moderna
+/auto          ← volver a auto-detección
+/help          ← ver todos los comandos
+/salir         ← terminar
+```
+
+### Sin comandos: solo habla
+
+No necesitas memorizar comandos. Escribe normalmente y la IA se adapta:
+
+- Habla de **amor, alma, sueños** → responde como poeta
+- Pregunta sobre **dios, verdad, Platón** → responde como filósofo
+- Cuenta una **historia, un recuerdo** → responde como narrador
+- Analiza **cultura, sociedad** → responde como ensayista
+- Pregunta sobre **tecnología, internet** → responde como contemporáneo
 
 ---
 
-## 💻 Paso 5: Usar en código Python
+## 💻 Paso 5: Usar en tu propio código
 
-### 5.1 Script básico
-
-Crea un archivo `mi_script.py`:
+### Script básico
 
 ```python
 from src.generation import TextGenerator, load_identity
 
-# Cargar generador
-gen = TextGenerator()
+gen = TextGenerator(dim=20000)
 gen.train_from_corpus("data/corpus/UD_Spanish-AnCora/es_ancora-ud-train.conllu")
 
-# Configurar identidad
+# Con identidad fija
 poeta = load_identity('poeta')
 gen.set_identity(poeta)
+print(gen.generate("El amor", max_words=25))
 
-# Generar texto
-texto = gen.generate("El amor", max_words=20)
-print(texto)
+# Con auto-detección de identidad
+gen.set_auto_identity(True)
+print(gen.generate("¿Quién fue Platón?"))
 ```
 
-Ejecuta:
-```bash
-python mi_script.py
-```
-
-### 5.2 Generar múltiples textos
+### Generar varios textos
 
 ```python
 prompts = ["El tiempo", "La memoria", "La muerte"]
-
 for prompt in prompts:
-    texto = gen.generate(prompt, max_words=15)
-    print(f"{prompt}: {texto}")
+    print(f"{prompt}: {gen.generate(prompt, max_words=20)}")
 ```
 
-### 5.3 Ajustar parámetros
+### Ajustar creatividad
 
 ```python
 # Más creativo (temperatura alta)
-texto = gen.generate("El amor", max_words=20, temperature=1.5)
+gen.generate("El amor", temperature=1.5)
 
 # Más conservador (temperatura baja)
-texto = gen.generate("El amor", max_words=20, temperature=0.5)
+gen.generate("El amor", temperature=0.5)
 ```
 
 ---
 
 ## 🎨 Paso 6: Explorar ejemplos
 
-### 6.1 Ejemplos por disciplina
-
 ```bash
+# Comparar las 5 identidades con los mismos prompts
+python examples/identidades.py
+
+# Generar texto en diferentes disciplinas
 python examples/generacion_por_disciplina.py
 ```
 
-Genera texto en diferentes dominios:
-- Política
-- Economía
-- Ciencia
-- Tecnología
-- Cultura
-
-### 6.2 Ejemplos con identidades
-
-```bash
-python examples/identidades.py
-```
-
-Compara cómo cada identidad genera texto diferente para el mismo prompt.
-
 ---
 
-## 🔧 Solución de problemas
+## 🔧 Problemas comunes
 
-### Problema: "ModuleNotFoundError: No module named 'numpy'"
+| Problema | Solución |
+|----------|----------|
+| `externally-managed-environment` | Usa `python3 -m venv venv && source venv/bin/activate` |
+| `ModuleNotFoundError: numpy` | `pip install -r requirements.txt` |
+| `Corpus no encontrado` | `bash scripts/setup_corpus.sh` |
+| `No hay suficientes datos` | Descarga al menos una fuente (Paso 2) |
+| Texto repetitivo | Aumenta temperatura: `temperature=1.5` |
+| Texto sin sentido | Reduce temperatura: `temperature=0.5` |
 
-**Solución:**
-```bash
-pip install -r requirements.txt
-```
-
-### Problema: "FileNotFoundError: Corpus no encontrado"
-
-**Solución:**
-```bash
-bash scripts/setup_corpus.sh
-python scripts/train_final.py
-```
-
-### Problema: "El texto generado es muy repetitivo"
-
-**Solución:** Aumenta la temperatura:
-```python
-texto = gen.generate("El amor", temperature=1.5)
-```
-
-### Problema: "El texto no tiene sentido"
-
-**Solución:** Reduce la temperatura:
-```python
-texto = gen.generate("El amor", temperature=0.5)
-```
-
-### Problema: "El entrenamiento tarda mucho"
-
-**Solución:** Reduce el número de oraciones:
-```python
-gen.train_from_corpus(corpus_path, max_sentences=1000)
-```
+Para más detalles, consulta [FAQ.md](FAQ.md).
 
 ---
 
 ## 🎓 Próximos pasos
 
-### Aprende más
-
-1. **Lee el README.md** - Documentación completa
-2. **Explora archive/** - Investigación científica (fases 1-7)
-3. **Lee CONTRIBUTING.md** - Cómo contribuir al proyecto
-
-### Experimenta
-
-1. **Crea tu propia identidad** - Personaliza el estilo de generación
-2. **Entrena con tus propios textos** - Usa tu corpus personalizado
-3. **Modifica los parámetros** - Experimenta con temperatura y max_words
-
-### Contribuye
-
-1. **Reporta bugs** - Abre issues en GitHub
-2. **Agrega identidades** - Nuevos estilos literarios
-3. **Mejora documentación** - Tutoriales, ejemplos, traducciones
+- **[FAQ.md](FAQ.md)** — Preguntas frecuentes
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** — Cómo contribuir al proyecto
+- **[CHANGELOG.md](CHANGELOG.md)** — Historial de versiones
+- **`archive/`** — Investigación científica completa (7 fases, 24 experimentos)
 
 ---
 
-## 📚 Recursos adicionales
-
-- **Repositorio:** https://github.com/IsaacToDv/Laboratorio-MicroIA
-- **Issues:** https://github.com/IsaacToDv/Laboratorio-MicroIA/issues
-- **Discussions:** https://github.com/IsaacToDv/Laboratorio-MicroIA/discussions
-
----
-
-## 🎉 ¡Felicidades!
-
-Has completado el tutorial básico. Ahora puedes:
-
-✅ Generar texto con diferentes identidades de IA  
-✅ Personalizar parámetros de generación  
-✅ Usar el generador en tus propios scripts  
-✅ Explorar ejemplos avanzados  
-
-**¡Sigue experimentando y divirtiéndote con el Laboratorio de Micro-IA Biomimética!**
-
----
-
-**¿Preguntas o problemas?** Abre un issue en GitHub o consulta CONTRIBUTING.md
+**¿Preguntas?** Abre un [issue en GitHub](https://github.com/IsaacToDv/Laboratorio-MicroIA/issues).
