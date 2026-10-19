@@ -75,11 +75,8 @@ def load_gen():
             
             if sentences:
                 gen = TextGenerator(dim=20000)
-                for sent in sentences:
-                    gen.memory.store_sequence(sent)
-                gen.selector.train(sentences)
-                gen.is_trained = True
-                print(f"\r{C.G}✓ Modelo cargado ({len(sentences):,} oraciones, dim=20,000){C.E}            ")
+                gen.train_from_sentences(sentences)
+                print(f"\r{C.G}✓ Modelo cargado ({len(sentences):,} oraciones, Deep Cognition){C.E}            ")
                 return gen
         except Exception:
             pass
@@ -98,11 +95,8 @@ def load_gen():
         all_sents, sources = ensure_data_available(min_sentences=50)
         if all_sents:
             gen = TextGenerator(dim=20000)
-            for sent in all_sents:
-                gen.memory.store_sequence(sent)
-            gen.selector.train(all_sents)
-            gen.is_trained = True
-            print(f"\r{C.G}✓ Generador cargado ({len(all_sents):,} oraciones){C.E}            ")
+            gen.train_from_sentences(all_sents)
+            print(f"\r{C.G}✓ Generador cargado ({len(all_sents):,} oraciones, Deep Cognition){C.E}            ")
             return gen
     except Exception:
         pass
@@ -139,7 +133,7 @@ def show_help():
 def main():
     """Demo con prompt libre simplificado."""
     # Banner minimalista
-    print(f"\n{C.BOLD}🧬 Micro-IA Biomimética v3{C.E}")
+    print(f"\n{C.BOLD}🧬 Micro-IA Biomimética v6 — Deep Cognition{C.E}")
     print(f"{C.D}Escribe libremente. Usa /help para comandos.{C.E}")
     
     gen = load_gen()

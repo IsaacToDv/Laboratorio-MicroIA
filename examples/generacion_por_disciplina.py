@@ -52,10 +52,7 @@ def main():
             
             if sentences:
                 gen = TextGenerator(dim=20000)
-                for sent in sentences:
-                    gen.memory.store_sequence(sent)
-                gen.selector.train(sentences)
-                gen.is_trained = True
+                gen.train_from_sentences(sentences)
                 print(f"✓ Modelo pre-entrenado cargado ({len(sentences)} oraciones)\n")
         except Exception:
             pass
@@ -75,10 +72,7 @@ def main():
             all_sentences, sources = ensure_data_available(min_sentences=50)
             if all_sentences:
                 gen = TextGenerator(dim=20000)
-                for sent in all_sentences:
-                    gen.memory.store_sequence(sent)
-                gen.selector.train(all_sentences)
-                gen.is_trained = True
+                gen.train_from_sentences(all_sentences)
                 print(f"✓ Generador listo ({len(all_sentences)} oraciones)\n")
         except Exception:
             pass
