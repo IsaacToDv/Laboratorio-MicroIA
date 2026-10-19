@@ -2,6 +2,36 @@
 
 Todas las versiones notables de este proyecto se documentan en este archivo.
 
+## [5.0.0] - 2025-10-18
+
+### 🧠 Arquitectura expandida + Prompt libre
+
+#### Arquitectura del generador
+- **HDC expandido**: dimensión 10,000 → 20,000
+- **5-gramas** (pentagramas) para coherencia de largo alcance
+- **Splicing multi-oración**: combina fragmentos de múltiples oraciones
+- **Clasificador de intención**: detecta tema del prompt automáticamente
+- **Búsqueda multi-estrategia** (5 niveles en cascada)
+- **Índice invertido** de bigramas para búsqueda O(1)
+
+#### UX simplificada
+- **Prompt libre**: sin menús, solo escribe y la IA se adapta
+- **Auto-detección de identidad**: analiza palabras clave del prompt
+- **Comandos**: `/poeta`, `/filosofo`, `/narrador`, `/ensayista`, `/contemporaneo`, `/auto`
+- Demo reescrito para interacción natural
+
+#### Correcciones de funcionalidad
+- Creado `scripts/setup_corpus.sh` (descarga UD AnCora desde GitHub)
+- `download_datasets.py` reescrito con fallbacks a textos de respaldo
+- `demo.py`, `examples/*.py` funcionan sin corpus UD AnCora (buscan en cualquier fuente)
+- `download_literature.py` con import de datasets opcional
+- `data_loader.py` para carga unificada de datos
+
+#### Documentación
+- README reestructurado (más conciso y efectivo)
+- TUTORIAL actualizado al prompt libre
+- FAQ actualizado
+
 ## [4.0.0] - 2025-01-18
 
 ### 🎭 Identidades de IA y Literatura Clásica
@@ -154,6 +184,7 @@ Todas las versiones notables de este proyecto se documentan en este archivo.
 
 | Versión | Fecha | Descripción |
 |---------|-------|-------------|
+| 5.0.0 | 2025-10 | **Prompt libre** - Arquitectura expandida, auto-detección de identidad |
 | 4.0.0 | 2025-01 | **Identidades de IA** - Literatura clásica, 5 personalidades |
 | 3.0.0 | 2025-01 | **Versión Final** - Datasets Hugging Face, multi-disciplina |
 | 2.0.0 | 2025-01 | Limpieza para demo - Estructura simplificada |

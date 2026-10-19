@@ -4,7 +4,7 @@
 
 ## 🎯 Estado del Proyecto
 
-Este proyecto está **terminado y consolidado** (v4.0.0), pero aceptamos contribuciones en las siguientes áreas:
+Este proyecto está **terminado y consolidado** (v5.0.0), pero aceptamos contribuciones en las siguientes áreas:
 
 ### Áreas de Contribución Bienvenidas
 
@@ -242,7 +242,7 @@ Error: KeyError 'alma'
 **Entorno:**
 - Python: 3.9.7
 - Sistema: Ubuntu 20.04
-- Versión del proyecto: 4.0.0
+- Versión del proyecto: 5.0.0
 
 **Logs:**
 [Incluir logs relevantes]
