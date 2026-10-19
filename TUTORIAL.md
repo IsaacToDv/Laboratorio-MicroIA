@@ -36,7 +36,7 @@ git clone https://github.com/IsaacToDv/Laboratorio-MicroIA.git
 cd Laboratorio-MicroIA
 ```
 
-### 1.2 Crear entorno virtual (recomendado)
+### 1.2 Crear entorno virtual (⚠️ OBLIGATORIO en Linux moderno)
 
 **Linux/Mac:**
 ```bash
@@ -50,11 +50,20 @@ python -m venv venv
 venv\Scripts\activate
 ```
 
+**⚠️ Importante:** Si ves el error "externally-managed-environment", es porque tu sistema Linux (Arch, Fedora, Ubuntu 23.04+) protege Python del sistema. **El entorno virtual es la solución correcta.**
+
 ### 1.3 Instalar dependencias
 
 ```bash
 pip install -r requirements.txt
 ```
+
+**Opción alternativa: Instalación automática**
+```bash
+bash install.sh
+```
+
+Este script crea el entorno virtual, instala dependencias y descarga datos básicos automáticamente.
 
 ### 1.4 Verificar instalación
 
