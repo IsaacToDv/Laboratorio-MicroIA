@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """
-Entrenamiento del generador con literatura clásica en español
+Entrenamiento del generador con énfasis en literatura clásica
 
-Combina:
+Busca automáticamente TODAS las fuentes de datos disponibles:
 - UD Spanish-AnCora (corpus lingüístico)
 - Datasets de Hugging Face (multi-disciplina)
 - Literatura clásica (poesía, filosofía, narrativa)
+
+Si no hay datos, da instrucciones claras de qué descargar.
 
 Uso:
     python scripts/train_with_literature.py
@@ -14,121 +16,46 @@ Uso:
 import json
 import sys
 from pathlib import Path
-from conllu import parse_incr
 
 # Agregar src al path
 sys.path.insert(0, str(Path(__file__).parent.parent / 'src'))
+sys.path.insert(0, str(Path(__file__).parent))
 
-from generation import TextGenerator
-
-
-def load_ud_ancora(corpus_path: str, max_sentences: int = 3000):
-    """Carga oraciones del corpus UD Spanish-AnCora."""
-    print(f"📖 Cargando UD Spanish-AnCora...")
-    
-    sentences = []
-    try:
-        with open(corpus_path, 'r', encoding='utf-8') as f:
-            for i, sent in enumerate(parse_incr(f)):
-                if i >= max_sentences:
-                    break
-                
-                words = [token['form'] for token in sent 
-                        if not isinstance(token['id'], tuple)]
-                
-                if len(words) >= 3:
-                    sentences.append(words)
-        
-        print(f"   ✓ {len(sentences)} oraciones de UD AnCora")
-        
-    except FileNotFoundError:
-        print(f"   ⚠ Corpus no encontrado en {corpus_path}")
-    
-    return sentences
-
-
-def load_json_dataset(json_path: str, max_sentences: int = 2000):
-    """Carga oraciones de un dataset JSON."""
-    print(f"📚 Cargando {Path(json_path).name}...")
-    
-    sentences = []
-    try:
-        with open(json_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-        
-        raw_sentences = data.get('sentences', [])
-        
-        for text in raw_sentences[:max_sentences]:
-            # Tokenizar por espacios
-            words = text.strip().split()
-            if len(words) >= 3 and len(words) <= 50:
-                sentences.append(words)
-        
-        print(f"   ✓ {len(sentences)} oraciones de {Path(json_path).stem}")
-        
-    except FileNotFoundError:
-        print(f"   ⚠ Dataset no encontrado: {json_path}")
-    except Exception as e:
-        print(f"   ⚠ Error cargando {json_path}: {e}")
-    
-    return sentences
+from generation import TextGenerator, load_identity
+from data_loader import ensure_data_available, Colors
 
 
 def main():
-    """Entrena el generador con todos los datasets disponibles."""
+    """Entrena el generador con énfasis en literatura."""
+    print()
     print("=" * 70)
     print("Entrenamiento con Literatura Clásica")
     print("=" * 70)
-    print()
     
-    # Recopilar todas las oraciones
-    all_sentences = []
+    # Cargar todos los datos disponibles
+    all_sentences, sources = ensure_data_available(min_sentences=50)
     
-    # 1. UD Spanish-AnCora (corpus principal)
-    ud_path = "data/corpus/UD_Spanish-AnCora/es_ancora-ud-train.conllu"
-    ud_sentences = load_ud_ancora(ud_path, max_sentences=3000)
-    all_sentences.extend(ud_sentences)
-    
-    # 2. Datasets de Hugging Face
-    datasets_dir = Path("data/datasets")
-    if datasets_dir.exists():
-        for json_file in datasets_dir.glob("*.json"):
-            if json_file.name == "combined.json":
-                continue  # Saltar el combinado
-            
-            dataset_sentences = load_json_dataset(str(json_file), max_sentences=1500)
-            all_sentences.extend(dataset_sentences)
-    else:
-        print("\n⚠ Directorio data/datasets no encontrado")
-        print("  Ejecuta primero: python scripts/download_datasets.py")
-    
-    # 3. Literatura clásica
-    literature_dir = Path("data/literature")
-    if literature_dir.exists():
-        for json_file in literature_dir.glob("*.json"):
-            if json_file.name == "literature_combined.json":
-                continue  # Saltar el combinado
-            
-            literature_sentences = load_json_dataset(str(json_file), max_sentences=1000)
-            all_sentences.extend(literature_sentences)
-    else:
-        print("\n⚠ Directorio data/literature no encontrado")
-        print("  Ejecuta primero: python scripts/download_literature.py")
-    
-    print("\n" + "=" * 70)
-    print(f"Total de oraciones: {len(all_sentences)}")
-    print("=" * 70)
-    print()
-    
-    if len(all_sentences) < 100:
-        print("❌ No hay suficientes datos para entrenar")
-        print("   Asegúrate de tener el corpus UD AnCora o ejecuta:")
-        print("   python scripts/download_datasets.py")
-        print("   python scripts/download_literature.py")
+    if all_sentences is None:
         return
     
+    # Verificar si hay literatura
+    has_literature = any('literature' in k or 'classics' in k for k in sources)
+    
+    print()
+    print("=" * 70)
+    print(f"Total de oraciones: {len(all_sentences)}")
+    print("=" * 70)
+    
+    if has_literature:
+        print(f"{Colors.GREEN}✓ Incluye literatura clásica{Colors.END}")
+    else:
+        print(f"{Colors.YELLOW}⚠ Sin literatura clásica (solo datos generales){Colors.END}")
+        print(f"  Para mejor calidad literaria, ejecuta: python scripts/download_literature.py")
+    
+    print()
+    
     # Entrenar generador
-    print("🧠 Entrenando generador con literatura...")
+    print(f"{Colors.BLUE}🧠 Entrenando generador con literatura...{Colors.END}")
     gen = TextGenerator(dim=10000)
     
     # Entrenar memoria HDC
@@ -136,19 +63,20 @@ def main():
     for sent in all_sentences:
         gen.memory.store_sequence(sent)
     
-    print(f"   ✓ {len(gen.memory.sequence_memory)} secuencias almacenadas")
+    print(f"   {Colors.GREEN}✓{Colors.END} {len(gen.memory.sequence_memory)} secuencias almacenadas")
     
     # Entrenar selector FEP
     print("   Entrenando selector FEP...")
     gen.selector.train(all_sentences)
     
-    print(f"   ✓ Selector FEP entrenado")
-    print(f"   ✓ Vocabulario: {len(gen.selector.unigram_counts)} palabras")
+    print(f"   {Colors.GREEN}✓{Colors.END} Selector FEP entrenado")
+    print(f"   {Colors.GREEN}✓{Colors.END} Vocabulario: {len(gen.selector.unigram_counts)} palabras")
     
     gen.is_trained = True
     
     # Guardar modelo entrenado
-    print("\n" + "=" * 70)
+    print()
+    print("=" * 70)
     print("Guardando modelo entrenado")
     print("=" * 70)
     print()
@@ -156,28 +84,36 @@ def main():
     model_dir = Path("models")
     model_dir.mkdir(exist_ok=True)
     
-    # Guardar configuración
     config = {
         'dim': gen.memory.dim,
         'total_sentences': len(all_sentences),
         'vocabulary_size': len(gen.selector.unigram_counts),
         'sequences_stored': len(gen.memory.sequence_memory),
-        'includes_literature': literature_dir.exists()
+        'includes_literature': has_literature,
+        'sources': sources
     }
     
     config_file = model_dir / "config_literature.json"
     with open(config_file, 'w') as f:
         json.dump(config, f, indent=2)
     
-    print(f"✓ Configuración guardada en {config_file}")
+    print(f"{Colors.GREEN}✓{Colors.END} Configuración guardada en {config_file}")
+    
+    # Guardar el corpus completo para uso posterior
+    corpus_file = model_dir / "trained_corpus.json"
+    with open(corpus_file, 'w', encoding='utf-8') as f:
+        json.dump({
+            'sentences': [' '.join(s) for s in all_sentences],
+            'sources': sources
+        }, f, ensure_ascii=False, indent=2)
+    
+    print(f"{Colors.GREEN}✓{Colors.END} Corpus de entrenamiento guardado en {corpus_file}")
     
     # Probar generación con identidad
-    print("\n" + "=" * 70)
+    print()
+    print("=" * 70)
     print("Probando generación con identidades")
     print("=" * 70)
-    print()
-    
-    from generation import load_identity
     
     identities_to_test = ['poeta', 'filosofo', 'narrador']
     
@@ -185,7 +121,7 @@ def main():
         identity = load_identity(identity_name)
         gen.set_identity(identity)
         
-        print(f"\n🎭 {identity.name} ({identity.style})")
+        print(f"\n{Colors.BLUE}🎭 {identity.name} ({identity.style}){Colors.END}")
         print("-" * 70)
         
         test_prompts = ["El amor", "El tiempo", "La vida"]
@@ -194,12 +130,15 @@ def main():
             text = gen.generate(prompt, max_words=20)
             print(f"  {prompt}... → {text}")
     
-    print("\n" + "=" * 70)
-    print("✅ Entrenamiento completado")
+    print()
+    print("=" * 70)
+    print(f"{Colors.GREEN}✅ Entrenamiento completado{Colors.END}")
     print("=" * 70)
     print()
-    print("Siguiente paso:")
-    print("  python examples/identidades.py")
+    print(f"{Colors.BLUE}Próximos pasos:{Colors.END}")
+    print(f"  {Colors.YELLOW}python demo.py{Colors.END}                          # Demo interactivo")
+    print(f"  {Colors.YELLOW}python examples/identidades.py{Colors.END}            # Generar con identidades")
+    print(f"  {Colors.YELLOW}python examples/generacion_por_disciplina.py{Colors.END} # Generar por disciplina")
     print()
 
 
