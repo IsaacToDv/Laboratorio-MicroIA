@@ -46,25 +46,10 @@ def main():
     print("=" * 70)
     print()
     
-    # Entrenar generador
-    print(f"{Colors.BLUE}🧠 Entrenando generador...{Colors.END}")
+    # Entrenar generador (usa train_from_sentences para activar todos los componentes)
+    print(f"{Colors.BLUE}🧠 Entrenando generador (Deep Cognition)...{Colors.END}")
     gen = TextGenerator(dim=20000)
-    
-    # Entrenar memoria HDC
-    print("   Almacenando secuencias en memoria HDC...")
-    for sent in all_sentences:
-        gen.memory.store_sequence(sent)
-    
-    print(f"   {Colors.GREEN}✓{Colors.END} {len(gen.memory.sequence_memory)} secuencias almacenadas")
-    
-    # Entrenar selector FEP
-    print("   Entrenando selector FEP...")
-    gen.selector.train(all_sentences)
-    
-    print(f"   {Colors.GREEN}✓{Colors.END} Selector FEP entrenado")
-    print(f"   {Colors.GREEN}✓{Colors.END} Vocabulario: {len(gen.selector.unigram_counts)} palabras")
-    
-    gen.is_trained = True
+    gen.train_from_sentences(all_sentences)
     
     # Guardar modelo entrenado
     print()

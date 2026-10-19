@@ -29,6 +29,11 @@ from .identity import (
     save_identity,
     load_custom_identity
 )
+from .tokenizer import Tokenizer
+from .semantic_memory import SemanticMemory
+from .coherence import CoherenceScorer
+from .conversation import ConversationMemory
+from .topics import TopicModel
 
 __all__ = [
     'TextGenerator', 
@@ -38,6 +43,11 @@ __all__ = [
     'list_identities',
     'IDENTITIES',
     'save_identity',
-    'load_custom_identity'
+    'load_custom_identity',
+    'Tokenizer',
+    'SemanticMemory',
+    'CoherenceScorer',
+    'ConversationMemory',
+    'TopicModel',
 ]
-__version__ = '5.0.0'
+__version__ = '6.0.0'
