@@ -231,6 +231,7 @@ class TextGenerator:
     - Memoria asociativa HDC para almacenar secuencias
     - Recuperación por similitud contextual
     - Selección con FEP para coherencia
+    - Identidad configurable (poeta, filósofo, narrador, etc.)
     """
     
     def __init__(self, dim: int = 10000):
@@ -238,6 +239,7 @@ class TextGenerator:
         self.selector = FreeEnergySelector()
         self.vocabulary = set()
         self.is_trained = False
+        self.identity = None  # AIIdentity opcional
     
     def train_from_corpus(self, corpus_path: str, max_sentences: int = 5000):
         """
@@ -273,8 +275,21 @@ class TextGenerator:
         print(f"  - Vocabulario: {len(self.vocabulary)} palabras")
         print(f"  - Secuencias en memoria: {len(self.memory.sequence_memory)}")
     
+    def set_identity(self, identity):
+        """
+        Configura la identidad/personalidad de la IA.
+        
+        Args:
+            identity: Objeto AIIdentity con la personalidad deseada
+        """
+        self.identity = identity
+        print(f"✓ Identidad configurada: {identity.name}")
+        print(f"  - Estilo: {identity.style}")
+        print(f"  - Tono emocional: {identity.emotional_tone}")
+        print(f"  - Temperatura: {identity.temperature}")
+    
     def generate(self, prefix: str, max_words: int = 15, 
-                temperature: float = 1.0) -> str:
+                temperature: float = None) -> str:
         """
         Genera texto a partir de un prefijo.
         
@@ -294,6 +309,10 @@ class TextGenerator:
         """
         if not self.is_trained:
             raise RuntimeError("El generador no está entrenado. Llama a train_from_corpus() primero.")
+        
+        # Usar temperatura de la identidad si no se especifica
+        if temperature is None:
+            temperature = self.identity.temperature if self.identity else 1.0
         
         # Tokenizar prefijo
         words = prefix.strip().split()
@@ -333,6 +352,10 @@ class TextGenerator:
                 
                 if diverse_candidates:
                     candidates = diverse_candidates
+            
+            # Aplicar vocabulary_bias de la identidad si existe
+            if self.identity and self.identity.vocabulary_bias:
+                candidates = self._apply_vocabulary_bias(candidates)
             
             # Seleccionar siguiente palabra
             if temperature <= 0.1:
@@ -423,6 +446,33 @@ class TextGenerator:
         # Muestrear
         idx = np.random.choice(len(candidates), p=probs)
         return candidates[idx]
+    
+    def _apply_vocabulary_bias(self, candidates: List[str]) -> List[str]:
+        """
+        Aplica el vocabulary_bias de la identidad para priorizar palabras del estilo.
+        
+        Args:
+            candidates: Lista de palabras candidatas
+            
+        Returns:
+            Lista de candidatas con palabras del estilo duplicadas según su peso
+        """
+        if not self.identity or not self.identity.vocabulary_bias:
+            return candidates
+        
+        weighted_candidates = []
+        for word in candidates:
+            # Agregar la palabra original
+            weighted_candidates.append(word)
+            
+            # Si está en el vocabulary_bias, agregarla más veces según el peso
+            if word.lower() in self.identity.vocabulary_bias:
+                weight = self.identity.vocabulary_bias[word.lower()]
+                # Agregar (weight-1) copias adicionales
+                for _ in range(int(weight - 1)):
+                    weighted_candidates.append(word)
+        
+        return weighted_candidates
     
     def complete_sentence(self, prefix: str) -> str:
         """
