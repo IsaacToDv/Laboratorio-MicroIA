@@ -178,6 +178,32 @@ gen.generate("En un lugar de la Mancha")
 
 ## 🔧 Problemas Técnicos
 
+### Error: "externally-managed-environment"
+
+Este error ocurre en sistemas Linux modernos (Arch Linux, Fedora, Ubuntu 23.04+) que siguen PEP 668.
+
+**Solución:** Usa un entorno virtual:
+
+```bash
+# Crear entorno virtual
+python3 -m venv venv
+
+# Activarlo
+source venv/bin/activate  # Linux/Mac
+# venv\Scripts\activate   # Windows
+
+# Ahora sí instalar dependencias
+pip install -r requirements.txt
+```
+
+**¿Por qué pasa esto?**  
+Tu sistema protege Python del sistema para evitar romper dependencias del sistema operativo. El entorno virtual aísla las dependencias del proyecto.
+
+**Alternativa automática:**
+```bash
+bash install.sh
+```
+
 ### Error: "ModuleNotFoundError"
 
 Faltan dependencias. Instala:

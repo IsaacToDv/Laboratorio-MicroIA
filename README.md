@@ -84,8 +84,23 @@ print(gen.generate("Muchos años después"))
 git clone https://github.com/IsaacToDv/Laboratorio-MicroIA.git
 cd Laboratorio-MicroIA
 
+# Crear entorno virtual (RECOMENDADO)
+python3 -m venv venv
+source venv/bin/activate  # Linux/Mac
+# venv\Scripts\activate   # Windows
+
 # Instalar dependencias
 pip install -r requirements.txt
+```
+
+**⚠️ ¿Error "externally-managed-environment"?**  
+Esto es normal en sistemas Linux modernos (Arch, Fedora, Ubuntu 23.04+). **Usa el entorno virtual** como se muestra arriba.  
+Ver [FAQ](FAQ.md#error-externally-managed-environment) para más detalles.
+
+**Opción alternativa: Script automático**
+```bash
+# Instala todo automáticamente (crea venv y descarga datos)
+bash install.sh
 ```
 
 ### 2. Descargar datasets (3 minutos)
