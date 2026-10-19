@@ -412,4 +412,4 @@ Verifica las licencias de los datasets:
 ---
 
 **Última actualización:** Enero 2025  
-**Versión del proyecto:** 5.0.0
+**Versión del proyecto:** 6.0.0
